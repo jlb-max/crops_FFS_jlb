@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://l03johye468p"]
+
+[ext_resource type="Texture2D" uid="uid://bpeug2sfgx6n1" path="res://assets/game/ui/curseur.png" id="1_7ffny"]
+
+[node name="CurseurDeVisee" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.588235)
+texture = ExtResource("1_7ffny")
+region_enabled = true
+region_rect = Rect2(74, 101, 17, 17)

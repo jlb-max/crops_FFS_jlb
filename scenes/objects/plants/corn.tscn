@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj2fbslrkicfi"]
+
+[ext_resource type="Script" uid="uid://scargv8psw7e" path="res://scenes/objects/plants/corn.gd" id="1_hgaca"]
+[ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="2_aphyd"]
+[ext_resource type="PackedScene" uid="uid://c0ebot12hw7ax" path="res://scenes/objects/plants/watering_particles.tscn" id="2_ofjf8"]
+[ext_resource type="Texture2D" uid="uid://bx8av0euofc2q" path="res://assets/game/objects/Items/Basic_Plants.png" id="2_q3ekf"]
+[ext_resource type="PackedScene" uid="uid://dyqvbk6ovlhi" path="res://scenes/objects/plants/flowering_particles.tscn" id="3_ofjf8"]
+[ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="6_310os"]
+[ext_resource type="PackedScene" uid="uid://b6b8mu3b2d2gb" path="res://scenes/components/save_data_component.tscn" id="7_q3ekf"]
+[ext_resource type="Resource" uid="uid://d3m5asbufhohr" path="res://resources/scene_data_resource.tres" id="8_310os"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgaca"]
+size = Vector2(12.75, 8)
+
+[node name="Corn" type="Node2D"]
+top_level = true
+z_index = 20
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_hgaca")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("2_q3ekf")
+hframes = 6
+vframes = 2
+frame = 1
+
+[node name="WateringParticles" parent="." instance=ExtResource("2_ofjf8")]
+
+[node name="FloweringParticles" parent="." instance=ExtResource("3_ofjf8")]
+
+[node name="HurtComponent" parent="." instance=ExtResource("2_aphyd")]
+position = Vector2(-1, -5)
+tool = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+position = Vector2(0.625, 7)
+shape = SubResource("RectangleShape2D_hgaca")
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("6_310os")]
+current_growth_state = 1
+
+[node name="SaveDataComponent" parent="." instance=ExtResource("7_q3ekf")]
+save_data_resource = ExtResource("8_310os")

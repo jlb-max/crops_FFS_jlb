@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://bc1qem1hbsfdq"]
+
+[ext_resource type="Script" uid="uid://bl2woqvf3xjb6" path="res://scenes/objects/plants/tomato.gd" id="1_78crp"]
+[ext_resource type="PackedScene" uid="uid://c0ebot12hw7ax" path="res://scenes/objects/plants/watering_particles.tscn" id="3_4gm33"]
+[ext_resource type="PackedScene" uid="uid://dyqvbk6ovlhi" path="res://scenes/objects/plants/flowering_particles.tscn" id="4_na3lo"]
+[ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="5_0iafk"]
+[ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="6_1jdfh"]
+[ext_resource type="PackedScene" uid="uid://b6b8mu3b2d2gb" path="res://scenes/components/save_data_component.tscn" id="7_btglf"]
+[ext_resource type="Resource" uid="uid://d3m5asbufhohr" path="res://resources/scene_data_resource.tres" id="8_iay8t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu140"]
+size = Vector2(16, 8)
+
+[node name="Gravitron" type="Node2D"]
+top_level = true
+z_index = 20
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_78crp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+hframes = 6
+vframes = 2
+frame = 7
+
+[node name="WateringParticles" parent="." instance=ExtResource("3_4gm33")]
+
+[node name="FloweringParticles" parent="." instance=ExtResource("4_na3lo")]
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("5_0iafk")]
+current_growth_state = 1
+
+[node name="HurtComponent" parent="." instance=ExtResource("6_1jdfh")]
+tool = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+position = Vector2(1, -4)
+shape = SubResource("RectangleShape2D_wu140")
+
+[node name="SaveDataComponent" parent="." instance=ExtResource("7_btglf")]
+save_data_resource = ExtResource("8_iay8t")

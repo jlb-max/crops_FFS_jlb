@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="PlantData" load_steps=8 format=3 uid="uid://bsea61ia2yqe6"]
+
+[ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_rj4jm"]
+[ext_resource type="Texture2D" uid="uid://6vjmo4jrsif1" path="res://assets/game/objects/farming_plants.png" id="2_srlkv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhev2"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3elc"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(16, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70tkv"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6o5e"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(48, 128, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhev2")
+}],
+"loop": true,
+"name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3elc")
+}],
+"loop": true,
+"name": &"stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70tkv")
+}],
+"loop": true,
+"name": &"stage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6o5e")
+}],
+"loop": true,
+"name": &"stage_3",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_rj4jm")
+plant_name = "Tomato"
+sprite_frames = SubResource("SpriteFrames_ypls3")
+time_per_stage = 10.0
+harvest_item_name = "tomato"
+min_harvest_yield = 1
+max_harvest_yield = 3
+heat_effect = 0.0
+light_emission = 0.0
+gravity_influence = 0.0
+metadata/_custom_type_script = "uid://b6isf51xji5ud"
