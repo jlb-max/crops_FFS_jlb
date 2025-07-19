@@ -1,10 +1,10 @@
+res://scenes/objects/plants/corn_data.tres
 res://scenes/main_scene.tscn
 res://scenes/ui/game_ui_theme.tres
 res://Tilesets/house_tile_set.tres
 res://dialogue/dialogue_balloon_theme.tres
 res://Tilesets/game_tile_set.tres
-res://scenes/objects/plants/plantedcrop.gd
-res://scenes/characters/player/player.gd
+res://scenes/objects/plants/corn_seed.tres
 res://scenes/characters/player/player.tscn
 res://scenes/test/test_scene_cropfields_tilled_dirt.tscn
 res://scenes/test/test_scene_crops.tscn

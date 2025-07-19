@@ -1,0 +1,68 @@
+[gd_resource type="Resource" script_class="PlantData" load_steps=8 format=3 uid="uid://bgc3ymb4tf8v8"]
+
+[ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_3njbw"]
+[ext_resource type="Texture2D" uid="uid://bx8av0euofc2q" path="res://assets/game/objects/Items/Basic_Plants.png" id="2_3njbw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykp8u"]
+atlas = ExtResource("2_3njbw")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gh80"]
+atlas = ExtResource("2_3njbw")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxvxb"]
+atlas = ExtResource("2_3njbw")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnaos"]
+atlas = ExtResource("2_3njbw")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykp8u")
+}],
+"loop": true,
+"name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gh80")
+}],
+"loop": true,
+"name": &"stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxvxb")
+}],
+"loop": true,
+"name": &"stage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnaos")
+}],
+"loop": true,
+"name": &"stage_3",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_3njbw")
+plant_name = "Blé"
+sprite_frames = SubResource("SpriteFrames_ypls3")
+time_per_stage = 10.0
+harvest_item_name = "blé"
+min_harvest_yield = 1
+max_harvest_yield = 3
+heat_effect = 0.0
+light_emission = 0.0
+gravity_influence = 0.0
+metadata/_custom_type_script = "uid://b6isf51xji5ud"
