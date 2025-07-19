@@ -22,7 +22,7 @@ func _ready() -> void:
 	animated_sprite.play("stage_0")
 	watering_particles.emitting = false
 	flowering_particles.emitting = false
-	collectable_component.collectable_name = plant_data.harvest_item_name
+	collectable_component.item_data = plant_data.harvest_item
 	
 	# --- Connexion aux signaux ---
 	hurt_component.hurt.connect(on_hurt)

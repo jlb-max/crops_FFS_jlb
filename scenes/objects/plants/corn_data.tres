@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=8 format=3 uid="uid://bgc3ymb4tf8v8"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=9 format=3 uid="uid://bgc3ymb4tf8v8"]
 
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_3njbw"]
+[ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="1_ykp8u"]
 [ext_resource type="Texture2D" uid="uid://bx8av0euofc2q" path="res://assets/game/objects/Items/Basic_Plants.png" id="2_3njbw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ykp8u"]
@@ -57,6 +58,7 @@ animations = [{
 [resource]
 script = ExtResource("1_3njbw")
 plant_name = "Maïs"
+harvest_item = ExtResource("1_ykp8u")
 sprite_frames = SubResource("SpriteFrames_ypls3")
 time_per_stage = 10.0
 harvest_item_name = "maïs"

@@ -9,6 +9,8 @@ class_name PlantData
 extends Resource
 
 @export var plant_name: String = "Nouvelle Plante"
+@export var harvest_item: ItemData
+
 
 @export_group("Animation & Croissance")
 @export var sprite_frames: SpriteFrames
