@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://j8hkffneyctf"]
+[gd_scene load_steps=6 format=4 uid="uid://j8hkffneyctf"]
 
 [ext_resource type="PackedScene" uid="uid://bs11ymp2b1ruq" path="res://scenes/components/day_night_cycle_component.tscn" id="1_17gaa"]
 [ext_resource type="TileSet" uid="uid://dm7aupe2py7xa" path="res://Tilesets/game_tile_set.tres" id="2_eku4r"]
 [ext_resource type="PackedScene" uid="uid://y3mgqptfb4bw" path="res://scenes/characters/player/player.tscn" id="3_s5uu4"]
 [ext_resource type="PackedScene" uid="uid://cqg3k2c6eqa6m" path="res://scenes/ui/game_screen.tscn" id="4_f40v7"]
-[ext_resource type="PackedScene" uid="uid://bj2fbslrkicfi" path="res://scenes/objects/plants/corn.tscn" id="5_eku4r"]
-[ext_resource type="PackedScene" uid="uid://duisgl0trrdct" path="res://scenes/objects/plants/tomato.tscn" id="6_s5uu4"]
 [ext_resource type="PackedScene" uid="uid://rt5qhh852s26" path="res://scenes/components/test_scene_enable_tool_buttons_component.tscn" id="7_f40v7"]
 
 [node name="TestSceneCrops" type="Node2D"]
@@ -28,11 +26,5 @@ position = Vector2(152, 150)
 current_tool = 3
 
 [node name="GameScreen" parent="." instance=ExtResource("4_f40v7")]
-
-[node name="Corn" parent="." instance=ExtResource("5_eku4r")]
-position = Vector2(219, 158)
-
-[node name="Tomato" parent="." instance=ExtResource("6_s5uu4")]
-position = Vector2(129, 186)
 
 [node name="TestSceneEnableToolButtonsComponent" parent="." instance=ExtResource("7_f40v7")]

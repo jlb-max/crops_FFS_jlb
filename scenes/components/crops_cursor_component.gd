@@ -41,7 +41,7 @@ func get_cell_under_mouse() -> void:
 	cell_source_id = tilled_soil_tilemap_layer.get_cell_source_id(cell_position)
 	local_cell_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
 	distance = player.global_position.distance_to(local_cell_position)
-
+	
 	print("mouse_position: ", mouse_position, " cell_position: ", cell_position, " cell_source_id: ", cell_source_id)
 	print("distance: ", distance)
 
@@ -79,7 +79,7 @@ func add_crop() -> void:
 	if crop_fields_node:
 		crop_fields_node.add_child(crop_instance)
 		# On positionne la plante au centre de la tuile
-		crop_instance.global_position = local_cell_position + Vector2(tilled_soil_tilemap_layer.tile_set.tile_size / 2)
+		crop_instance.global_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
 		print("Plantation de '", plant_recipe.plant_name, "' réussie.")
 	else:
 		print("ERREUR: Le noeud 'CropFields' est introuvable pour y placer la plante.")
@@ -90,5 +90,6 @@ func remove_crop() -> void:
 		var crop_nodes = get_parent().find_child("CropFields").get_children()
 		
 		for node: Node2D in crop_nodes:
-			if node.global_position == local_cell_position:
+			if node.global_position.is_equal_approx(local_cell_position + Vector2(8, 16)):
 				node.queue_free()
+				return # On sort de la boucle dès qu'on a trouvé et supprimé la plante.

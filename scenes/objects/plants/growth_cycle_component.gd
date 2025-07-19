@@ -1,59 +1,47 @@
+# GrowthCycleComponent.gd (version corrigée et simplifiée)
 class_name GrowthCycleComponent
 extends Node
 
 signal growth_stage_changed(new_stage: int)
-
-@export var current_growth_state: DataTypes.GrowthStates = DataTypes.GrowthStates.Seed
-@export_range(5, 365) var days_until_harvest: int = 7
-
-signal crop_maturity
 signal crop_harvesting
 
-var is_watered: bool
-var starting_day: int
-var current_day: int
+@export var days_per_stage: int = 2 # Nombre de jours arrosés pour passer un stade
+@export var total_stages: int = 4 # Nombre de stades avant la récolte (ex: graine -> jeune pousse -> moyenne -> mature)
+
+var current_growth_state: int = 0
+var growth_days_counter: int = 0
+var is_watered: bool = false
+var is_harvestable: bool = false
 
 func _ready() -> void:
-	DayAndNightCycleManager.time_tick_day.connect(on_time_tick_day)
+	# Assurez-vous que votre manager de journée émet bien ce signal
+	DayAndNightCycleManager.time_tick_day.connect(on_day_passed)
 
+# Cette fonction est appelée chaque nouveau jour
+func on_day_passed(day: int) -> void:
+	# Si la plante est déjà prête à être récoltée, on ne fait plus rien
+	print("DEBUG: Un nouveau jour s'est levé pour la plante.")
+	if is_harvestable:
+		return
 
-func on_time_tick_day(day: int) -> void:
+	# Si la plante a été arrosée la veille, elle progresse
 	if is_watered:
-		if starting_day == 0:
-			starting_day = day
-		
-		growth_states(starting_day, day)
-		harvest_state(starting_day, day)
+		growth_days_counter += 1
+		print("La plante a maintenant ", growth_days_counter, " jours de croissance.")
 
+		# On calcule le stade actuel basé sur le nombre de jours de croissance
+		var calculated_stage = floori(float(growth_days_counter) / float(days_per_stage))
 
-func growth_states(starting_day: int, current_day: int) -> void:
-	if current_growth_state == DataTypes.GrowthStates.Maturity:
-		return
-	
-	var num_states = 5
-	
-	var growth_days_passed = (current_day - starting_day) % num_states
-	var state_index = growth_days_passed % num_states + 1
-	
-	current_growth_state = state_index
-	growth_stage_changed.emit(current_growth_state) # On notifie tout le monde !
-	
-	var name = DataTypes.GrowthStates.keys()[current_growth_state]
-	
-	if current_growth_state == DataTypes.GrowthStates.Maturity:
-		crop_maturity.emit()
+		# Si le stade a changé, on met à jour et on émet le signal
+		if calculated_stage != current_growth_state:
+			current_growth_state = calculated_stage
+			growth_stage_changed.emit(current_growth_state)
+			print("Nouveau stade de croissance : ", current_growth_state)
 
-
-func harvest_state(starting_day: int, current_day: int) -> void:
-	if current_growth_state == DataTypes.GrowthStates.Harvesting:
-		return
+			# Si on atteint le dernier stade, la plante est prête à être récoltée
+			if current_growth_state >= total_stages:
+				is_harvestable = true
+				crop_harvesting.emit()
 	
-	var days_passed = (current_day - starting_day) % days_until_harvest
-	
-	if days_passed == days_until_harvest - 1:
-		current_growth_state = DataTypes.GrowthStates.Harvesting
-		crop_harvesting.emit()
-
-
-func get_current_growth_state() -> DataTypes.GrowthStates:
-	return current_growth_state
+	# Chaque jour, la plante a de nouveau soif. On réinitialise son état d'arrosage.
+	is_watered = false

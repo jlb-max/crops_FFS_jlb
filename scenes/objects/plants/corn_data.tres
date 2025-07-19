@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=9 format=3 uid="uid://bgc3ymb4tf8v8"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=10 format=3 uid="uid://bgc3ymb4tf8v8"]
 
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_3njbw"]
 [ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="1_ykp8u"]
@@ -19,6 +19,10 @@ region = Rect2(48, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnaos"]
 atlas = ExtResource("2_3njbw")
 region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqdq1"]
+atlas = ExtResource("2_3njbw")
+region = Rect2(80, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
 animations = [{
@@ -52,6 +56,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"stage_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqdq1")
+}],
+"loop": true,
+"name": &"stage_4",
 "speed": 5.0
 }]
 
