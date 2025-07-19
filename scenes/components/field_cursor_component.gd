@@ -8,6 +8,9 @@ extends Node
 
 @onready var player: Player 
 
+signal action_requested(tile_coords: Vector2i)
+
+
 var mouse_position: Vector2
 var cell_position: Vector2i
 var cell_source_id: int

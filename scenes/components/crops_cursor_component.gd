@@ -5,8 +5,8 @@ extends Node
 
 var player: Player
 
-var corn_plant_scene = preload("res://scenes/objects/plants/corn.tscn")
-var tomato_plant_scene = preload("res://scenes/objects/plants/tomato.tscn")
+var crop_scene = preload("res://scenes/objects/plants/plantedcrop.tscn")
+
 
 var mouse_position: Vector2
 var cell_position: Vector2i
@@ -14,85 +14,81 @@ var cell_source_id: int
 var local_cell_position : Vector2 
 var distance: float 
 
+
+
 func _ready() -> void:
-	await get_tree().process_frame
-	player = get_tree().get_first_node_in_group("player")
+    await get_tree().process_frame
+    player = get_tree().get_first_node_in_group("player")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("remove_dirt"):
-		if ToolManager.selected_tool == DataTypes.Tools.TillGround:
-			get_cell_under_mouse()
-			remove_crop()
-	elif event.is_action_pressed("hit"):
-		if ToolManager.selected_tool == DataTypes.Tools.PlantCorn or ToolManager.selected_tool == DataTypes.Tools.PlantTomato:
-			get_cell_under_mouse()
-			add_crop()
+    # La logique de suppression ne change pas
+    if event.is_action_pressed("remove_dirt"):
+        if ToolManager.selected_tool == DataTypes.Tools.TillGround:
+            get_cell_under_mouse()
+            remove_crop()
+    
+    # La logique de plantation est simplifiée
+    elif event.is_action_pressed("hit"):
+        # On n'a plus besoin de vérifier l'outil ici,
+        # la fonction add_crop va vérifier si l'item est une graine.
+        get_cell_under_mouse()
+        add_crop()
 
 
 func get_cell_under_mouse() -> void:
-	mouse_position = tilled_soil_tilemap_layer.get_local_mouse_position()
-	cell_position = tilled_soil_tilemap_layer.local_to_map(mouse_position)
-	cell_source_id = tilled_soil_tilemap_layer.get_cell_source_id(cell_position)
-	local_cell_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
-	distance = player.global_position.distance_to(local_cell_position)
+    mouse_position = tilled_soil_tilemap_layer.get_local_mouse_position()
+    cell_position = tilled_soil_tilemap_layer.local_to_map(mouse_position)
+    cell_source_id = tilled_soil_tilemap_layer.get_cell_source_id(cell_position)
+    local_cell_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
+    distance = player.global_position.distance_to(local_cell_position)
 
-	print("mouse_position: ", mouse_position, " cell_position: ", cell_position, " cell_source_id: ", cell_source_id)
-	print("distance: ", distance)
+    print("mouse_position: ", mouse_position, " cell_position: ", cell_position, " cell_source_id: ", cell_source_id)
+    print("distance: ", distance)
 
 
 func add_crop() -> void:
-	print("\n--- DEBUT DEBUG add_crop ---")
+    # --- Vérification de la distance (ne change pas) ---
+    if distance >= 20.0:
+        return
 
-	# Test 1: La distance
-	print("DEBUG: Distance actuelle = %s" % distance)
-	if distance >= 20.0:
-		print("DEBUG: ECHEC - La distance est trop grande.")
-		print("--- FIN DEBUG ---\n")
-		return
-	print("DEBUG: SUCCES - La distance est correcte.")
+    # --- Nouvelle logique Data-Driven ---
 
-	# Test 2: L'outil sélectionné
-	var selected_tool = ToolManager.selected_tool
-	var expected_tool = DataTypes.Tools.PlantCorn
-	var selected_tool_name = DataTypes.Tools.keys()[selected_tool]
-	var expected_tool_name = DataTypes.Tools.keys()[expected_tool]
-	print("DEBUG: Outil sélectionné = %s (Nom: %s)" % [selected_tool, selected_tool_name])
-	print("DEBUG: Outil attendu = %s (Nom: %s)" % [expected_tool, expected_tool_name])
+    # 1. On récupère l'item actuellement sélectionné par le joueur
+    var selected_item: ItemData = ToolManager.get_selected_item() # Assurez-vous que ToolManager renvoie bien un ItemData
 
-	if selected_tool != expected_tool:
-		print("DEBUG: ECHEC - Le mauvais outil est sélectionné.")
-		print("--- FIN DEBUG ---\n")
-		return
-	print("DEBUG: SUCCES - Le bon outil (PlantCorn) est sélectionné.")
+    # 2. On vérifie si l'item est bien une graine valide
+    if not selected_item or not selected_item.plant_to_grow:
+        # Si aucun item n'est tenu, ou si l'item n'a pas de "recette" de plante, on s'arrête.
+        return
+        
+    # 3. On vérifie qu'on est bien sur de la terre labourée
+    if tilled_soil_tilemap_layer.get_cell_source_id(cell_position) == -1:
+        return
 
-	# Test 3: Trouver le noeud "CropFields"
-	var parent_node = get_parent()
-	print("DEBUG: Le noeud parent est: %s" % parent_node.name)
+    # 4. On récupère la recette (le PlantData) depuis l'item
+    var plant_recipe: PlantData = selected_item.plant_to_grow
+    
+    # 5. On instancie notre scène générique
+    var crop_instance = crop_scene.instantiate()
+    
+    # 6. On injecte la recette dans la nouvelle plante pour qu'elle sache ce qu'elle est
+    crop_instance.plant_data = plant_recipe
 
-	var crop_fields_node = parent_node.find_child("CropFields")
-	if crop_fields_node == null:
-		print("DEBUG: ECHEC - Impossible de trouver le noeud enfant 'CropFields'.")
-		print("--- FIN DEBUG ---\n")
-		return
-	print("DEBUG: SUCCES - Le noeud 'CropFields' a été trouvé: %s" % crop_fields_node)
-
-	# Si on arrive ici, tout est OK.
-	print("DEBUG: Toutes les verifications ont réussi. Instanciation de la plante...")
-	var corn_instance = corn_plant_scene.instantiate() as Node2D
-	corn_instance.global_position = local_cell_position
-	
-	# === LA MODIFICATION EST ICI ===
-	crop_fields_node.call_deferred("add_child", corn_instance)
-	
-	print("DEBUG: Ajout de la plante à la scène demandé (en différé).")
-	
-	print("--- FIN DEBUG ---\n")
+    # 7. On trouve le conteneur et on ajoute la plante
+    var crop_fields_node = get_parent().find_child("CropFields")
+    if crop_fields_node:
+        crop_fields_node.add_child(crop_instance)
+        # On positionne la plante au centre de la tuile
+        crop_instance.global_position = local_cell_position + Vector2(tilled_soil_tilemap_layer.tile_set.tile_size / 2)
+        print("Plantation de '", plant_recipe.plant_name, "' réussie.")
+    else:
+        print("ERREUR: Le noeud 'CropFields' est introuvable pour y placer la plante.")
 
 
 func remove_crop() -> void:
-	if distance < 20.0:
-		var crop_nodes = get_parent().find_child("CropFields").get_children()
-		
-		for node: Node2D in crop_nodes:
-			if node.global_position == local_cell_position:
-				node.queue_free()
+    if distance < 20.0:
+        var crop_nodes = get_parent().find_child("CropFields").get_children()
+        
+        for node: Node2D in crop_nodes:
+            if node.global_position == local_cell_position:
+                node.queue_free()

@@ -13,3 +13,10 @@ res://scenes/objects/plants/tomato_harvest.tscn
 res://scenes/objects/plants/gravitron.tscn
 res://scenes/objects/plants/growth_cycle_component.tscn
 res://scenes/objects/plants/plantedcrop.tscn
+res://scenes/components/crops_cursor_component.gd
+res://scenes/components/field_cursor_component.gd
+res://scenes/levels/level_1.tscn
+res://scenes/levels/level_1_1.tscn
+res://scenes/test/test_scene_tilemap_layer_y_sort_2.tscn
+res://scenes/test/test_scene_cropfields_FFS_1.tscn
+res://scripts/globals/tool_manager.gd
