@@ -9,7 +9,7 @@ var tool_to_item_map: Dictionary = {}
 
 func _ready() -> void:
 	# On dit au jeu que l'outil pour planter du maïs correspond à l'item "graine de maïs"
-	tool_to_item_map[DataTypes.Tools.PlantCorn] = load("res://resources/items/corn_seed.tres")
+	tool_to_item_map[DataTypes.Tools.PlantCorn] = load("res://scenes/objects/plants/corn_seed.tres")
 	print("DEBUG: ToolManager prêt. Contenu de la carte: ", tool_to_item_map)
 	# Vous ajouterez ici les autres graines plus tard
 	# tool_to_item_map[DataTypes.Tools.PlantTomato] = load("res://resources/items/tomato_seed.tres")
