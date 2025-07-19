@@ -1,0 +1,15 @@
+res://scenes/main_scene.tscn
+res://scenes/ui/game_ui_theme.tres
+res://Tilesets/house_tile_set.tres
+res://dialogue/dialogue_balloon_theme.tres
+res://Tilesets/game_tile_set.tres
+res://scenes/objects/plants/plantedcrop.gd
+res://scenes/characters/player/player.gd
+res://scenes/characters/player/player.tscn
+res://scenes/test/test_scene_cropfields_tilled_dirt.tscn
+res://scenes/test/test_scene_crops.tscn
+res://scenes/objects/plants/tomato.tscn
+res://scenes/objects/plants/tomato_harvest.tscn
+res://scenes/objects/plants/gravitron.tscn
+res://scenes/objects/plants/growth_cycle_component.tscn
+res://scenes/objects/plants/plantedcrop.tscn
