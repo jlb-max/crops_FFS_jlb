@@ -10,6 +10,7 @@ extends PanelContainer
 
 func _ready() -> void:
 	InventoryManager.inventory_changed.connect(on_inventory_changed)
+	on_inventory_changed() # Appeler une fois pour l'état initial
 
 func on_inventory_changed() -> void:
 	var inventory: Dictionary = InventoryManager.inventory
@@ -42,7 +43,6 @@ func on_inventory_changed() -> void:
 				egg_label.text = str(quantity)
 			"Milk":
 				milk_label.text = str(quantity)
-			"Graine de Blé": # Pour voir les graines
-				# Vous devez ajouter un "wheat_seed_label" à votre scène
+			"Graine de Maïs": # Pour voir les graines
+				corn_seed_label.text = str(quantity)
 				# wheat_seed_label.text = str(quantity)
-				pass # À remplacer par la ligne du dessus

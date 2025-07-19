@@ -65,11 +65,13 @@ func on_enable_tool_button(tool: DataTypes.Tools) -> void:
         tool_tomato.focus_mode = Control.FOCUS_ALL
 
 func update_seed_buttons() -> void:
+    print("DEBUG: update_seed_buttons est appelé.") # Ligne de débogage
     # --- Logique pour le maïs ---
-    # On vérifie si l'inventaire contient la RESSOURCE corn_seed_item
     if InventoryManager.inventory.has(corn_seed_item) and InventoryManager.inventory[corn_seed_item] > 0:
+        print("DEBUG: Graines de maïs trouvées, activation du bouton.") # Ligne de débogage
         tool_corn.disabled = false
     else:
+        print("DEBUG: Pas de graines de maïs, désactivation du bouton.") # Ligne de débogage
         tool_corn.disabled = true
 
     # --- Logique pour la tomate ---
