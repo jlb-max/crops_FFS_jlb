@@ -137,7 +137,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = SubResource("AtlasTexture_vni4r")
 
-[node name="CornLabel" type="Label" parent="MarginContainer/VBoxContainer/Corn"]
+[node name="CornSeedLabel" type="Label" parent="MarginContainer/VBoxContainer/Corn"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8

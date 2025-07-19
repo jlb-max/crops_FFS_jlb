@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://j05t4q63l14w"]
+[gd_scene load_steps=16 format=4 uid="uid://j05t4q63l14w"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_bphjb"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_7aum1"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://y3mgqptfb4bw" path="res://scenes/characters/player/player.tscn" id="11_feidn"]
 [ext_resource type="PackedScene" uid="uid://cqg3k2c6eqa6m" path="res://scenes/ui/game_screen.tscn" id="12_cvoxr"]
 [ext_resource type="PackedScene" uid="uid://rt5qhh852s26" path="res://scenes/components/test_scene_enable_tool_buttons_component.tscn" id="13_3sp4u"]
+[ext_resource type="PackedScene" uid="uid://d1vj58ke8ca83" path="res://scenes/components/GroundLoot.tscn" id="14_7aum1"]
+[ext_resource type="Resource" uid="uid://dlxrfh2t0atl7" path="res://scenes/objects/plants/corn_seed.tres" id="15_60amf"]
 
 [node name="TestSceneCropsTilledDirt" type="Node2D"]
 
@@ -58,3 +60,7 @@ game_tilemap = NodePath("../GameTileMap/Grass")
 [node name="GameScreen" parent="." instance=ExtResource("12_cvoxr")]
 
 [node name="TestSceneEnableToolButtonsComponent" parent="." instance=ExtResource("13_3sp4u")]
+
+[node name="GroundLoot" parent="." instance=ExtResource("14_7aum1")]
+position = Vector2(100, 97)
+item_data = ExtResource("15_60amf")

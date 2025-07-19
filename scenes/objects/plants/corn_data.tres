@@ -56,10 +56,10 @@ animations = [{
 
 [resource]
 script = ExtResource("1_3njbw")
-plant_name = "Blé"
+plant_name = "Maïs"
 sprite_frames = SubResource("SpriteFrames_ypls3")
 time_per_stage = 10.0
-harvest_item_name = "blé"
+harvest_item_name = "maïs"
 min_harvest_yield = 1
 max_harvest_yield = 3
 heat_effect = 0.0
