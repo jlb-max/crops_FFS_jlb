@@ -1,5 +1,9 @@
+Panel
+Control
+GridContainer
 Label
 TextureRect
+PanelContainer
 Button
 CollisionShape2D
 Sprite2D
