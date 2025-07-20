@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://j05t4q63l14w"]
+[gd_scene load_steps=19 format=4 uid="uid://j05t4q63l14w"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_bphjb"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_7aum1"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://dm7aupe2py7xa" path="res://Tilesets/game_tile_set.tres" id="4_w88m5"]
 [ext_resource type="PackedScene" uid="uid://b6b8mu3b2d2gb" path="res://scenes/components/save_data_component.tscn" id="5_34ix2"]
 [ext_resource type="Resource" uid="uid://bl7mq3ojrvet1" path="res://resources/tilemap_layer_data_resource.tres" id="6_recgw"]
+[ext_resource type="Shader" uid="uid://cl3iim11yms5i" path="res://scenes/objects/weting.gdshader" id="7_34ix2"]
 [ext_resource type="TileSet" uid="uid://bttnwin5krffe" path="res://assets/game/tilesets/ground tiles/wetness_tileset.tres" id="7_w88m5"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="7_y3pbv"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="8_lsper"]
@@ -16,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://rt5qhh852s26" path="res://scenes/components/test_scene_enable_tool_buttons_component.tscn" id="13_3sp4u"]
 [ext_resource type="PackedScene" uid="uid://d1vj58ke8ca83" path="res://scenes/components/GroundLoot.tscn" id="14_7aum1"]
 [ext_resource type="Resource" uid="uid://dlxrfh2t0atl7" path="res://scenes/objects/plants/corn_seed.tres" id="15_60amf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_recgw"]
+shader = ExtResource("7_34ix2")
+shader_parameter/radius = 0.5
+shader_parameter/softness = 0.331
 
 [node name="TestSceneCropsTilledDirt" type="Node2D"]
 
@@ -43,6 +49,7 @@ save_data_resource = ExtResource("6_recgw")
 
 [node name="WetnessOverlay" type="TileMapLayer" parent="GameTileMap"]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_recgw")
 tile_set = ExtResource("7_w88m5")
 
 [node name="CropFields" type="Node2D" parent="."]
