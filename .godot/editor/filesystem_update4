@@ -44,3 +44,5 @@ res://scenes/objects/plants/gravitron_data.tres
 res://scenes/objects/plants/gravitron_fruit.tres
 res://scenes/objects/plants/gravitron_seed.tres
 res://scenes/objects/gravityeffect.gdshader
+res://scenes/objects/gravity_shader.gdshader
+res://scenes/test/gravity_overlay.gd

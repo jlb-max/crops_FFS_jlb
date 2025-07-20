@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://j05t4q63l14w"]
+[gd_scene load_steps=27 format=4 uid="uid://j05t4q63l14w"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_bphjb"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_7aum1"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://rt5qhh852s26" path="res://scenes/components/test_scene_enable_tool_buttons_component.tscn" id="13_3sp4u"]
 [ext_resource type="PackedScene" uid="uid://d1vj58ke8ca83" path="res://scenes/components/GroundLoot.tscn" id="14_7aum1"]
 [ext_resource type="Resource" uid="uid://dlxrfh2t0atl7" path="res://scenes/objects/plants/corn_seed.tres" id="15_60amf"]
+[ext_resource type="Script" uid="uid://cymsenn14j0u7" path="res://scenes/test/gravity_overlay.gd" id="15_cvoxr"]
+[ext_resource type="Shader" uid="uid://bf072n2n88acs" path="res://scenes/objects/gravity_shader.gdshader" id="16_3sp4u"]
 [ext_resource type="Resource" uid="uid://c8ph32wom3n6e" path="res://scenes/objects/plants/eggplant_seed.tres" id="18_recgw"]
 [ext_resource type="Resource" uid="uid://c7p3yk3760o3s" path="res://scenes/objects/plants/carot_seed.tres" id="19_y3pbv"]
 [ext_resource type="Resource" uid="uid://xrou4c8xrhkf" path="res://scenes/objects/plants/star_seed.tres" id="20_qgv8r"]
@@ -27,6 +29,12 @@
 shader = ExtResource("7_34ix2")
 shader_parameter/radius = 0.5
 shader_parameter/softness = 0.331
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8lsa"]
+shader = ExtResource("16_3sp4u")
+shader_parameter/hole_center_uv = Vector2(0.5, 0.5)
+shader_parameter/radius_uv = 0.15
+shader_parameter/strength = 0.35
 
 [node name="TestSceneCropsTilledDirt" type="Node2D"]
 
@@ -75,6 +83,19 @@ position = Vector2(152, 150)
 game_tilemap = NodePath("../GameTileMap/Grass")
 
 [node name="GameScreen" parent="." instance=ExtResource("12_cvoxr")]
+
+[node name="GravityOverlay" type="CanvasLayer" parent="."]
+layer = 100
+script = ExtResource("15_cvoxr")
+
+[node name="WarpRect" type="ColorRect" parent="GravityOverlay"]
+visible = false
+material = SubResource("ShaderMaterial_k8lsa")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TestSceneEnableToolButtonsComponent" parent="." instance=ExtResource("13_3sp4u")]
 
