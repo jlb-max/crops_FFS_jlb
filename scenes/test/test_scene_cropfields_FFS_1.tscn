@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://j05t4q63l14w"]
+[gd_scene load_steps=23 format=4 uid="uid://j05t4q63l14w"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_bphjb"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_7aum1"]
@@ -19,6 +19,8 @@
 [ext_resource type="Resource" uid="uid://dlxrfh2t0atl7" path="res://scenes/objects/plants/corn_seed.tres" id="15_60amf"]
 [ext_resource type="Resource" uid="uid://c8ph32wom3n6e" path="res://scenes/objects/plants/eggplant_seed.tres" id="18_recgw"]
 [ext_resource type="Resource" uid="uid://c7p3yk3760o3s" path="res://scenes/objects/plants/carot_seed.tres" id="19_y3pbv"]
+[ext_resource type="Resource" uid="uid://xrou4c8xrhkf" path="res://scenes/objects/plants/star_seed.tres" id="20_qgv8r"]
+[ext_resource type="Resource" uid="uid://bclleevjva4wm" path="res://scenes/objects/plants/tomato_seed.tres" id="21_hfn3m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_recgw"]
 shader = ExtResource("7_34ix2")
@@ -86,3 +88,11 @@ item_data = ExtResource("18_recgw")
 [node name="GroundLoot3" parent="." instance=ExtResource("14_7aum1")]
 position = Vector2(163, 97)
 item_data = ExtResource("19_y3pbv")
+
+[node name="GroundLoot4" parent="." instance=ExtResource("14_7aum1")]
+position = Vector2(193, 97)
+item_data = ExtResource("20_qgv8r")
+
+[node name="GroundLoot5" parent="." instance=ExtResource("14_7aum1")]
+position = Vector2(222, 97)
+item_data = ExtResource("21_hfn3m")

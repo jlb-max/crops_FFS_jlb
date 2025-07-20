@@ -14,6 +14,7 @@ var days_watered: int = 0
 var is_watered_today: bool = false
 var is_harvestable: bool = false
 var wetness_overlay: TileMapLayer
+var growth_modifier: float = 1.0
 
 
 func _ready() -> void:
@@ -58,3 +59,6 @@ func check_for_growth() -> void:
 		if current_growth_state >= total_stages:
 			is_harvestable = true
 			crop_harvesting.emit()
+
+func apply_growth_modifier(bonus: float) -> void:
+	growth_modifier += bonus

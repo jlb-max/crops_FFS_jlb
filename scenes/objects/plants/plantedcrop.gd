@@ -14,6 +14,7 @@ var wetness_overlay: TileMapLayer
 @onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
 @onready var hurt_component: HurtComponent = $HurtComponent
 @onready var collectable_component: CollectableComponent = $CollectableComponent
+@onready var light_emitter: PointLight2D = $LightEmitter
 
 func _ready() -> void:
 	if not plant_data:
@@ -44,8 +45,24 @@ func _ready() -> void:
 	if SoilManager.is_tile_wet(my_tile_coords):
 		print("INFO: Plante placée sur un sol déjà humide.")
 		growth_cycle_component.set_watered_state(true)
+		
+	if plant_data and plant_data.light_emission > 0:
+		light_emitter.energy = plant_data.light_emission
+		start_shimmer_animation()
 
 # --- Fonctions de réaction ---
+
+func start_shimmer_animation() -> void:
+	var base_energy = light_emitter.energy
+	var low_energy = base_energy * 0.2
+	var high_energy = base_energy * 1.0
+	var duration = 1.5
+
+	var tween = create_tween().set_loops()
+	
+	# On anime bien la propriété "energy"
+	tween.tween_property(light_emitter, "energy", high_energy, duration).from(low_energy).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(light_emitter, "energy", low_energy, duration).set_trans(Tween.TRANS_SINE)
 
 func on_growth_stage_changed(stage: int) -> void:
 	var anim_name = "stage_" + str(stage)

@@ -25,5 +25,10 @@ extends Resource
 
 @export_group("Effets Environnementaux")
 @export var heat_effect: float = 0.0 # Augmente la T° locale
-@export var light_emission: float = 0.0 # Émet de la lumière
 @export var gravity_influence: float = 0.0 # Modifie la gravité
+
+@export_group("Effets de Lumière")
+@export var light_emission: float = 0.0 # Intensité de la lumière émise
+@export var light_influence_radius: float = 50.0 # Rayon d'effet en pixels
+@export var light_growth_bonus: float = 0.2 # Bonus de 20% de croissance par jour
+@export var light_sensitivity: float = 1.0 # 1.0 = normal, > 1.0 aime la lumière, < 1.0 n'aime pas
