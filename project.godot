@@ -25,6 +25,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameDialogueManager="*res://scripts/globals/game_dialogue_manager.gd"
 GameManager="*res://scripts/globals/game_manager.gd"
 SceneManager="*res://scripts/globals/scene_manager.gd"
+SoilManager="*res://scripts/globals/soilmanager.gd"
 
 [display]
 

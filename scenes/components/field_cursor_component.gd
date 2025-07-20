@@ -25,6 +25,15 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	# On récupère l'action de l'item sélectionné UNE SEULE FOIS au début
 	var current_action = ToolManager.get_selected_action()
+	
+	if current_action == ItemData.ActionType.WATER:
+		if event.is_action_pressed("hit"): # Ou votre action de clic
+			get_cell_under_mouse()
+
+			# On vérifie que la tuile visée est bien de la terre labourable
+			if tilled_soil_tilemap_layer.get_cell_source_id(cell_position) != -1:
+				# On demande au manager de mouiller la tuile
+				SoilManager.add_wet_tile(cell_position)
 
 	if event.is_action_pressed("remove_dirt"):
 		

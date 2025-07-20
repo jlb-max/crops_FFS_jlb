@@ -17,6 +17,7 @@ var player_direction: Vector2
 
 func _ready() -> void:
 	ToolManager.item_selected.connect(on_item_selected)
+	SoilManager.register_wetness_overlay(%WetnessOverlay)
 	
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -29,8 +29,6 @@ func set_watered_state(is_watered: bool) -> void:
 func on_day_passed(day: int) -> void:
 	print("--- NOUVEAU JOUR ", day, " POUR LA PLANTE ---")
 	print("  La plante a-t-elle été arrosée hier ? ", is_watered_today)
-	if wetness_overlay: # On vérifie qu'elle n'est pas nulle par sécurité
-		wetness_overlay.erase_cell(tile_coords)
 
 	if is_harvestable:
 		print("  La plante est déjà récoltable. Pas de croissance.")
