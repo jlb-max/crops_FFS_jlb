@@ -1,30 +1,39 @@
-# ToolSlot.gd (Version finale simplifiée)
+# ToolSlot.gd (Version finale)
 extends Button
 
-# On n'a plus besoin de référence au TextureRect
 @onready var label: Label = $Label
 
 var item_data: ItemData
+var slot_index: int = -1
 
 func set_item(new_item: ItemData, quantity: int) -> void:
     item_data = new_item
-    
-    # On assigne directement l'icône à la propriété "icon" du bouton lui-même.
     self.icon = item_data.icon
-    
-    # On n'affiche la quantité que si elle est supérieure à 1
     label.text = str(quantity) if quantity > 1 else ""
-    visible = true
-
-    # On se connecte directement à la fonction du ToolManager
+    
     if not pressed.is_connected(ToolManager.select_item):
         pressed.connect(ToolManager.select_item.bind(item_data))
 
 func clear_item() -> void:
-    # On se déconnecte avant de vider pour éviter les bugs
     if item_data and pressed.is_connected(ToolManager.select_item):
         pressed.disconnect(ToolManager.select_item)
-    
     item_data = null
-    self.icon = null # On efface l'icône du bouton
-    visible = false
+    self.icon = null
+    label.text = ""
+
+# --- LOGIQUE DE GLISSER-DÉPOSER AJOUTÉE ---
+func _get_drag_data(at_position: Vector2) -> Variant:
+    if item_data:
+        var preview = TextureRect.new()
+        preview.texture = self.icon
+        preview.size = Vector2(32, 32)
+        set_drag_preview(preview)
+        var data = {"item": item_data, "from_slot": slot_index, "source": "hotbar"}
+        return data
+    return null
+
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+    return data is Dictionary and data.has("item")
+
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+    InventoryManager.merge_or_swap_slots(data.source, data.from_slot, "hotbar", self.slot_index)

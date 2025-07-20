@@ -26,6 +26,8 @@ func redraw_inventory() -> void:
 	for i in range(InventoryManager.slots.size()):
 		var slot_node = grid_container.get_child(i)
 		var slot_data = InventoryManager.slots[i]
+		
+		slot_node.slot_index = i
 
 		if slot_data != null:
 			slot_node.display_item(slot_data.item, slot_data.quantity)

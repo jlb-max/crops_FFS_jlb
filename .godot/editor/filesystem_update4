@@ -43,3 +43,4 @@ res://scripts/globals/inventory_manager.gd
 res://scenes/ui/inventoryslot.gd
 res://scenes/ui/inventory_panel.gd
 res://scenes/ui/inventoryslot.tscn
+res://scenes/objects/plants/tomato.tscn
