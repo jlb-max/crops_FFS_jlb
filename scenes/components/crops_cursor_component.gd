@@ -40,14 +40,20 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func get_cell_under_mouse() -> void:
+    # Ces lignes pour trouver la case sont OK
     var mouse_pos = tilled_soil_tilemap_layer.get_local_mouse_position()
     cell_position = tilled_soil_tilemap_layer.local_to_map(mouse_pos)
-    mouse_position = tilled_soil_tilemap_layer.get_local_mouse_position()
     cell_source_id = tilled_soil_tilemap_layer.get_cell_source_id(cell_position)
-    local_cell_position = tilled_soil_tilemap_layer.map_to_local(cell_position)
+    
+    # --- CORRECTION ---
+    # 1. On calcule la position LOCALE du coin de la tuile
     var local_cell_pos = tilled_soil_tilemap_layer.map_to_local(cell_position)
+    
+    # 2. On la convertit en position MONDIALE
     var world_pos_of_cell = tilled_soil_tilemap_layer.to_global(local_cell_pos)
-    distance = player.global_position.distance_to(local_cell_position)
+    
+    # 3. On calcule la distance entre deux positions MONDIALES. Ce calcul est maintenant juste.
+    distance = player.global_position.distance_to(world_pos_of_cell)
     
     print("mouse_position: ", mouse_position, " cell_position: ", cell_position, " cell_source_id: ", cell_source_id)
     print("distance: ", distance)
