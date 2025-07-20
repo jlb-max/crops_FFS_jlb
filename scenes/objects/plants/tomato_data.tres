@@ -1,29 +1,35 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=8 format=3 uid="uid://bsea61ia2yqe6"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=11 format=3 uid="uid://bsea61ia2yqe6"]
 
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_rj4jm"]
+[ext_resource type="Resource" uid="uid://dbjvv5124nvmi" path="res://scenes/objects/plants/tomato_fruit.tres" id="1_s3elc"]
 [ext_resource type="Texture2D" uid="uid://6vjmo4jrsif1" path="res://assets/game/objects/farming_plants.png" id="2_srlkv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mhev2"]
-atlas = ExtResource("2_srlkv")
-region = Rect2(0, 128, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s3elc"]
-atlas = ExtResource("2_srlkv")
-region = Rect2(16, 128, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70tkv"]
-atlas = ExtResource("2_srlkv")
-region = Rect2(32, 128, 16, 16)
+[ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_70tkv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6o5e"]
 atlas = ExtResource("2_srlkv")
-region = Rect2(48, 128, 16, 16)
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypls3"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkcaq"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocsnq"]
+atlas = ExtResource("2_srlkv")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpp4m"]
+atlas = ExtResource("4_70tkv")
+region = Rect2(16, 64, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mhev2")
+"texture": SubResource("AtlasTexture_u6o5e")
 }],
 "loop": true,
 "name": &"stage_0",
@@ -31,7 +37,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s3elc")
+"texture": SubResource("AtlasTexture_ypls3")
 }],
 "loop": true,
 "name": &"stage_1",
@@ -39,7 +45,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_70tkv")
+"texture": SubResource("AtlasTexture_dkcaq")
 }],
 "loop": true,
 "name": &"stage_2",
@@ -47,19 +53,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u6o5e")
+"texture": SubResource("AtlasTexture_ocsnq")
 }],
 "loop": true,
 "name": &"stage_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpp4m")
+}],
+"loop": true,
+"name": &"stage_4",
 "speed": 5.0
 }]
 
 [resource]
 script = ExtResource("1_rj4jm")
-plant_name = "Tomato"
+plant_name = "Tomate"
+harvest_item = ExtResource("1_s3elc")
 sprite_frames = SubResource("SpriteFrames_ypls3")
 time_per_stage = 10.0
-harvest_item_name = "tomato"
+harvest_item_name = "Tomate"
 min_harvest_yield = 1
 max_harvest_yield = 3
 heat_effect = 0.0

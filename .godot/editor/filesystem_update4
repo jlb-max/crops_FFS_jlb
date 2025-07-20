@@ -28,3 +28,10 @@ res://scenes/objects/weting.gdshader
 res://scenes/objects/plants/eggplant_data.tres
 res://scenes/objects/plants/eggplant_fruit.tres
 res://scenes/objects/plants/eggplant_seed.tres
+res://scenes/objects/plants/tomato_data.tres
+res://scenes/objects/plants/tomato_fruit.tres
+res://scenes/objects/plants/tomato_seed.tres
+res://scenes/objects/plants/carot_fruit.tres
+res://scenes/objects/plants/carot_data.tres
+res://scenes/objects/plants/carot_seed.tres
+res://scripts/globals/inventory_manager.gd
