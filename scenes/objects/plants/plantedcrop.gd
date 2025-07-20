@@ -1,174 +1,161 @@
-# PlantedCrop.gd (Version finale complète et corrigée)
 class_name PlantedCrop
 extends Node2D
 
-@export var plant_data: PlantData
+# --------------------------------------------------------------------
+@export var plant_data : PlantData
+var wetness_overlay    : TileMapLayer        # assignée par le cursor
 
-# Cette variable est remplie par le CropsCursorComponent lors de la plantation
-var wetness_overlay: TileMapLayer
-var gravity_overlay : CanvasLayer
-
-
-# --- Références aux composants ---
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var watering_particles: GPUParticles2D = $WateringParticles
-@onready var flowering_particles: GPUParticles2D = $FloweringParticles
-@onready var growth_cycle_component: GrowthCycleComponent = $GrowthCycleComponent
-@onready var hurt_component: HurtComponent = $HurtComponent
+# --- Références internes (onready) ----------------------------------
+@onready var animated_sprite      : AnimatedSprite2D   = $AnimatedSprite2D
+@onready var watering_particles   : GPUParticles2D     = $WateringParticles
+@onready var flowering_particles  : GPUParticles2D     = $FloweringParticles
+@onready var growth_cycle_component : GrowthCycleComponent = $GrowthCycleComponent
+@onready var hurt_component       : HurtComponent      = $HurtComponent
 @onready var collectable_component: CollectableComponent = $CollectableComponent
-@onready var light_emitter: PointLight2D = $LightEmitter
-@onready var gravity_effect: BackBufferCopy = $GravityEffect
+@onready var light_emitter        : PointLight2D       = $LightEmitter
+@onready var gravity_fx : ColorRect = $GravityFX
 
+# --------------------------------------------------------------------
 func _ready() -> void:
-    print("\n--- DEBUG PlantedCrop: _ready() DÉMARRE ---")
-    gravity_overlay = get_tree().current_scene.get_node("GravityOverlay") as CanvasLayer
-    if not plant_data:
-        print("  ERREUR: Pas de plant_data. Destruction de la plante.")
-        queue_free()
-        return
+    print("[DEBUG] influence=", plant_data.gravity_influence)
+    if plant_data == null:
+        queue_free(); return
 
-    print("  Plante initialisée avec les données pour : ", plant_data.plant_name)
-    gravity_effect.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT
-    gravity_effect.top_level = true
-    gravity_effect.self_modulate = Color.WHITE
-    
-    # --- Initialisation de la plante ---
+    # init : sprite, particules, etc.
     animated_sprite.sprite_frames = plant_data.sprite_frames
     animated_sprite.play("stage_0")
-    watering_particles.emitting = false
-    flowering_particles.emitting = false
-    collectable_component.item_data = plant_data.harvest_item
-    
-    # On passe la référence au composant de croissance
-    growth_cycle_component.wetness_overlay = self.wetness_overlay
-    
-    # --- Connexion aux signaux ---
+    collectable_component.item_data      = plant_data.harvest_item
+    growth_cycle_component.wetness_overlay = wetness_overlay
+
     hurt_component.hurt.connect(on_hurt)
     growth_cycle_component.growth_stage_changed.connect(on_growth_stage_changed)
     growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
 
-    # --- VÉRIFICATION DE L'EFFET DE GRAVITÉ ---
-    print("  Vérification de l'effet de gravité...")
-    if plant_data.gravity_influence > 0.0 and gravity_overlay:
-        gravity_overlay.set_gravity_hole(global_position,
-                                         plant_data.gravity_radius,
-                                         plant_data.gravity_influence)
-        start_pulse()       # lance l’anim si tu veux
-    
-    print("--- DEBUG PlantedCrop: _ready() TERMINÉ ---\n")
-    # --- Vérification du sol à la plantation ---
-    await get_tree().process_frame
-    
-    # On utilise notre variable "wetness_overlay", qui n'est pas nulle
-    var my_tile_coords = wetness_overlay.local_to_map(wetness_overlay.to_local(self.global_position))
-    
-    if SoilManager.is_tile_wet(my_tile_coords):
-        print("INFO: Plante placée sur un sol déjà humide.")
-        growth_cycle_component.set_watered_state(true)
-    
-    
-    
-    if plant_data and plant_data.gravity_influence > 0.0:
-        # On active l'effet et on lance son animation
-        gravity_effect.visible = true
-        start_gravity_animation()
-    else:
-        # Sinon, on le désactive pour économiser les ressources
-        gravity_effect.visible = false
-    
-    if plant_data and plant_data.light_emission > 0:
-        # On lit la couleur et l'énergie depuis les données de la plante
-        light_emitter.color = plant_data.light_color
+    # halo lumineux éventuel
+    if plant_data.light_emission > 0:
+        light_emitter.color  = plant_data.light_color
         light_emitter.energy = plant_data.light_emission
         start_shimmer_animation()
+        
+    if plant_data.gravity_influence > 0:
+        gravity_fx.visible = true
+        _update_gravity_rect()           # ← NEW
+        _update_shader_params()
+        _start_pulse()
+    # initialise taille du quad
+    gravity_fx.anchor_left   = 0
+    gravity_fx.anchor_top    = 0
+    gravity_fx.anchor_right  = 1
+    gravity_fx.anchor_bottom = 1
+    gravity_fx.position = Vector2.ZERO
+    gravity_fx.size     = get_viewport().size
+    set_process(true)    
 
-# --- Fonctions de réaction ---
+func _process(_delta: float) -> void:
+    if not gravity_fx.visible:
+        return
+    var cam : Camera2D = get_viewport().get_camera_2d()
+    if cam == null:
+        return
 
+    var screen_pos : Vector2 = cam.get_screen_transform() * self.global_position
+    var uv : Vector2 = screen_pos / Vector2(get_viewport().size)
+    gravity_fx.material.set_shader_parameter("hole_center_uv", uv)
+
+func _update_gravity_rect() -> void:     # ← NEW
+    var vp_size : Vector2 = get_viewport().size
+    gravity_fx.custom_minimum_size = vp_size     # donne une taille
+    gravity_fx.position = -vp_size * 0.5         # centre sur la plante
+
+func _update_shader_params() -> void:    # ← extrait existant
+    var radius_uv := plant_data.gravity_radius / float(get_viewport().size.x)
+    gravity_fx.material.set_shader_parameter("radius_uv", radius_uv)
+    gravity_fx.material.set_shader_parameter("strength",
+        plant_data.gravity_influence)
+
+func _update_hole_center_uv() -> void:   # ← NEW
+    var cam : Camera2D = get_viewport().get_camera_2d()
+    if cam == null: return
+    var screen_pos : Vector2 = cam.get_screen_transform() * self.global_position
+    var uv : Vector2 = screen_pos / Vector2(get_viewport().size)
+    gravity_fx.material.set_shader_parameter("hole_center_uv", uv)
+
+# --------------------------------------------------------------------
+# 1. Animation pulsante de la gravité (shader overlay)
+# --------------------------------------------------------------------
+func _start_pulse() -> void:
+    var path := "material:shader_parameter/strength"
+    var base := plant_data.gravity_influence
+    var t := create_tween().set_loops()
+    t.tween_property(gravity_fx, path, base * 1.5, 2.0).from(base * 0.5)
+    t.tween_property(gravity_fx, path, base * 0.5, 2.0)
+
+# --------------------------------------------------------------------
+# 2. Halo lumineux « shimmer »
+# --------------------------------------------------------------------
 func start_shimmer_animation() -> void:
-    var base_energy = light_emitter.energy
-    
-    # --- LECTURE DES PARAMÈTRES DEPUIS PLANTDATA ---
-    # On lit les multiplicateurs et la durée directement depuis la ressource
-    var low_energy = base_energy * plant_data.shimmer_min_energy_factor
-    var high_energy = base_energy * plant_data.shimmer_max_energy_factor
-    var duration = plant_data.shimmer_duration
-    
-    var tween = create_tween().set_loops()
-    
-    tween.tween_property(light_emitter, "energy", high_energy, duration).from(low_energy).set_trans(Tween.TRANS_SINE)
-    tween.tween_property(light_emitter, "energy", low_energy, duration).set_trans(Tween.TRANS_SINE)
+    var base_energy := light_emitter.energy
+    var low  := base_energy * plant_data.shimmer_min_energy_factor
+    var high := base_energy * plant_data.shimmer_max_energy_factor
+    var dur  := plant_data.shimmer_duration
 
+    var t := create_tween().set_loops()
+    t.tween_property(light_emitter, "energy", high, dur).from(low).set_trans(Tween.TRANS_SINE)
+    t.tween_property(light_emitter, "energy", low,  dur).set_trans(Tween.TRANS_SINE)
+
+# --------------------------------------------------------------------
+# 3. Changements de stade de croissance
+# --------------------------------------------------------------------
 func on_growth_stage_changed(stage: int) -> void:
-    var anim_name = "stage_" + str(stage)
-    if animated_sprite.sprite_frames.has_animation(anim_name):
-        animated_sprite.play(anim_name)
-    
+    var anim := "stage_" + str(stage)
+    if animated_sprite.sprite_frames.has_animation(anim):
+        animated_sprite.play(anim)
+
+    # ---------- Gravité : ne s’active qu’au stade final -----------------
     if stage == growth_cycle_component.total_stages - 1:
         flowering_particles.emitting = true
-
-func on_hurt(item_used: ItemData) -> void:
-    if not growth_cycle_component.is_watered_today:
-        print("DEBUG: Arrosage DÉTECTÉ PAR LA PLANTE !")
-        watering_particles.emitting = true
-        growth_cycle_component.set_watered_state(true)
-
-        # On utilise notre variable "wetness_overlay" ici aussi
-        var my_tile_coords = wetness_overlay.local_to_map(wetness_overlay.to_local(self.global_position))
-        SoilManager.add_wet_tile(my_tile_coords)
         
-        await get_tree().create_timer(1.0).timeout
-        watering_particles.emitting = false
 
-func on_crop_harvesting() -> void:
-    print(plant_data.plant_name, " est prêt à être récolté !")
-    var harvest_anim_name = "stage_" + str(growth_cycle_component.total_stages)
-    if animated_sprite.sprite_frames.has_animation(harvest_anim_name):
-        animated_sprite.play(harvest_anim_name)
-    collectable_component.monitoring = true
-
-func _notification(what: int) -> void:
-    # Cette fonction est appelée par le moteur juste avant que le noeud soit détruit.
-    if what == NOTIFICATION_PREDELETE:
-        # On calcule nos coordonnées une dernière fois pour se désenregistrer.
-        var my_tile_coords = wetness_overlay.local_to_map(wetness_overlay.to_local(self.global_position))
-        CropManager.unregister_crop(my_tile_coords)
-
-
-func start_gravity_animation() -> void:
-    # Sécurité : vérifier qu'on a un matériau shader
-    if not gravity_effect.material:
-        push_warning("GravityEffect n'a pas de matérial ! Effet désactivé.")
+# --------------------------------------------------------------------
+# 4. Arrosage (hurt avec outil arrosoir)
+# --------------------------------------------------------------------
+func on_hurt(item_used : ItemData) -> void:
+    if growth_cycle_component.is_watered_today:
         return
-    
-    var mat := gravity_effect.material
-    var property_to_animate := "material:shader_parameter/strength"
-    
-    var base_strength := clampf(plant_data.gravity_influence, -0.99, 0.99)
-    var low_strength  := clampf(base_strength * plant_data.gravity_anim_min_factor, -0.99, 0.99)
-    var high_strength := clampf(base_strength * plant_data.gravity_anim_max_factor, -0.99, 0.99)
-    var duration      := maxf(plant_data.gravity_anim_duration, 0.01)
-    
-    # Valeur de départ
-    mat.set_shader_parameter("strength", low_strength)
-    
-    var tween := create_tween().set_loops()
-    tween.tween_property(gravity_effect, property_to_animate, high_strength, duration)\
-        .set_trans(Tween.TRANS_SINE)
-    tween.tween_property(gravity_effect, property_to_animate, low_strength, duration)\
-        .set_trans(Tween.TRANS_SINE)
 
-func start_pulse():
-    if gravity_overlay == null:
-        return
-    var base := plant_data.gravity_influence
-    var tween := create_tween().set_loops()
-    tween.tween_property(
-        gravity_overlay.material,                 # <-- on anime le matos
-        "shader_parameter/strength",
-        base * 1.5, 2.0
-    ).from(base * 0.5)
-    tween.tween_property(
-        gravity_overlay.material,
-        "shader_parameter/strength",
-        base * 0.5, 2.0
+    watering_particles.emitting = true
+    growth_cycle_component.set_watered_state(true)
+
+    var tile := wetness_overlay.local_to_map(
+        wetness_overlay.to_local(global_position)
     )
+    SoilManager.add_wet_tile(tile)
+
+    await get_tree().create_timer(1.0).timeout
+    watering_particles.emitting = false
+
+# --------------------------------------------------------------------
+# 5. Récolte
+# --------------------------------------------------------------------
+func on_crop_harvesting() -> void:
+    gravity_fx.visible = false
+    var anim := "stage_" + str(growth_cycle_component.total_stages)
+    if animated_sprite.sprite_frames.has_animation(anim):
+        animated_sprite.play(anim)
+    collectable_component.monitoring = true
+    
+
+# --------------------------------------------------------------------
+# 6. Nettoyage quand la plante est supprimée
+# --------------------------------------------------------------------
+func _notification(what: int) -> void:
+    if what == NOTIFICATION_PREDELETE:
+        gravity_fx.visible = false
+        
+
+        # On recalcule nos coordonnées de case avant de nous désenregistrer
+        if wetness_overlay:
+            var tile := wetness_overlay.local_to_map(
+                wetness_overlay.to_local(global_position)
+            )
+            CropManager.unregister_crop(tile)

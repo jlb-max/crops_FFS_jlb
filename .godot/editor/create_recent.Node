@@ -12,4 +12,3 @@ TextureRect
 PanelContainer
 Button
 CollisionShape2D
-Area2D
