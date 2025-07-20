@@ -34,6 +34,11 @@ extends Resource
 @export_range(0.0, 1.0) var gravity_anim_min_factor: float = 0.5 # Amplitude min (50%)
 @export_range(1.0, 2.0) var gravity_anim_max_factor: float = 1.0 # Amplitude max (100%)
 
+@export_group("Gravity Waves")
+@export var gravity_wave_amplitude  : float = 6.0
+@export var gravity_wave_wavelength : float = 32.0
+@export var gravity_wave_speed      : float = 2.0
+
 @export_group("Effets de Lumière")
 @export var light_emission: float = 0.0 # Intensité de la lumière émise
 @export var light_influence_radius: float = 50.0 # Rayon d'effet en pixels

@@ -13,7 +13,8 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 @onready var hurt_component       : HurtComponent      = $HurtComponent
 @onready var collectable_component: CollectableComponent = $CollectableComponent
 @onready var light_emitter        : PointLight2D       = $LightEmitter
-@onready var gravity_fx : ColorRect = $GravityFX
+@onready var gravity_fx : BackBufferCopy = $GravityFX
+@onready var gravity_warp : Sprite2D = $GravityWarp
 
 # --------------------------------------------------------------------
 func _ready() -> void:
@@ -38,29 +39,21 @@ func _ready() -> void:
         start_shimmer_animation()
         
     if plant_data.gravity_influence > 0:
-        gravity_fx.visible = true
-        _update_gravity_rect()           # ← NEW
-        _update_shader_params()
+        gravity_warp.visible = true
+        gravity_warp.scale = Vector2.ONE * (
+            plant_data.gravity_radius / 128.0)
+
+        var mat := gravity_warp.material
+        mat.set_shader_parameter("strength",   plant_data.gravity_influence)
+        mat.set_shader_parameter("radius_px",  plant_data.gravity_radius)
+        mat.set_shader_parameter("amplitude",  plant_data.gravity_wave_amplitude)
+        mat.set_shader_parameter("wavelength", plant_data.gravity_wave_wavelength)
+        mat.set_shader_parameter("speed",      plant_data.gravity_wave_speed)
+
         _start_pulse()
-    # initialise taille du quad
-    gravity_fx.anchor_left   = 0
-    gravity_fx.anchor_top    = 0
-    gravity_fx.anchor_right  = 1
-    gravity_fx.anchor_bottom = 1
-    gravity_fx.position = Vector2.ZERO
-    gravity_fx.size     = get_viewport().size
-    set_process(true)    
 
-func _process(_delta: float) -> void:
-    if not gravity_fx.visible:
-        return
-    var cam : Camera2D = get_viewport().get_camera_2d()
-    if cam == null:
-        return
 
-    var screen_pos : Vector2 = cam.get_screen_transform() * self.global_position
-    var uv : Vector2 = screen_pos / Vector2(get_viewport().size)
-    gravity_fx.material.set_shader_parameter("hole_center_uv", uv)
+
 
 func _update_gravity_rect() -> void:     # ← NEW
     var vp_size : Vector2 = get_viewport().size
@@ -84,11 +77,12 @@ func _update_hole_center_uv() -> void:   # ← NEW
 # 1. Animation pulsante de la gravité (shader overlay)
 # --------------------------------------------------------------------
 func _start_pulse() -> void:
-    var path := "material:shader_parameter/strength"
     var base := plant_data.gravity_influence
-    var t := create_tween().set_loops()
-    t.tween_property(gravity_fx, path, base * 1.5, 2.0).from(base * 0.5)
-    t.tween_property(gravity_fx, path, base * 0.5, 2.0)
+    var tw = create_tween().set_loops()
+    tw.tween_property(gravity_warp.material,
+        "shader_parameter/strength", base*1.5, 2.0).from(base*0.5)
+    tw.tween_property(gravity_warp.material,
+        "shader_parameter/strength", base*0.5, 2.0)
 
 # --------------------------------------------------------------------
 # 2. Halo lumineux « shimmer »

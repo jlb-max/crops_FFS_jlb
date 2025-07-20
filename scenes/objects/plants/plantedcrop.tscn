@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://p7n5n5kk4vjo"]
+[gd_scene load_steps=19 format=3 uid="uid://p7n5n5kk4vjo"]
 
 [ext_resource type="Script" uid="uid://mwgrq6ij5y2x" path="res://scenes/objects/plants/plantedcrop.gd" id="1_urelw"]
 [ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="2_p35mx"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://c3myk53pl1vm" path="res://scenes/components/collectable_component.tscn" id="7_25r6l"]
 [ext_resource type="Shader" uid="uid://bm3s4ueuilofj" path="res://scenes/objects/lightemitter.gdshader" id="8_2wwbq"]
 [ext_resource type="Shader" uid="uid://bf072n2n88acs" path="res://scenes/objects/gravity_shader.gdshader" id="9_sf1ja"]
+[ext_resource type="Shader" uid="uid://cri82b3cif8tx" path="res://scenes/objects/plants/dique_gravity.gdshader" id="10_l0xxe"]
+[ext_resource type="Texture2D" uid="uid://bq0gkk5rkk06e" path="res://assets/game/tilesets/ground tiles/disque_gravite.png" id="11_25r6l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyutu"]
 size = Vector2(16, 16)
@@ -28,11 +30,18 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss7xp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sf1ja"]
 shader = ExtResource("9_sf1ja")
-shader_parameter/hole_center_uv = Vector2(0.5, 0.5)
-shader_parameter/radius_uv = 0.15
-shader_parameter/strength = 0.35
+shader_parameter/radius_px = 128.0
+shader_parameter/strength = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyutu"]
+shader = ExtResource("10_l0xxe")
+shader_parameter/radius_px = 32.0
+shader_parameter/amplitude = 6.0
+shader_parameter/wavelength = 32.0
+shader_parameter/speed = 2.0
+shader_parameter/strength = 1.0
 
 [node name="Plantedcrop" type="Node2D"]
 script = ExtResource("1_urelw")
@@ -68,13 +77,15 @@ color = Color(0.454902, 1, 1, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ss7xp")
 
-[node name="GravityFX" type="ColorRect" parent="."]
+[node name="GravityFX" type="BackBufferCopy" parent="."]
 visible = false
-z_index = 10
-material = SubResource("ShaderMaterial_ss7xp")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
+z_index = 100
+z_as_relative = false
+material = SubResource("ShaderMaterial_sf1ja")
+rect = Rect2(-64, -64, 128, 128)
+
+[node name="GravityWarp" type="Sprite2D" parent="."]
+z_index = 100
+texture_filter = 1
+material = SubResource("ShaderMaterial_uyutu")
+texture = ExtResource("11_25r6l")

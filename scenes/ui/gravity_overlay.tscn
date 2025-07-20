@@ -5,8 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k8lsa"]
 shader = ExtResource("2_r217r")
-shader_parameter/hole_center_uv = Vector2(0.5, 0.5)
-shader_parameter/radius_uv = 0.15
+shader_parameter/radius_px = 64.0
 shader_parameter/strength = 0.35
 
 [node name="GravityOverlay" type="CanvasLayer"]

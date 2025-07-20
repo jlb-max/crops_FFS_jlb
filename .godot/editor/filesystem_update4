@@ -26,7 +26,8 @@ res://scenes/objects/plants/gravitron_fruit.tres
 res://scenes/objects/plants/gravitron_data.tres
 res://scenes/objects/plants/gravitron_seed.tres
 res://scenes/objects/gravityeffect.gdshader
-res://scenes/test/gravity_overlay.gd
+res://scenes/objects/plants/dique_gravity.gdshader
+res://scenes/objects/plants/growth_cycle_component.gd
 res://scenes/objects/plants/plantedcrop.gd
 res://scenes/characters/player/player.tscn
 res://scenes/objects/plants/plantedcrop.tscn
@@ -37,4 +38,4 @@ res://scenes/ui/tools_panel.tscn
 res://scenes/ui/inventoryslot.tscn
 res://scenes/objects/plants/tomato.tscn
 res://scenes/ui/gravity_overlay.tscn
-res://scenes/objects/plants/growth_cycle_component.gd
+res://scripts/globals/plantdata.gd
