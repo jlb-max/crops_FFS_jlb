@@ -19,6 +19,13 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 # --------------------------------------------------------------------
 func _ready() -> void:
     print("[DEBUG] influence=", plant_data.gravity_influence)
+    # 1. DUPLIQUER le matériau pour que chaque plante ait le sien
+    gravity_warp.material = gravity_warp.material.duplicate()
+    
+    # 2. État par défaut = désactivé
+    gravity_warp.visible = false
+    gravity_warp.material.set_shader_parameter("strength", 0.0)
+    
     if plant_data == null:
         queue_free(); return
 
@@ -37,15 +44,20 @@ func _ready() -> void:
         light_emitter.color  = plant_data.light_color
         light_emitter.energy = plant_data.light_emission
         start_shimmer_animation()
-        
-    if plant_data.gravity_influence > 0:
+    
+    gravity_warp.visible = false          # état par défaut
+    gravity_warp.material = gravity_warp.material.duplicate()
+      
+        # 3. Activer seulement si Influence > 0
+    if plant_data.gravity_influence > 0.0:
         gravity_warp.visible = true
+
         gravity_warp.scale = Vector2.ONE * (
-            plant_data.gravity_radius / 128.0)
+            plant_data.gravity_radius / 128.0)   # 128 = rayon naturel texture
 
         var mat := gravity_warp.material
-        mat.set_shader_parameter("strength",   plant_data.gravity_influence)
         mat.set_shader_parameter("radius_px",  plant_data.gravity_radius)
+        mat.set_shader_parameter("strength",   plant_data.gravity_influence)
         mat.set_shader_parameter("amplitude",  plant_data.gravity_wave_amplitude)
         mat.set_shader_parameter("wavelength", plant_data.gravity_wave_wavelength)
         mat.set_shader_parameter("speed",      plant_data.gravity_wave_speed)
