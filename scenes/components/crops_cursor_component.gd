@@ -100,6 +100,7 @@ func add_crop() -> void:
         var local_cell_pos = tilled_soil_tilemap_layer.map_to_local(cell_position)
         crop_instance.global_position = tilled_soil_tilemap_layer.to_global(local_cell_pos)
         CropManager.register_crop(cell_position, crop_instance)
+        InventoryManager.remove_item(selected_item, 1)
         
         print("Plantation de '", plant_recipe.plant_name, "' réussie.")
     else:

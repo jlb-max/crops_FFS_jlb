@@ -25,3 +25,6 @@ res://scripts/globals/soilmanager.gd
 res://scripts/globals/CropManager.gd
 res://scenes/components/crops_cursor_component.gd
 res://scenes/objects/weting.gdshader
+res://scenes/objects/plants/eggplant_data.tres
+res://scenes/objects/plants/eggplant_fruit.tres
+res://scenes/objects/plants/eggplant_seed.tres
