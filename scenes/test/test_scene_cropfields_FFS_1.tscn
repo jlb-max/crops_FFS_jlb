@@ -23,7 +23,6 @@
 [node name="SaveLevelDataComponent" parent="." instance=ExtResource("2_7aum1")]
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("3_60amf")]
-visible = false
 
 [node name="GameTileMap" type="Node2D" parent="."]
 

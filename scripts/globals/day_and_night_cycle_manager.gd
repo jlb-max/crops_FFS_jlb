@@ -48,5 +48,8 @@ func recalculate_time() -> void:
 	
 	if current_day != day:
 		current_day = day
+		print("DEBUG (DayNightManager): ÉMISSION du signal time_tick_day.")
 		time_tick_day.emit(day)
 	
+func get_current_day() -> int:
+	return current_day

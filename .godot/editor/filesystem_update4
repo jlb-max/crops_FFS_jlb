@@ -36,3 +36,6 @@ res://scenes/objects/trees/small_tree.tscn
 res://scenes/objects/trees/large_tree.tscn
 res://scenes/objects/axe.tres
 res://scenes/components/test_scene_enable_tool_buttons_component.gd
+res://scenes/objects/plants/growth_cycle_component.tscn
+res://scenes/objects/plants/growth_cycle_component.gd
+res://scripts/globals/day_and_night_cycle_manager.gd

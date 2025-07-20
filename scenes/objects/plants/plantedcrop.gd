@@ -32,18 +32,27 @@ func _ready() -> void:
 
 
 func on_growth_stage_changed(stage: int) -> void:
+	print("DEBUG (Etape 2): RÉCEPTION du signal avec le stade: ", stage)
 	var anim_name = "stage_" + str(stage)
+	print("DEBUG (Etape 3): Tentative de jouer l'animation nommée: '", anim_name, "'")
 	if animated_sprite.sprite_frames.has_animation(anim_name):
 		animated_sprite.play(anim_name)
+		print("DEBUG (Etape 4): SUCCÈS - Animation '", anim_name, "' trouvée et jouée.")
+	else:
+		print("ERREUR (Etape 4): ECHEC - Animation '", anim_name, "' INTROUVABLE dans les SpriteFrames !")
 	
-	if stage == DataTypes.GrowthStates.Maturity:
+	# On vérifie si on atteint l'avant-dernier stade (juste avant la récolte)
+	# pour déclencher les particules de floraison.
+	if stage == growth_cycle_component.total_stages - 1:
 		flowering_particles.emitting = true
 
-func on_hurt(hit_damage: int) -> void:
-	if !growth_cycle_component.is_watered:
-		print("DEBUG: Arrosage détecté sur la plante !") # Ligne de test
+func on_hurt(item_used: ItemData) -> void:
+	# La logique à l'intérieur ne change pas.
+	# On n'a même pas besoin d'utiliser l'argument "item_used" ici.
+	if not growth_cycle_component.is_watered_today:
+		print("DEBUG: Arrosage DÉTECTÉ PAR LA PLANTE !")
 		watering_particles.emitting = true
-		growth_cycle_component.is_watered = true
+		growth_cycle_component.set_watered_state(true)
 		await get_tree().create_timer(1.0).timeout
 		watering_particles.emitting = false
 

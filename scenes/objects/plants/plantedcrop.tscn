@@ -23,6 +23,7 @@ offset = Vector2(0, -4)
 [node name="GrowthCycleComponent" parent="." instance=ExtResource("2_p35mx")]
 
 [node name="HurtComponent" parent="." instance=ExtResource("3_2wwbq")]
+required_action = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
 shape = SubResource("RectangleShape2D_uyutu")
