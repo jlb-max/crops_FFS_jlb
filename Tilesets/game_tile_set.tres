@@ -488,6 +488,7 @@ scenes/6/scene = ExtResource("12_tl0r4")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tl0r4"]
 texture = ExtResource("12_skfke")
+0:0/next_alternative_id = 2
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 3

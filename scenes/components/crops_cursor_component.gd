@@ -3,6 +3,8 @@ extends Node
 
 @export var tilled_soil_tilemap_layer: TileMapLayer
 
+@onready var wetness_overlay_node: TileMapLayer = %WetnessOverlay
+
 var player: Player
 
 var crop_scene = preload("res://scenes/objects/plants/plantedcrop.tscn")
@@ -75,6 +77,7 @@ func add_crop() -> void:
 	
 	# 6. On injecte la recette dans la nouvelle plante pour qu'elle sache ce qu'elle est
 	crop_instance.plant_data = plant_recipe
+	crop_instance.wetness_overlay = wetness_overlay_node
 
 	# 7. On trouve le conteneur et on ajoute la plante
 	var crop_fields_node = get_parent().find_child("CropFields")

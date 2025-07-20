@@ -2,6 +2,9 @@
 class_name PlantedCrop
 extends Node2D
 
+var wetness_overlay: TileMapLayer
+
+
 @export var plant_data: PlantData
 
 # --- Références aux composants ---
@@ -29,6 +32,7 @@ func _ready() -> void:
 	# On se connecte au nouveau signal pour une logique plus propre !
 	growth_cycle_component.growth_stage_changed.connect(on_growth_stage_changed)
 	growth_cycle_component.crop_harvesting.connect(on_crop_harvesting)
+	growth_cycle_component.wetness_overlay = self.wetness_overlay
 
 
 func on_growth_stage_changed(stage: int) -> void:
@@ -53,6 +57,9 @@ func on_hurt(item_used: ItemData) -> void:
 		print("DEBUG: Arrosage DÉTECTÉ PAR LA PLANTE !")
 		watering_particles.emitting = true
 		growth_cycle_component.set_watered_state(true)
+		var my_tile_coords = wetness_overlay.local_to_map(wetness_overlay.to_local(self.global_position))
+		wetness_overlay.set_cell(my_tile_coords, 0, Vector2i(0, 0))
+		growth_cycle_component.tile_coords = my_tile_coords
 		await get_tree().create_timer(1.0).timeout
 		watering_particles.emitting = false
 

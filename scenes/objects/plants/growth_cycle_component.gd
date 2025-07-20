@@ -8,10 +8,13 @@ signal crop_harvesting
 @export var days_per_stage: int = 2
 @export var total_stages: int = 4
 
+var tile_coords: Vector2i
 var current_growth_state: int = 0
 var days_watered: int = 0
 var is_watered_today: bool = false
 var is_harvestable: bool = false
+var wetness_overlay: TileMapLayer
+
 
 func _ready() -> void:
 	# La connexion au signal de l'horloge
@@ -26,6 +29,8 @@ func set_watered_state(is_watered: bool) -> void:
 func on_day_passed(day: int) -> void:
 	print("--- NOUVEAU JOUR ", day, " POUR LA PLANTE ---")
 	print("  La plante a-t-elle été arrosée hier ? ", is_watered_today)
+	if wetness_overlay: # On vérifie qu'elle n'est pas nulle par sécurité
+		wetness_overlay.erase_cell(tile_coords)
 
 	if is_harvestable:
 		print("  La plante est déjà récoltable. Pas de croissance.")
