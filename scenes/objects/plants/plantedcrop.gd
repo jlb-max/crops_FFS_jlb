@@ -25,7 +25,10 @@ func _ready() -> void:
 		return
 
 	print("  Plante initialisée avec les données pour : ", plant_data.plant_name)
-
+	gravity_effect.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT
+	gravity_effect.top_level = true
+	gravity_effect.self_modulate = Color.WHITE
+	
 	# --- Initialisation de la plante ---
 	animated_sprite.sprite_frames = plant_data.sprite_frames
 	animated_sprite.play("stage_0")
@@ -66,6 +69,8 @@ func _ready() -> void:
 	if SoilManager.is_tile_wet(my_tile_coords):
 		print("INFO: Plante placée sur un sol déjà humide.")
 		growth_cycle_component.set_watered_state(true)
+	
+	
 	
 	if plant_data and plant_data.gravity_influence > 0.0:
 		# On active l'effet et on lance son animation
@@ -134,19 +139,24 @@ func _notification(what: int) -> void:
 
 
 func start_gravity_animation() -> void:
-	# La propriété que nous animons est un "uniform" du shader
-	# On y accède via "shader_parameter/nom_de_la_variable"
-	var property_to_animate = "material:shader_parameter/strength"
+	# Sécurité : vérifier qu'on a un matériau shader
+	if not gravity_effect.material:
+		push_warning("GravityEffect n'a pas de matérial ! Effet désactivé.")
+		return
 	
-	var base_strength = plant_data.gravity_influence
+	var mat := gravity_effect.material
+	var property_to_animate := "material:shader_parameter/strength"
 	
-	# On lit les multiplicateurs et la durée depuis la ressource
-	var low_strength = base_strength * plant_data.gravity_anim_min_factor
-	var high_strength = base_strength * plant_data.gravity_anim_max_factor
-	var duration = plant_data.gravity_anim_duration
+	var base_strength := clampf(plant_data.gravity_influence, -0.99, 0.99)
+	var low_strength  := clampf(base_strength * plant_data.gravity_anim_min_factor, -0.99, 0.99)
+	var high_strength := clampf(base_strength * plant_data.gravity_anim_max_factor, -0.99, 0.99)
+	var duration      := maxf(plant_data.gravity_anim_duration, 0.01)
 	
-	var tween = create_tween().set_loops()
+	# Valeur de départ
+	mat.set_shader_parameter("strength", low_strength)
 	
-	# On anime la force de la distorsion pour créer l'effet de respiration
-	tween.tween_property(gravity_effect, property_to_animate, high_strength, duration).from(low_strength).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(gravity_effect, property_to_animate, low_strength, duration).set_trans(Tween.TRANS_SINE)
+	var tween := create_tween().set_loops()
+	tween.tween_property(gravity_effect, property_to_animate, high_strength, duration)\
+		.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(gravity_effect, property_to_animate, low_strength, duration)\
+		.set_trans(Tween.TRANS_SINE)
