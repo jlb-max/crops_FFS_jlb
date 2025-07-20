@@ -14,4 +14,5 @@ item_name = "Graine de Maïs"
 description = ""
 icon = SubResource("AtlasTexture_ydtw6")
 stackable = true
+action_type = 3
 plant_to_grow = ExtResource("2_xyfgl")

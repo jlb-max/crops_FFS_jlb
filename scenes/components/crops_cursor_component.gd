@@ -21,18 +21,20 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 
 func _unhandled_input(event: InputEvent) -> void:
-	# La logique de suppression ne change pas
+	# On récupère l'action de l'item sélectionné UNE SEULE FOIS au début
+	var current_action = ToolManager.get_selected_action()
+
 	if event.is_action_pressed("remove_dirt"):
-		if ToolManager.selected_tool == DataTypes.Tools.TillGround:
+		# On vérifie si l'action de l'item est bien de labourer (TILL)
+		if current_action == ItemData.ActionType.TILL:
 			get_cell_under_mouse()
 			remove_crop()
 	
-	# La logique de plantation est simplifiée
 	elif event.is_action_pressed("hit"):
-		# On n'a plus besoin de vérifier l'outil ici,
-		# la fonction add_crop va vérifier si l'item est une graine.
-		get_cell_under_mouse()
-		add_crop()
+		# On vérifie si l'action de l'item est bien de planter (PLANT)
+		if current_action == ItemData.ActionType.PLANT:
+			get_cell_under_mouse()
+			add_crop()
 
 
 func get_cell_under_mouse() -> void:

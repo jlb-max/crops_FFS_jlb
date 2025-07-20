@@ -1,3 +1,6 @@
+Label
+TextureRect
+Button
 CollisionShape2D
 Sprite2D
 Area2D

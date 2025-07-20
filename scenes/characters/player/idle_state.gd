@@ -26,15 +26,21 @@ func _on_next_transitions() -> void:
 	
 	if GameInputEvents.is_movement_input():
 		transition.emit("Walk")
-		
-	if player.current_tool == DataTypes.Tools.AxeWood && GameInputEvents.use_tool():
-		transition.emit("Chopping")
+		return # On retourne pour ne pas bouger ET utiliser un outil en même temps
 
-	if player.current_tool == DataTypes.Tools.TillGround && GameInputEvents.use_tool():
-		transition.emit("Tilling")
-		
-	if player.current_tool == DataTypes.Tools.WaterCrops && GameInputEvents.use_tool():
-		transition.emit("Watering")
+	# On vérifie si le joueur veut utiliser un outil
+	if GameInputEvents.use_tool():
+		# On demande au ToolManager quelle est l'action de l'item en main
+		var current_action = ToolManager.get_selected_action()
+
+		# On utilise un "match" pour choisir le bon état de destination
+		match current_action:
+			ItemData.ActionType.CHOP:
+				transition.emit("Chopping")
+			ItemData.ActionType.TILL:
+				transition.emit("Tilling")
+			ItemData.ActionType.WATER:
+				transition.emit("Watering")
 
 func _on_enter() -> void:
 	pass

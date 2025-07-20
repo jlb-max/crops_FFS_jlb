@@ -54,7 +54,6 @@ tilled_soil_tilemap_layer = NodePath("../GameTileMap/TilledSoil")
 
 [node name="Player" parent="." node_paths=PackedStringArray("game_tilemap") instance=ExtResource("11_feidn")]
 position = Vector2(152, 150)
-current_tool = 3
 game_tilemap = NodePath("../GameTileMap/Grass")
 
 [node name="GameScreen" parent="." instance=ExtResource("12_cvoxr")]

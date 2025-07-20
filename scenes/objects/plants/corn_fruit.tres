@@ -13,4 +13,5 @@ item_name = "Maïs"
 description = ""
 icon = SubResource("AtlasTexture_y2jcg")
 stackable = true
+action_type = 0
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

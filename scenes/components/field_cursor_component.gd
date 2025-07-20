@@ -23,14 +23,22 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# On récupère l'action de l'item sélectionné UNE SEULE FOIS au début
+	var current_action = ToolManager.get_selected_action()
+
 	if event.is_action_pressed("remove_dirt"):
-		if ToolManager.selected_tool == DataTypes.Tools.TillGround:
+		
+		if current_action == ItemData.ActionType.TILL:
 			get_cell_under_mouse()
 			remove_tilled_soil_cell()
+	
 	elif event.is_action_pressed("hit"):
-		if ToolManager.selected_tool == DataTypes.Tools.TillGround:
+		
+		if current_action == ItemData.ActionType.TILL:
 			get_cell_under_mouse()
 			add_tilled_soil_cell()
+
+
 
 func get_cell_under_mouse() -> void:
 	mouse_position = grass_tilemap_layer.get_local_mouse_position()
