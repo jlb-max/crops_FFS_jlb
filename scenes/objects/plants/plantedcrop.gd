@@ -74,3 +74,10 @@ func on_crop_harvesting() -> void:
 	if animated_sprite.sprite_frames.has_animation(harvest_anim_name):
 		animated_sprite.play(harvest_anim_name)
 	collectable_component.monitoring = true
+
+func _notification(what: int) -> void:
+	# Cette fonction est appelée par le moteur juste avant que le noeud soit détruit.
+	if what == NOTIFICATION_PREDELETE:
+		# On calcule nos coordonnées une dernière fois pour se désenregistrer.
+		var my_tile_coords = wetness_overlay.local_to_map(wetness_overlay.to_local(self.global_position))
+		CropManager.unregister_crop(my_tile_coords)

@@ -22,3 +22,5 @@ res://scenes/objects/plants/plantedcrop.gd
 res://scenes/objects/plants/growth_cycle_component.gd
 res://scenes/characters/player/player.gd
 res://scripts/globals/soilmanager.gd
+res://scripts/globals/CropManager.gd
+res://scenes/components/crops_cursor_component.gd
