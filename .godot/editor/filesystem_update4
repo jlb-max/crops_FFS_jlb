@@ -40,3 +40,7 @@ res://scenes/objects/plants/star_fruit.tres
 res://scenes/objects/plants/star_seed.tres
 res://scripts/globals/plantdata.gd
 res://scenes/objects/lightemitter.gdshader
+res://scenes/objects/plants/gravitron_data.tres
+res://scenes/objects/plants/gravitron_fruit.tres
+res://scenes/objects/plants/gravitron_seed.tres
+res://scenes/objects/gravityeffect.gdshader

@@ -1,0 +1,94 @@
+[gd_resource type="Resource" script_class="PlantData" load_steps=11 format=3 uid="uid://c4kqwscknxc4"]
+
+[ext_resource type="Resource" uid="uid://c6px0p22mqhy8" path="res://scenes/objects/plants/gravitron_fruit.tres" id="1_ulaau"]
+[ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="2_ayohc"]
+[ext_resource type="Texture2D" uid="uid://6vjmo4jrsif1" path="res://assets/game/objects/farming_plants.png" id="3_07wek"]
+[ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_uplo2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w44kd"]
+atlas = ExtResource("3_07wek")
+region = Rect2(0, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulaau"]
+atlas = ExtResource("3_07wek")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayohc"]
+atlas = ExtResource("3_07wek")
+region = Rect2(32, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07wek"]
+atlas = ExtResource("3_07wek")
+region = Rect2(48, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uplo2"]
+atlas = ExtResource("4_uplo2")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w44kd")
+}],
+"loop": true,
+"name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulaau")
+}],
+"loop": true,
+"name": &"stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayohc")
+}],
+"loop": true,
+"name": &"stage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07wek")
+}],
+"loop": true,
+"name": &"stage_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uplo2")
+}],
+"loop": true,
+"name": &"stage_4",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("2_ayohc")
+plant_name = "Gravitron"
+harvest_item = ExtResource("1_ulaau")
+sprite_frames = SubResource("SpriteFrames_ypls3")
+time_per_stage = 10.0
+harvest_item_name = "Gravitron"
+min_harvest_yield = 1
+max_harvest_yield = 3
+heat_effect = 0.0
+gravity_influence = 0.9
+gravity_radius = 64.0
+gravity_anim_duration = 3.0
+gravity_anim_min_factor = 0.5
+gravity_anim_max_factor = 1.93
+light_emission = 0.0
+light_influence_radius = 50.0
+light_growth_bonus = 0.5
+light_sensitivity = 1.2
+light_color = Color(1, 1, 0.490196, 1)
+shimmer_duration = 2.5
+shimmer_min_energy_factor = 0.6
+shimmer_max_energy_factor = 1.1
+metadata/_custom_type_script = "uid://b6isf51xji5ud"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://p7n5n5kk4vjo"]
+[gd_scene load_steps=16 format=3 uid="uid://p7n5n5kk4vjo"]
 
 [ext_resource type="Script" uid="uid://mwgrq6ij5y2x" path="res://scenes/objects/plants/plantedcrop.gd" id="1_urelw"]
 [ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="2_p35mx"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dyqvbk6ovlhi" path="res://scenes/objects/plants/flowering_particles.tscn" id="6_l0xxe"]
 [ext_resource type="PackedScene" uid="uid://c3myk53pl1vm" path="res://scenes/components/collectable_component.tscn" id="7_25r6l"]
 [ext_resource type="Shader" uid="uid://bm3s4ueuilofj" path="res://scenes/objects/lightemitter.gdshader" id="8_2wwbq"]
+[ext_resource type="Shader" uid="uid://66iwfvvy8rwm" path="res://scenes/objects/gravityeffect.gdshader" id="9_sf1ja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyutu"]
 size = Vector2(16, 16)
@@ -26,6 +27,10 @@ gradient = SubResource("Gradient_sf1ja")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ss7xp"]
+shader = ExtResource("9_sf1ja")
+shader_parameter/strength = 0.1
 
 [node name="Plantedcrop" type="Node2D"]
 script = ExtResource("1_urelw")
@@ -55,7 +60,13 @@ shape = SubResource("RectangleShape2D_y26r2")
 debug_color = Color(0.67052, 0.392643, 0.83035, 0.42)
 
 [node name="LightEmitter" type="PointLight2D" parent="."]
+z_index = 10
 material = SubResource("ShaderMaterial_2wwbq")
 color = Color(0.454902, 1, 1, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ss7xp")
+
+[node name="GravityEffect" type="BackBufferCopy" parent="."]
+self_modulate = Color(0.780392, 0.113725, 0.2, 0.858824)
+z_index = 10
+material = SubResource("ShaderMaterial_ss7xp")

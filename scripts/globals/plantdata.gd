@@ -26,6 +26,13 @@ extends Resource
 @export_group("Effets Environnementaux")
 @export var heat_effect: float = 0.0 # Augmente la T° locale
 @export var gravity_influence: float = 0.0 # Modifie la gravité
+@export var gravity_radius: float = 64.0 # Rayon de l'effet en pixels.
+
+# On peut aussi ajouter des paramètres pour l'animation
+@export_group("Animation Gravitationnelle")
+@export var gravity_anim_duration: float = 3.0
+@export_range(0.0, 1.0) var gravity_anim_min_factor: float = 0.5 # Amplitude min (50%)
+@export_range(1.0, 2.0) var gravity_anim_max_factor: float = 1.0 # Amplitude max (100%)
 
 @export_group("Effets de Lumière")
 @export var light_emission: float = 0.0 # Intensité de la lumière émise
