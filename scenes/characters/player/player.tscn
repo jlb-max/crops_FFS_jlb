@@ -1238,7 +1238,7 @@ animations = [{
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xnwo"]
-radius = 4.0
+radius = 8.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 5

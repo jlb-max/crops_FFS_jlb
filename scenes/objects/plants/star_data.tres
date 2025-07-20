@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="PlantData" load_steps=11 format=3 uid="uid://e1sg8hu6p87x"]
+
+[ext_resource type="Resource" uid="uid://cu13fr1wekvwu" path="res://scenes/objects/plants/star_fruit.tres" id="1_e7cpb"]
+[ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="2_buyi8"]
+[ext_resource type="Texture2D" uid="uid://6vjmo4jrsif1" path="res://assets/game/objects/farming_plants.png" id="3_gi62y"]
+[ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_8f0mn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of4ge"]
+atlas = ExtResource("3_gi62y")
+region = Rect2(0, 208, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7cpb"]
+atlas = ExtResource("3_gi62y")
+region = Rect2(16, 208, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buyi8"]
+atlas = ExtResource("3_gi62y")
+region = Rect2(32, 208, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gi62y"]
+atlas = ExtResource("3_gi62y")
+region = Rect2(48, 208, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f0mn"]
+atlas = ExtResource("4_8f0mn")
+region = Rect2(16, 208, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of4ge")
+}],
+"loop": true,
+"name": &"stage_0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7cpb")
+}],
+"loop": true,
+"name": &"stage_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buyi8")
+}],
+"loop": true,
+"name": &"stage_2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gi62y")
+}],
+"loop": true,
+"name": &"stage_3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8f0mn")
+}],
+"loop": true,
+"name": &"stage_4",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("2_buyi8")
+plant_name = "Lumina"
+harvest_item = ExtResource("1_e7cpb")
+sprite_frames = SubResource("SpriteFrames_ypls3")
+time_per_stage = 10.0
+harvest_item_name = "Lumina"
+min_harvest_yield = 1
+max_harvest_yield = 3
+heat_effect = 0.0
+light_emission = 5.0
+gravity_influence = 0.0
+metadata/_custom_type_script = "uid://b6isf51xji5ud"
