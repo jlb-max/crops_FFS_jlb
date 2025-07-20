@@ -47,6 +47,8 @@ func _ready() -> void:
 		growth_cycle_component.set_watered_state(true)
 		
 	if plant_data and plant_data.light_emission > 0:
+		# On lit la couleur et l'énergie depuis les données de la plante
+		light_emitter.color = plant_data.light_color
 		light_emitter.energy = plant_data.light_emission
 		start_shimmer_animation()
 
@@ -54,13 +56,15 @@ func _ready() -> void:
 
 func start_shimmer_animation() -> void:
 	var base_energy = light_emitter.energy
-	var low_energy = base_energy * 0.2
-	var high_energy = base_energy * 1.0
-	var duration = 1.5
-
+	
+	# --- LECTURE DES PARAMÈTRES DEPUIS PLANTDATA ---
+	# On lit les multiplicateurs et la durée directement depuis la ressource
+	var low_energy = base_energy * plant_data.shimmer_min_energy_factor
+	var high_energy = base_energy * plant_data.shimmer_max_energy_factor
+	var duration = plant_data.shimmer_duration
+	
 	var tween = create_tween().set_loops()
 	
-	# On anime bien la propriété "energy"
 	tween.tween_property(light_emitter, "energy", high_energy, duration).from(low_energy).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(light_emitter, "energy", low_energy, duration).set_trans(Tween.TRANS_SINE)
 

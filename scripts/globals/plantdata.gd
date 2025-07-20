@@ -32,3 +32,7 @@ extends Resource
 @export var light_influence_radius: float = 50.0 # Rayon d'effet en pixels
 @export var light_growth_bonus: float = 0.2 # Bonus de 20% de croissance par jour
 @export var light_sensitivity: float = 1.0 # 1.0 = normal, > 1.0 aime la lumière, < 1.0 n'aime pas
+@export var light_color: Color = Color("ffff7d") # Une couleur jaune pâle par défaut
+@export var shimmer_duration: float = 2.5 # Durée d'un cycle de "respiration"
+@export_range(0.0, 1.0) var shimmer_min_energy_factor: float = 0.6 # Energie min (ex: 60% de la base)
+@export_range(1.0, 2.0) var shimmer_max_energy_factor: float = 1.1 # Energie max (ex: 110% de la base)
