@@ -1,4 +1,4 @@
-# TilledSoil.gd (mis à jour)
+# TilledSoil.gd (Version finale corrigée)
 extends TileMapLayer
 
 func _ready() -> void:
@@ -10,27 +10,25 @@ func on_weather_changed(new_weather: int) -> void:
 		print("Il pleut ! Les terres labourées sont arrosées (sauf celles protégées).")
 
 func water_all_tiles() -> void:
-	# On récupère tous les émetteurs de chaleur actifs dans la scène
 	var heat_emitters = get_tree().get_nodes_in_group("heat_emitters")
-	
 	var tilled_tiles = get_used_cells()
 	
-	# Pour chaque tuile labourée...
 	for tile_coord in tilled_tiles:
 		var is_protected = false
-		# On convertit les coordonnées de la tuile en position dans le monde
-		var tile_world_pos = map_to_local(tile_coord)
 		
-		# ...on vérifie si elle est proche d'un émetteur de chaleur
+		# --- CORRECTION ---
+		# On convertit les coordonnées de la tuile en position GLOBALE.
+		var tile_global_pos = to_global(map_to_local(tile_coord))
+		
 		for emitter in heat_emitters:
 			var heat_component = emitter.get_node_or_null("HeatComponent")
 			if heat_component:
-				var distance = tile_world_pos.distance_to(emitter.global_position)
-				# Si la distance est inférieure au rayon du bouclier...
+				# On compare maintenant deux positions globales, le calcul est juste.
+				var distance = tile_global_pos.distance_to(emitter.global_position)
+				
 				if distance < heat_component.heat_data.heat_radius:
 					is_protected = true
-					break # Pas la peine de vérifier les autres émetteurs, elle est protégée.
+					break
 		
-		# Si après toutes les vérifications, la tuile n'est pas protégée, on la mouille.
 		if not is_protected:
 			SoilManager.add_wet_tile(tile_coord)

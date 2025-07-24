@@ -115,9 +115,10 @@ shape = SubResource("CircleShape2D_25r6l")
 
 [node name="HeatWarp" type="ColorRect" parent="."]
 visible = false
-z_index = 110
+z_index = 100
 material = ExtResource("12_25r6l")
 color = Color(0, 0, 0, 0.00392157)
 
 [node name="FlameParticles" type="GPUParticles2D" parent="."]
+z_index = 100
 process_material = SubResource("ParticleProcessMaterial_cmi3h")
