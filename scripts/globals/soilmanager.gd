@@ -25,6 +25,11 @@ func add_wet_tile(coords: Vector2i) -> void:
 
 # Chaque nouveau jour, cette fonction est appelée.
 func on_day_passed(day: int) -> void:
+	# Si la météo du nouveau jour est la pluie, on ne sèche pas le sol.
+	if WeatherManager.get_current_weather() == WeatherManager.Weather.RAINING:
+		return
+
+	# Sinon (s'il fait soleil), on sèche tout comme avant.
 	if not wetness_overlay: return
 
 	for tile_coord in wet_tiles:

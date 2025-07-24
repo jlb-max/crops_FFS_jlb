@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=4 uid="uid://ctlwob6j64u8g"]
+[gd_scene load_steps=28 format=4 uid="uid://ctlwob6j64u8g"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_cskto"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_6lk7k"]
 [ext_resource type="PackedScene" uid="uid://bs11ymp2b1ruq" path="res://scenes/components/day_night_cycle_component.tscn" id="3_xraex"]
 [ext_resource type="TileSet" uid="uid://dm7aupe2py7xa" path="res://Tilesets/game_tile_set.tres" id="4_4ndcl"]
+[ext_resource type="Script" uid="uid://d35qhuu5vf6lx" path="res://scenes/components/tilled_soil.gd" id="5_6lk7k"]
 [ext_resource type="PackedScene" uid="uid://b6b8mu3b2d2gb" path="res://scenes/components/save_data_component.tscn" id="5_xk8nh"]
 [ext_resource type="Resource" uid="uid://bl7mq3ojrvet1" path="res://resources/tilemap_layer_data_resource.tres" id="6_1b5q6"]
 [ext_resource type="Shader" uid="uid://cl3iim11yms5i" path="res://scenes/objects/weting.gdshader" id="7_iw503"]
@@ -51,6 +52,7 @@ tile_set = ExtResource("4_4ndcl")
 
 [node name="TilledSoil" type="TileMapLayer" parent="GameTileMap"]
 tile_set = ExtResource("4_4ndcl")
+script = ExtResource("5_6lk7k")
 
 [node name="SaveDataComponent" parent="GameTileMap/TilledSoil" instance=ExtResource("5_xk8nh")]
 save_data_resource = ExtResource("6_1b5q6")

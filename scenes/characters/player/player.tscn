@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=3 uid="uid://y3mgqptfb4bw"]
+[gd_scene load_steps=176 format=3 uid="uid://y3mgqptfb4bw"]
 
 [ext_resource type="Texture2D" uid="uid://cqvck2bvic0d6" path="res://assets/game/characters/premium_charakter_spritesheet.png" id="1_7uws0"]
 [ext_resource type="Script" uid="uid://b0tvw1o2ysir0" path="res://scenes/characters/player/player.gd" id="1_qd3e3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b752vg6yy0is3" path="res://scenes/characters/player/tilling_state.gd" id="7_mk55u"]
 [ext_resource type="Script" uid="uid://c2jjhq7kckqfp" path="res://scenes/characters/player/watering_state.gd" id="8_xuses"]
 [ext_resource type="PackedScene" uid="uid://ce6dgert4sb77" path="res://scenes/components/hit_component.tscn" id="9_42irl"]
+[ext_resource type="Script" uid="uid://n8tm2m6k08d2" path="res://scenes/characters/player/raineffect.gd" id="9_djydg"]
 [ext_resource type="PackedScene" uid="uid://l03johye468p" path="res://scenes/test/test_scene_curseurdevisee.tscn" id="10_3xnwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t61fv"]
@@ -1237,6 +1238,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1crtg"]
 radius = 5.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bsn6e"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(700, 700, 1)
+direction = Vector3(0, 1, 0)
+spread = 5.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 800, 0)
+scale_min = 0.8
+scale_max = 2.5
+color = Color(0.470359, 0.661978, 0.988851, 0.533333)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xnwo"]
 radius = 8.0
 
@@ -1290,6 +1304,12 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 hit_component_collision_shape = NodePath("../../HitComponent/HitComponentCollisionShape2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RainEffect" type="GPUParticles2D" parent="Camera2D"]
+amount = 3000
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_bsn6e")
+script = ExtResource("9_djydg")
 
 [node name="HitComponent" parent="." instance=ExtResource("9_42irl")]
 

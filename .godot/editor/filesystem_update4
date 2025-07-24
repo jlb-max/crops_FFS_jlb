@@ -63,3 +63,7 @@ res://scenes/objects/rocks/stone.tres
 res://scenes/objects/rocks/rock.gd
 res://scenes/objects/rocks/rock.tscn
 res://scenes/objects/rocks/stone.tscn
+res://scenes/characters/player/raineffect.gd
+res://scripts/globals/soilmanager.gd
+res://scenes/components/tilled_soil.gd
+res://scripts/globals/weather_manager.gd

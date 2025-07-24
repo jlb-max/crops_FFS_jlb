@@ -27,6 +27,7 @@ GameManager="*res://scripts/globals/game_manager.gd"
 SceneManager="*res://scripts/globals/scene_manager.gd"
 SoilManager="*res://scripts/globals/soilmanager.gd"
 CropManager="*res://scripts/globals/CropManager.gd"
+WeatherManager="*res://scripts/globals/weather_manager.gd"
 
 [display]
 
