@@ -32,6 +32,7 @@ func init(data: HeatEffectData):
 	monitorable = false # Il détecte, mais n'est pas détecté
 	collision_shape.disabled = false
 	set_process(true)
+	get_parent().add_to_group("heat_emitters")
 
 func _process(delta: float) -> void:
 	# S'il n'y a rien à faire, on arrête
@@ -59,3 +60,8 @@ func _on_body_entered(body: Node2D):
 func _on_body_exited(body: Node2D):
 	if body.is_in_group("crops") and plants_in_range.has(body):
 		plants_in_range.erase(body)
+
+
+func _exit_tree():
+	# AJOUT : On s'assure de retirer la plante du groupe pour ne pas garder de fantômes
+	get_parent().remove_from_group("heat_emitters")

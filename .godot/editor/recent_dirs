@@ -1,3 +1,4 @@
+res://scenes/ui
 res://scenes/components
 res://scripts/globals
 res://assets/game/objects/Items
@@ -6,7 +7,6 @@ res://assets/game/objects
 res://assets/game/objects/Tree animations
 res://scenes/objects/trees
 res://scenes/objects/plants
-res://scenes/ui
 res://scenes/test
 res://scenes/objects
 res://assets/game/tilesets/ground tiles
