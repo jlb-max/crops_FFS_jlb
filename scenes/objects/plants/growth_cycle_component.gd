@@ -5,7 +5,7 @@ extends Node
 signal growth_stage_changed(new_stage: int)
 signal crop_harvesting
 
-@export var days_per_stage: int = 2
+var days_per_stage: int = 2
 @export var total_stages: int = 4
 
 var tile_coords: Vector2i
@@ -15,6 +15,7 @@ var is_watered_today: bool = false
 var is_harvestable: bool = false
 var wetness_overlay: TileMapLayer
 var growth_modifier: float = 1.0
+var plant_data_ref: PlantData
 
 
 func _ready() -> void:
@@ -48,7 +49,7 @@ func on_day_passed(day: int) -> void:
 
 # La logique de croissance
 func check_for_growth() -> void:
-	var calculated_stage = floori(float(days_watered) / float(days_per_stage))
+	var calculated_stage = floori((float(days_watered) / float(days_per_stage)) * total_stages)
 	
 	print("  Vérification de croissance: Stade calculé [", calculated_stage, "] | Stade actuel [", current_growth_state, "]")
 	
@@ -63,3 +64,13 @@ func check_for_growth() -> void:
 
 func apply_growth_modifier(bonus: float) -> void:
 	growth_modifier += bonus
+
+func apply_heat_modifier(external_heat_power: float):
+	# La plante a besoin de ses propres données pour savoir comment réagir
+	var sensitivity = plant_data_ref.heat_effect.heat_sensitivity
+	
+	if sensitivity != 0:
+		# Calcule le bonus/malus de croissance
+		var growth_bonus = external_heat_power * sensitivity
+		# Applique le modificateur (vous avez déjà une variable growth_modifier)
+		growth_modifier += growth_bonus

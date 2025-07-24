@@ -2,10 +2,13 @@
 class_name HurtComponent
 extends Area2D
 
+var current_health: float = 100.0
+
 @export var required_action: ItemData.ActionType = ItemData.ActionType.NONE
 
 # On peut même faire en sorte que le signal envoie l'item qui a été utilisé
 signal hurt(item_used: ItemData)
+signal health_depleted
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
@@ -21,3 +24,10 @@ func _on_area_entered(area: Area2D) -> void:
 			
 			# Au lieu de détruire, on émet simplement un signal pour prévenir le parent.
 			hurt.emit(item_used)
+
+
+func take_damage(amount: float):
+	current_health -= amount
+	if current_health <= 0:
+		health_depleted.emit()
+		get_parent().queue_free() # Par exemple, pour tuer la plante

@@ -2,6 +2,14 @@ extends Node2D
 
 var balloon_scene = preload("res://dialogue/game_dialogue_balloon.tscn")
 
+@export_group("Items à Donner")
+@export var hoe_item: ItemData
+@export var watering_can_item: ItemData
+@export var corn_seed_item: ItemData
+@export var tomato_seed_item: ItemData
+@export var axe_item: ItemData
+
+
 @onready var interactable_component: InteractableComponent = $InteractableComponent
 @onready var interactable_label_component: Control = $InteractableLabelComponent
 
@@ -35,11 +43,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func on_give_crop_seeds() -> void:
-	ToolManager.enable_tool_button(DataTypes.Tools.TillGround)
-	ToolManager.enable_tool_button(DataTypes.Tools.WaterCrops)
-	ToolManager.enable_tool_button(DataTypes.Tools.PlantCorn)
-	ToolManager.enable_tool_button(DataTypes.Tools.PlantTomato)
-	InventoryManager.add_collectable("Corn", 3)
-	InventoryManager.add_collectable("Tomato", 3)
+	# On appelle la bonne fonction avec les bonnes ressources
+	InventoryManager.add_item(hoe_item, 1)
+	InventoryManager.add_item(watering_can_item, 1)
+	InventoryManager.add_item(corn_seed_item, 3)
+	InventoryManager.add_item(tomato_seed_item, 3)
+	InventoryManager.add_item(axe_item, 1)
 		
-	print("Le guide a donné 3 maïs et 3 tomates au joueur !")
+	print("Le guide a donné les outils de base et des graines au joueur !")

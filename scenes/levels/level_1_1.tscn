@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://c2kx53p6ebs5k"]
+[gd_scene load_steps=23 format=4 uid="uid://c2kx53p6ebs5k"]
 
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="1_0irj0"]
 [ext_resource type="TileSet" uid="uid://dm7aupe2py7xa" path="res://Tilesets/game_tile_set.tres" id="1_bdtp5"]
@@ -7,18 +7,23 @@
 [ext_resource type="Resource" uid="uid://bl7mq3ojrvet1" path="res://resources/tilemap_layer_data_resource.tres" id="3_ri5l0"]
 [ext_resource type="PackedScene" uid="uid://dffyaaoqolnsc" path="res://scenes/characters/chicken/chicken.tscn" id="4_nxxpi"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="5_xf46x"]
+[ext_resource type="Shader" uid="uid://cl3iim11yms5i" path="res://scenes/objects/weting.gdshader" id="6_0irj0"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="6_ilqp3"]
 [ext_resource type="PackedScene" uid="uid://cjpk8voymd2fj" path="res://scenes/characters/cow/cow.tscn" id="6_mahri"]
 [ext_resource type="PackedScene" uid="uid://hylmhugngmrk" path="res://scenes/components/crops_cursor_component.tscn" id="7_0irj0"]
+[ext_resource type="TileSet" uid="uid://bttnwin5krffe" path="res://assets/game/tilesets/ground tiles/wetness_tileset.tres" id="7_ifba3"]
 [ext_resource type="PackedScene" uid="uid://c6gu2dlyo0q6x" path="res://scenes/objects/chest/chest.tscn" id="7_xf46x"]
 [ext_resource type="Script" uid="uid://c7so78xdy58vn" path="res://scenes/components/crops_cursor_component.gd" id="8_ifba3"]
 [ext_resource type="PackedScene" uid="uid://dyrus5sb22psi" path="res://scenes/objects/milk.tscn" id="8_ilqp3"]
 [ext_resource type="PackedScene" uid="uid://dh1ydhcyar48l" path="res://scenes/objects/egg.tscn" id="9_0irj0"]
-[ext_resource type="PackedScene" uid="uid://duisgl0trrdct" path="res://scenes/objects/plants/tomato.tscn" id="9_g5cmx"]
-[ext_resource type="PackedScene" uid="uid://bj2fbslrkicfi" path="res://scenes/objects/plants/corn.tscn" id="10_sq8og"]
 [ext_resource type="PackedScene" uid="uid://y3mgqptfb4bw" path="res://scenes/characters/player/player.tscn" id="11_uasaq"]
 [ext_resource type="PackedScene" uid="uid://cqg3k2c6eqa6m" path="res://scenes/ui/game_screen.tscn" id="12_hiojm"]
 [ext_resource type="PackedScene" uid="uid://b6snwhyvyjtcb" path="res://scenes/characters/guide/guide.tscn" id="14_oax36"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5cmx"]
+shader = ExtResource("6_0irj0")
+shader_parameter/radius = 0.5
+shader_parameter/softness = 0.331
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bdtp5"]
 vertices = PackedVector2Array(521, -157, 521, -349.148, 528.078, -130.281, 648.648, 88.7734, 504.352, 47.4063, 200.852, -144.773, 239, -180.852, 239, -173, 230.031, 173.313, 175.352, 202.359, 137.133, 125.906, 55.7578, -69.3594, 290.508, 138.039, 490, -378, 495, -378, 495, -190, 441, -237, 441, -268, 393, -190, 393, -234, 398, -234, 398, -237, 430, -268, 430, -270, 393, -270, 393, -332, 367, -332, 367, -190, 303, -190, 265, -173, 265, -378, 270, -378, 270, -381, 490, -381, 303, -157)
@@ -56,6 +61,11 @@ tile_set = ExtResource("1_bdtp5")
 [node name="SaveDataComponent" parent="GameTileMap/TilledSoil" instance=ExtResource("2_mahri")]
 save_data_resource = ExtResource("3_ri5l0")
 
+[node name="WetnessOverlay" type="TileMapLayer" parent="GameTileMap"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_g5cmx")
+tile_set = ExtResource("7_ifba3")
+
 [node name="Undergrowth" type="TileMapLayer" parent="GameTileMap"]
 tile_map_data = PackedByteArray("AABs/4z/BQAAAAIAAABt/5v/BQAAAAIAAABv/5X/BQAAAAIAAABv/57/BQAAAAIAAABv/6X/BQAAAAIAAABy/4r/BQAAAAIAAABz/5z/BQAAAAIAAAB1/5j/BQADAAAAAAB4/5P/BQAAAAIAAAB8/4r/BQAAAAIAAAB8/4//BQAAAAIAAAB8/6X/BQAAAAIAAAB//47/BQAAAAIAAACB/5P/BQABAAQAAACF/6P/BQAAAAIAAACK/5r/BQADAAIAAACM/6H/BQAAAAIAAACN/5H/BQAAAAIAAACR/5P/BQAFAAEAAACS/43/BQAAAAIAAACU/5z/BQAAAAIAAACV/5f/BQAAAAIAAACW/57/BQAAAAIAAACX/6H/BQAAAAIAAACb/47/BQAAAAIAAABq/5v/BQABAAIAAABr/5j/BQABAAIAAABs/5T/BQABAAIAAABu/6T/BQABAAIAAABw/4z/BQABAAIAAAB1/57/BQABAAIAAAB3/6X/BQABAAIAAAB5/57/BQABAAIAAAB9/6X/BQABAAIAAAB+/5j/BQABAAIAAAB+/6L/BQABAAIAAACA/5T/BQABAAIAAACG/5r/BQABAAIAAACJ/5H/BQABAAIAAACJ/53/BQABAAIAAACM/4r/BQABAAIAAACM/5j/BQABAAIAAACN/4v/BQABAAIAAACO/5//BQABAAIAAACP/5L/BQABAAIAAACQ/5P/BQABAAIAAACQ/5z/BQABAAIAAACU/5H/BQABAAIAAACV/5X/BQABAAIAAACX/57/BQABAAIAAACZ/4v/BQABAAIAAACa/5H/BQABAAIAAACa/5b/BQABAAIAAACb/5P/BQABAAIAAACc/5f/BQABAAIAAABq/4z/BQADAAIAAABr/4r/BQADAAIAAABu/5H/BQADAAIAAABx/4v/BQADAAIAAABx/5H/BQADAAIAAABx/5v/BQADAAIAAABy/5v/BQADAAIAAAB0/5D/BQADAAIAAAB0/5X/BQADAAIAAAB0/5b/BQADAAIAAAB3/5r/BQADAAIAAAB4/47/BQADAAIAAAB7/4//BQADAAIAAAB7/6L/BQADAAIAAAB9/4v/BQADAAIAAAB//5j/BQABAAQAAACB/5j/BQADAAIAAACC/6L/BQADAAAAAACG/47/BQADAAIAAACI/5T/BQADAAIAAACK/4z/BQADAAIAAACL/5b/BQADAAIAAACR/4//BQADAAIAAACV/6T/BQADAAIAAACX/5L/BQADAAIAAACY/5D/BQAFAAEAAABs/5D/BQACAAMAAABs/5j/BQACAAMAAABy/5f/BQACAAMAAABz/5L/BQACAAMAAABz/5b/BQACAAMAAAB1/4//BQACAAMAAAB1/5n/BQACAAMAAACA/6T/BQACAAMAAACB/6T/BQACAAMAAACC/6T/BQACAAMAAACG/6D/BQACAAMAAACN/6D/BQACAAMAAACU/53/BQACAAMAAABq/53/BQABAAQAAABq/6D/BQABAAQAAABr/5P/BQABAAQAAABt/4v/BQABAAQAAABx/5L/BQABAAQAAABy/5j/BQABAAQAAAB3/4r/BQABAAQAAAB5/4z/BQABAAQAAAB6/4r/BQABAAQAAACA/4r/BQABAAQAAACC/4r/BQABAAQAAACC/5X/BQABAAQAAACD/4//BQABAAQAAACE/4z/BQABAAQAAACF/6D/BQABAAQAAACK/4r/BQABAAQAAACL/5H/BQABAAQAAACL/53/BQABAAQAAACM/5r/BQABAAQAAACP/53/BQABAAQAAACS/6H/BQABAAQAAACV/6L/BQABAAQAAACW/6L/BQABAAQAAACY/5P/BQABAAQAAACb/5H/BQABAAQAAACc/6T/BQABAAQAAABq/43/BQADAAAAAABr/5X/BQADAAAAAABt/6H/BQADAAAAAABw/5T/BQADAAAAAABx/5r/BQADAAAAAABy/6P/BQADAAAAAABz/5P/BQADAAAAAAB0/53/BQADAAAAAAB5/5D/BQADAAAAAAB9/4z/BQADAAAAAAB9/5X/BQADAAAAAAB9/5z/BQADAAAAAAB9/6T/BQADAAAAAAB+/5z/BQAFAAEAAAB//4z/BQADAAAAAACD/4r/BQADAAAAAACD/5v/BQADAAAAAACK/5b/BQADAAAAAACN/5f/BQADAAAAAACN/5z/BQADAAAAAACU/6L/BQADAAAAAACY/6L/BQADAAAAAACb/4//BQADAAAAAACb/5X/BQADAAAAAACc/4z/BQADAAAAAABr/5f/BQAFAAAAAABy/4//BQAFAAAAAABy/5n/BQAFAAAAAABz/5D/BQAFAAAAAAB9/5T/BQAFAAEAAABt/57/BQAFAAEAAABu/5P/BQAFAAEAAABv/4z/BQAFAAEAAABy/5D/BQAFAAEAAABz/6H/BQAFAAEAAAB2/5b/BQAFAAEAAAB2/6D/BQAFAAEAAAB7/57/BQAFAAEAAAB8/5b/BQAFAAEAAAB9/47/BQAFAAEAAAB9/4//BQAFAAEAAAB//5n/BQAFAAEAAACD/6T/BQAFAAEAAACE/5v/BQAFAAEAAACE/6L/BQAFAAEAAACE/6X/BQAFAAEAAACM/53/BQAFAAEAAACX/5z/BQAFAAEAAACc/5L/BQAFAAEAAAA=")
 tile_set = ExtResource("1_bdtp5")
@@ -65,9 +75,10 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AABq/4v/BQADAAMAAABx/6L/BQADAAMAAABz/43/BQADAAMAAABz/6L/BQADAAMAAAB0/5n/BQADAAMAAAB3/5b/BQADAAMAAAB3/53/BQADAAMAAAB5/5L/BQADAAMAAAB6/5r/BQADAAMAAAB8/5f/BQADAAMAAAB9/57/BQADAAMAAACB/5P/BQADAAMAAACD/4//BQADAAMAAACD/5//BQADAAMAAACE/5P/BQADAAMAAACE/5v/BQADAAMAAACF/6T/BQADAAMAAACK/6P/BQADAAMAAACL/43/BQADAAMAAACL/5L/BQADAAMAAACO/4z/BQADAAMAAACP/5H/BQADAAMAAACP/5z/BQADAAMAAACR/5f/BQADAAMAAACS/5L/BQADAAMAAACS/5j/BQADAAMAAACS/5//BQADAAMAAACT/53/BQADAAMAAACY/5n/BQADAAMAAACZ/5L/BQADAAMAAAA=")
 tile_set = ExtResource("1_bdtp5")
 
-[node name="Player" parent="GameTileMap" instance=ExtResource("11_uasaq")]
+[node name="Player" parent="GameTileMap" node_paths=PackedStringArray("game_tilemap") instance=ExtResource("11_uasaq")]
 z_index = 0
-position = Vector2(-1375, -1596)
+position = Vector2(-1365, -1596)
+game_tilemap = NodePath("../Grass")
 
 [node name="Objects" type="TileMapLayer" parent="GameTileMap" groups=["navigation_polygon_source_geometry_group"]]
 y_sort_enabled = true
@@ -98,18 +109,6 @@ position = Vector2(-1260, -1632)
 [node name="Crops" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-568, -1569)
-
-[node name="Tomato" parent="Crops" instance=ExtResource("9_g5cmx")]
-position = Vector2(-670, 53)
-
-[node name="Tomato2" parent="Crops" instance=ExtResource("9_g5cmx")]
-position = Vector2(-844, 66)
-
-[node name="Corn" parent="Crops" instance=ExtResource("10_sq8og")]
-position = Vector2(-634, 85)
-
-[node name="Corn2" parent="Crops" instance=ExtResource("10_sq8og")]
-position = Vector2(-805, 148)
 
 [node name="Chickens" type="Node2D" parent="."]
 

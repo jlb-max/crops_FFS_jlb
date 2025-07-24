@@ -9,7 +9,7 @@ enum ActionType { NONE, TILL, WATER, PLANT, CHOP }
 @export var description: String = ""
 @export var icon: Texture2D
 @export var stackable: bool = true
-
+@export var damage: int = 1
 
 @export var action_type: ActionType = ActionType.NONE
 @export var plant_to_grow: PlantData

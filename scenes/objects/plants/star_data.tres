@@ -1,35 +1,51 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=11 format=3 uid="uid://e1sg8hu6p87x"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=21 format=3 uid="uid://e1sg8hu6p87x"]
 
+[ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_8f0mn"]
 [ext_resource type="Resource" uid="uid://cu13fr1wekvwu" path="res://scenes/objects/plants/star_fruit.tres" id="1_e7cpb"]
+[ext_resource type="Script" uid="uid://cp0l8mepclpvf" path="res://scripts/globals/GrowthData.gd" id="2_66bci"]
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="2_buyi8"]
 [ext_resource type="Texture2D" uid="uid://6vjmo4jrsif1" path="res://assets/game/objects/farming_plants.png" id="3_gi62y"]
 [ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_8f0mn"]
+[ext_resource type="Script" uid="uid://uuuadwct7gp2" path="res://scripts/globals/HarvestData.gd" id="4_von5d"]
+[ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_iurbg"]
+[ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_vc0qe"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_of4ge"]
+[sub_resource type="Resource" id="Resource_vl1di"]
+script = ExtResource("1_8f0mn")
+has_gravity_effect = false
+gravity_influence = 0.0
+gravity_radius = 64.0
+gravity_sensitivity = 0.0
+wave_amplitude = 6.0
+wave_wavelength = 32.0
+wave_speed = 2.0
+metadata/_custom_type_script = "uid://caa2jifiaeqh0"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_von5d"]
 atlas = ExtResource("3_gi62y")
 region = Rect2(0, 208, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e7cpb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iurbg"]
 atlas = ExtResource("3_gi62y")
 region = Rect2(16, 208, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_buyi8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vc0qe"]
 atlas = ExtResource("3_gi62y")
 region = Rect2(32, 208, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gi62y"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl1di"]
 atlas = ExtResource("3_gi62y")
 region = Rect2(48, 208, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8f0mn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv07c"]
 atlas = ExtResource("4_8f0mn")
 region = Rect2(16, 208, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ypls3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ish6r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_of4ge")
+"texture": SubResource("AtlasTexture_von5d")
 }],
 "loop": true,
 "name": &"stage_0",
@@ -37,7 +53,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e7cpb")
+"texture": SubResource("AtlasTexture_iurbg")
 }],
 "loop": true,
 "name": &"stage_1",
@@ -45,7 +61,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_buyi8")
+"texture": SubResource("AtlasTexture_vc0qe")
 }],
 "loop": true,
 "name": &"stage_2",
@@ -53,7 +69,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gi62y")
+"texture": SubResource("AtlasTexture_vl1di")
 }],
 "loop": true,
 "name": &"stage_3",
@@ -61,37 +77,53 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8f0mn")
+"texture": SubResource("AtlasTexture_gv07c")
 }],
 "loop": true,
 "name": &"stage_4",
 "speed": 5.0
 }]
 
+[sub_resource type="Resource" id="Resource_gv07c"]
+script = ExtResource("2_66bci")
+time_to_maturity = 4.0
+sprite_frames = SubResource("SpriteFrames_ish6r")
+metadata/_custom_type_script = "uid://cp0l8mepclpvf"
+
+[sub_resource type="Resource" id="Resource_ish6r"]
+script = ExtResource("4_von5d")
+harvest_item = ExtResource("1_e7cpb")
+min_yield = 1
+max_yield = 3
+metadata/_custom_type_script = "uid://uuuadwct7gp2"
+
+[sub_resource type="Resource" id="Resource_5akck"]
+script = ExtResource("5_iurbg")
+emits_heat = false
+heat_power = 1.0
+heat_radius = 64.0
+burn_power = 0.0
+heat_sensitivity = 0.0
+metadata/_custom_type_script = "uid://bt6illphij7k6"
+
+[sub_resource type="Resource" id="Resource_qjutw"]
+script = ExtResource("6_vc0qe")
+has_light_effect = true
+light_emission = 0.5
+light_color = Color(1, 1, 0.490196, 1)
+light_sensitivity = 0.0
+shimmer_duration = 2.5
+shimmer_min_factor = 0.8
+shimmer_max_factor = 1.2
+metadata/_custom_type_script = "uid://dgtqgj606gj6g"
+
 [resource]
 script = ExtResource("2_buyi8")
 plant_name = "Lumina"
 harvest_item = ExtResource("1_e7cpb")
-sprite_frames = SubResource("SpriteFrames_ypls3")
-time_per_stage = 10.0
-harvest_item_name = "Lumina"
-min_harvest_yield = 1
-max_harvest_yield = 3
-heat_effect = 0.0
-gravity_influence = 0.0
-gravity_radius = 0.0
-gravity_anim_duration = 0.0
-gravity_anim_min_factor = 0.0
-gravity_anim_max_factor = 1.0
-gravity_wave_amplitude = 0.0
-gravity_wave_wavelength = 0.0
-gravity_wave_speed = 0.0
-light_emission = 1.0
-light_influence_radius = 50.0
-light_growth_bonus = 0.2
-light_sensitivity = 1.0
-light_color = Color(0.503133, 0.734538, 0.962448, 1)
-shimmer_duration = 2.5
-shimmer_min_energy_factor = 0.2
-shimmer_max_energy_factor = 1.0
+growth_data = SubResource("Resource_gv07c")
+harvest_data = SubResource("Resource_ish6r")
+light_effect = SubResource("Resource_qjutw")
+gravity_effect = SubResource("Resource_vl1di")
+heat_effect = SubResource("Resource_5akck")
 metadata/_custom_type_script = "uid://b6isf51xji5ud"

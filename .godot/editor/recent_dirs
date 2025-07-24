@@ -1,10 +1,11 @@
+res://assets/game/objects
+res://assets/game/objects/Items
+res://scenes/objects/trees
+res://scenes/objects/plants
 res://scenes/ui
 res://scenes/test
 res://scenes/objects
-res://assets/game/objects/Items
-res://assets/game/objects
 res://scripts/globals
 res://assets/game/tilesets/ground tiles
 res://scenes/components
-res://scenes/objects/plants
 res://resources
