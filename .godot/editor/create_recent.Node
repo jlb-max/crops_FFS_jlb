@@ -1,3 +1,4 @@
+AnimatedSprite2D
 GPUParticles2D
 ColorRect
 Sprite2D
@@ -11,5 +12,3 @@ Panel
 Control
 GridContainer
 Label
-TextureRect
-PanelContainer

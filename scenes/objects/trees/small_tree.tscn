@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://1ba8mrtswdvh"]
+[gd_scene load_steps=12 format=3 uid="uid://1ba8mrtswdvh"]
 
 [ext_resource type="Texture2D" uid="uid://cb4sjd3lforv3" path="res://assets/game/objects/trees_stumps_bushes.png" id="1_a8qts"]
 [ext_resource type="Shader" uid="uid://bx4d7ah5era7e" path="res://scenes/objects/shake.gdshader" id="1_w057i"]
@@ -13,9 +13,20 @@ shader = ExtResource("1_w057i")
 shader_parameter/shake_intensity = 0.0
 shader_parameter/shake_speed = 20.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xyb6m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_skbjc"]
 atlas = ExtResource("1_a8qts")
-region = Rect2(0, 0, 16, 32)
+region = Rect2(0, 0, 16, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_elu1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skbjc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_au4vd"]
 radius = 5.0
@@ -23,11 +34,11 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au4vd"]
 size = Vector2(8, 23)
 
-[node name="SmallTree" type="Sprite2D"]
+[node name="SmallTree" type="AnimatedSprite2D"]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_skbjc")
 position = Vector2(0, -11)
-texture = SubResource("AtlasTexture_xyb6m")
+sprite_frames = SubResource("SpriteFrames_elu1k")
 script = ExtResource("2_g5iuu")
 log_item_to_drop = ExtResource("4_skbjc")
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2jwe1fkixbt0"]
+[gd_scene load_steps=23 format=3 uid="uid://c2jwe1fkixbt0"]
 
 [ext_resource type="Shader" uid="uid://bx4d7ah5era7e" path="res://scenes/objects/shake.gdshader" id="1_f4wgc"]
-[ext_resource type="Texture2D" uid="uid://cb4sjd3lforv3" path="res://assets/game/objects/trees_stumps_bushes.png" id="1_wjqkr"]
+[ext_resource type="Texture2D" uid="uid://6s7oprsliv1m" path="res://assets/game/objects/Tree animations/tree_sprites.png" id="2_6vpey"]
 [ext_resource type="Script" uid="uid://b0v5qyub6s56e" path="res://scenes/objects/trees/small_tree.gd" id="2_f4wgc"]
 [ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="3_6vpey"]
 [ext_resource type="PackedScene" uid="uid://vp158f76aul3" path="res://scenes/components/damage_component.tscn" id="4_0ia52"]
@@ -13,9 +13,97 @@ shader = ExtResource("1_f4wgc")
 shader_parameter/shake_intensity = 0.0
 shader_parameter/shake_speed = 20.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xyb6m"]
-atlas = ExtResource("1_wjqkr")
-region = Rect2(16, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ia52"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_you1t"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cbki"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbr8p"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(144, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3x4n"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(192, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr3tk"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(240, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldynx"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(288, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63qeb"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(336, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcs6x"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(384, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkyaq"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(432, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3frf"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(480, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m1o7"]
+atlas = ExtResource("2_6vpey")
+region = Rect2(528, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dj7pk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ia52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_you1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cbki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbr8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3x4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr3tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldynx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63qeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcs6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkyaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3frf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m1o7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_au4vd"]
 radius = 5.0
@@ -23,10 +111,13 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au4vd"]
 size = Vector2(12, 24)
 
-[node name="LargeTree" type="Sprite2D"]
+[node name="LargeTree" type="AnimatedSprite2D"]
 material = SubResource("ShaderMaterial_6vpey")
 position = Vector2(0, -11)
-texture = SubResource("AtlasTexture_xyb6m")
+sprite_frames = SubResource("SpriteFrames_dj7pk")
+autoplay = "default"
+frame_progress = 0.422531
+offset = Vector2(0, -6)
 script = ExtResource("2_f4wgc")
 log_item_to_drop = ExtResource("4_6vpey")
 

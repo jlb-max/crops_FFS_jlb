@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://es2on243oiib"]
+[gd_scene load_steps=11 format=3 uid="uid://es2on243oiib"]
 
 [ext_resource type="Shader" uid="uid://bx4d7ah5era7e" path="res://scenes/objects/shake.gdshader" id="1_bntui"]
 [ext_resource type="Texture2D" uid="uid://bmmtsl5jahgp0" path="res://assets/game/objects/mushroom_flowers_stones.png" id="1_f5itc"]
 [ext_resource type="Script" uid="uid://bjnluuj7m34vq" path="res://scenes/objects/rocks/rock.gd" id="2_bntui"]
 [ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="3_8i8v8"]
+[ext_resource type="Resource" uid="uid://tm2vgs752rm6" path="res://scenes/objects/rocks/stone.tres" id="4_8i8v8"]
 [ext_resource type="PackedScene" uid="uid://vp158f76aul3" path="res://scenes/components/damage_component.tscn" id="4_wj66e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8i8v8"]
@@ -27,6 +28,7 @@ material = SubResource("ShaderMaterial_8i8v8")
 position = Vector2(0, -4)
 texture = SubResource("AtlasTexture_ms1l0")
 script = ExtResource("2_bntui")
+stone_item_to_drop = ExtResource("4_8i8v8")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
