@@ -19,9 +19,13 @@ var plant_data_ref: PlantData
 
 
 func _ready() -> void:
-	# La connexion au signal de l'horloge
+	# 1. Connexion à l’horloge
 	DayAndNightCycleManager.time_tick_day.connect(on_day_passed)
-	
+
+func _ensure_tile_coords() -> void:
+	if wetness_overlay and tile_coords == Vector2i():
+		var local_pos  = wetness_overlay.to_local(get_parent().global_position)
+		tile_coords = wetness_overlay.local_to_map(local_pos)
 
 # Appelée par PlantedCrop quand la plante est arrosée
 func set_watered_state(is_watered: bool) -> void:
@@ -30,6 +34,11 @@ func set_watered_state(is_watered: bool) -> void:
 
 # Appelée chaque nouveau jour par le signal de l'horloge
 func on_day_passed(day: int) -> void:
+	_ensure_tile_coords()      # ← nouvelle ligne
+
+	if not is_watered_today and SoilManager.is_tile_wet(tile_coords):
+		is_watered_today = true
+
 	print("--- NOUVEAU JOUR ", day, " POUR LA PLANTE ---")
 	print("  La plante a-t-elle été arrosée hier ? ", is_watered_today)
 

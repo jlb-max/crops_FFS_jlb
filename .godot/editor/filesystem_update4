@@ -57,3 +57,4 @@ res://scripts/globals/soilmanager.gd
 res://scenes/components/tilled_soil.gd
 res://scenes/components/field_cursor_component.gd
 res://scenes/test/wetnessoverlay.gd
+res://scenes/objects/plants/growth_cycle_component.gd
