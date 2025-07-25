@@ -61,3 +61,8 @@ res://scenes/objects/plants/growth_cycle_component.gd
 res://Tilesets/water.shader.gdshader
 res://scripts/globals/weather_manager.gd
 res://Tilesets/waterlayereffect.gd
+res://scenes/objects/plants/gravity_ripple.gdshader
+res://scenes/objects/rocks/grav_stone.gdshader
+res://scenes/objects/rocks/grav_stone.tscn
+res://scenes/objects/trees/small_tree.tscn
+res://scenes/objects/rocks/rock.tscn

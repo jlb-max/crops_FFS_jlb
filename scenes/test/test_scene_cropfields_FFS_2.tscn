@@ -34,8 +34,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw503"]
 shader = ExtResource("4_1b5q6")
-shader_parameter/WATER_COL = Color(0.176471, 0.635294, 0.85098, 1)
-shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
+shader_parameter/WATER_COL = Color(0.176471, 0.854902, 0.85098, 1)
+shader_parameter/WATER2_COL = Color(0.0588235, 0.690196, 0.776471, 1)
 shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
 shader_parameter/distortion_speed = 2.0
 shader_parameter/tile = Vector2(5, 5)

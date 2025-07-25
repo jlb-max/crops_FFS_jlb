@@ -1,6 +1,6 @@
-GPUParticles2D
-Sprite2D
 ColorRect
+Sprite2D
+GPUParticles2D
 Timer
 Node2D
 Node
@@ -12,4 +12,3 @@ AspectRatioContainer
 VBoxContainer
 MarginContainer
 PanelContainer
-GridContainer
