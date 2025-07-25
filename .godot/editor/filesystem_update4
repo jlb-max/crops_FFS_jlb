@@ -54,3 +54,6 @@ res://scenes/ui/inventory_panel.tscn
 res://scenes/ui/game_screen.tscn
 res://scenes/test/test_scene_curseurdevisee.tscn
 res://scripts/globals/soilmanager.gd
+res://scenes/components/tilled_soil.gd
+res://scenes/components/field_cursor_component.gd
+res://scenes/test/wetnessoverlay.gd

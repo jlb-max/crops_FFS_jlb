@@ -3,6 +3,7 @@ extends TileMapLayer
 
 func _ready() -> void:
 	WeatherManager.weather_changed.connect(on_weather_changed)
+	SoilManager.register_tilled_soil_layer(self)
 
 func on_weather_changed(new_weather: int) -> void:
 	if new_weather == WeatherManager.Weather.RAINING:
