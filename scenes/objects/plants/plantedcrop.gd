@@ -19,6 +19,7 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 @onready var heat_warp: ColorRect = $HeatWarp
 @onready var flame_particles: GPUParticles2D = $FlameParticles
 @onready var water_sphere: Sprite2D = $WaterSphere
+@onready var water_burst_particles: GPUParticles2D = $WaterSphere/WaterBurstParticles
 
 # --------------------------------------------------------------------
 # Dans PlantedCrop.gd
@@ -28,6 +29,14 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 func _ready() -> void:
     if plant_data == null:
         queue_free(); return
+    
+    var pmat := water_burst_particles.process_material as ParticleProcessMaterial
+    if pmat:
+        pmat.direction = Vector3(1, 0, 0)   # horizontale
+        pmat.spread    = 180.0              # 360° effectif
+    
+    if wetness_overlay == null and SoilManager.wetness_overlay:
+       wetness_overlay = SoilManager.wetness_overlay
 
     # --- 1. Initialisation de la Croissance ---
     # On vérifie que les données de croissance existent avant de les utiliser
@@ -118,14 +127,53 @@ func _ready() -> void:
         _start_water_sphere_animation()
 
 
-func _start_water_sphere_animation():
-    # On anime la propriété "growth" du shader
-    var tween = create_tween().set_loops()
-    var duration = plant_data.water_pulse_effect.pulse_duration
+const GROWTH_PART      := 0.50   # 50 % du temps = apparition
+const FILL_PART        := 0.40   # 40 % = remplissage
+const PAUSE_PART       := 0.10   # 10 % = suspense
 
-    # On fait aller "growth" de 0 à 1, puis de 1 à 0, en boucle
-    tween.tween_property(water_sphere.material, "shader_parameter/growth", 1.0, duration).from(0.0).set_trans(Tween.TRANS_SINE)
-    tween.tween_property(water_sphere.material, "shader_parameter/growth", 0.0, duration).set_trans(Tween.TRANS_SINE)
+func _start_water_sphere_animation() -> void:
+    var dur := plant_data.water_pulse_effect.pulse_duration
+    var t   := create_tween()
+
+    # 1. Apparition : growth 0 → 1
+    t.tween_property(water_sphere.material, "shader_parameter/growth",
+        1.0, dur * GROWTH_PART).from(0.0)\
+        .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+    # 2. Remplissage : fill_amount 0 → 1
+    t.tween_property(water_sphere.material, "shader_parameter/fill_amount",
+        1.0, dur * FILL_PART).from(0.0)\
+        .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+    # 3. Pause dramatique
+    t.tween_interval(dur * PAUSE_PART)
+
+    # 4. Explosion
+    t.tween_callback(_burst_water_sphere)
+
+func _burst_water_sphere() -> void:
+    water_burst_particles.emitting = true
+
+    # Mouille le sol labouré
+    if wetness_overlay:
+        var c := wetness_overlay.local_to_map(
+            wetness_overlay.to_local(global_position))
+        SoilManager.add_wet_area(c, plant_data.water_pulse_effect.pulse_radius)
+
+    # Fade‑out synchronisé des deux paramètres
+    var t := create_tween()
+    t.tween_property(water_sphere.material, "shader_parameter/growth",
+        0.0, 0.4).set_trans(Tween.TRANS_SINE)
+    t.parallel().tween_property(water_sphere.material, "shader_parameter/fill_amount",
+        0.0, 0.4).set_trans(Tween.TRANS_SINE)
+
+    # Quand le fade est fini → mini pause → cycle suivant
+    t.tween_callback(func():
+        await get_tree().create_timer(0.2).timeout
+        _start_water_sphere_animation()
+    )
+
+
 
 
 func _update_gravity_rect() -> void:     # ← NEW

@@ -68,14 +68,17 @@ tile_set = ExtResource("8_dhtug")
 [node name="CropFields" type="Node2D" parent="."]
 
 [node name="testtomato" parent="CropFields" instance=ExtResource("9_alwkh")]
+visible = false
 position = Vector2(99, 144)
 plant_data = ExtResource("10_4iilq")
 
 [node name="testgravitron" parent="CropFields" instance=ExtResource("9_alwkh")]
+visible = false
 position = Vector2(188, 144)
 plant_data = ExtResource("11_mkgfn")
 
 [node name="testcarrot" parent="CropFields" instance=ExtResource("9_alwkh")]
+visible = false
 position = Vector2(254, 133)
 plant_data = ExtResource("13_xk8nh")
 

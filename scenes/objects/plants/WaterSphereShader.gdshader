@@ -1,38 +1,67 @@
 shader_type canvas_item;
-
-// --- AJOUT CLÉ ---
-// On copie cette ligne depuis votre shader GravityWarp qui fonctionne.
-// Elle assure que le rendu n'est pas affecté par d'autres paramètres.
 render_mode unshaded;
 
-uniform float growth : hint_range(0.0, 1.0);
-uniform float distortion_strength = 0.03;
+// ---------- PARAMÈTRES ----------
+uniform float growth       : hint_range(0.0, 1.0) = 0.0;
+uniform float fill_amount  : hint_range(0.0, 1.0) = 0.0;
+uniform vec4  water_color  : source_color = vec4(0.55, 0.85, 1.0, 0.65);
+uniform vec4  rim_color    : source_color = vec4(1.0, 1.0, 1.0, 0.8);
+uniform float rim_width    : hint_range(0.0, 1.0) = 0.8;
+uniform float specular_shine : hint_range(0.0, 128.0) = 64.0;
+
+uniform float flow_speed   : hint_range(0.0,2.0) = 0.8;   // Vitesse des remous
+uniform float wave_freq    : hint_range(1.0,20.0) = 10.0; // Fréquence
+uniform float wave_amp     : hint_range(0.0,0.1) = 0.025; // Amplitude
+
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
 void fragment() {
-    // On calcule la distance par rapport au centre (de 0.0 au centre à 1.0 au bord)
-    float circle_dist = length(UV - vec2(0.5)) * 2.0;
+	// ----------------- BASE GÉOMÉTRIE -----------------
+	vec2 centered_uv = UV * 2.0 - 1.0;
+	float dist_from_center = length(centered_uv);
+	if (dist_from_center > 1.0) discard;               // cercle parfait
 
-    // Si on est en dehors du cercle, on ne dessine rien
-    if (circle_dist > 1.0) {
-        discard;
-    }
+	// ----------------- APPARITION / DISPARITION ---------------
+	float growth_mask = smoothstep(0.0, 0.12,
+				1.0 - dist_from_center - (1.0 - growth));
+	if (growth_mask < 0.01) discard;
 
-    // Le masque de croissance (ce qui fait apparaître le cercle)
-    float mask = smoothstep(growth, growth - 0.1, circle_dist);
-    if (mask < 0.01) {
-        discard;
-    }
+	// ----------------- ILLUSION 3D -----------------
+	vec3 normal = vec3(centered_uv.x, -centered_uv.y,
+		sqrt(max(0.0, 1.0 - dist_from_center * dist_from_center)));
+	vec3 view_dir = vec3(0.0, 0.0, 1.0);
+	vec3 light_dir = normalize(vec3(0.7, 0.8, 0.6));
 
-    // --- CORRECTION DE LA DISTORSION ---
-    // On utilise la direction depuis le centre, c'est plus fiable que NORMAL
-    vec2 direction = normalize(UV - vec2(0.5));
-    vec2 distorted_uv = SCREEN_UV - direction * distortion_strength * mask;
-    // --- FIN DE LA CORRECTION ---
+	float rim = pow(1.0 - dot(normal, view_dir), 2.0) * rim_width;
+	rim = smoothstep(0.0, 1.0, rim);
 
-    vec4 original_color = texture(SCREEN_TEXTURE, distorted_uv);
+	vec3 reflect_dir = reflect(-light_dir, normal);
+	float spec = pow(max(0.0, dot(view_dir, reflect_dir)), specular_shine);
 
-    // On applique une légère teinte bleutée et la transparence
-    COLOR.rgb = mix(original_color.rgb, vec3(0.8, 0.9, 1.0), 0.1);
-    COLOR.a = mask * 0.5;
+	// ----------------- ONDULATIONS INTERNE -------------
+	// Décale l’UV verticalement avec un sin TIME‑dépendant
+	float wave = sin(centered_uv.x * wave_freq + TIME * flow_speed)
+			   * wave_amp * (1.0 - dist_from_center);
+	vec2 flow_uv = centered_uv;
+	flow_uv.y += wave;     // remous internes
+
+	// ----------------- MASQUE DE REMPLISSAGE ----------
+	float fill_line = (1.0 - fill_amount) * 2.0 - 1.0 + wave;
+	float water_mask = smoothstep(fill_line, fill_line - 0.1, flow_uv.y);
+
+	// ----------------- DISTORSION DE FOND --------------
+	vec2 distortion = normalize(centered_uv) * wave_amp * 2.0
+	                  * (1.0 - dist_from_center) * growth;
+	vec4 back = texture(SCREEN_TEXTURE, SCREEN_UV - distortion);
+
+	// ----------------- COMPOSITION FINALE --------------
+	vec3 col = mix(back.rgb, water_color.rgb,
+	               water_color.a * water_mask);
+
+	col += rim * rim_color.rgb * rim_color.a; // bord lumineux
+	col += spec;                              // reflet spéculaire
+
+	float alpha = growth_mask * 0.45 + water_mask * 0.25;
+
+	COLOR = vec4(col, alpha);
 }

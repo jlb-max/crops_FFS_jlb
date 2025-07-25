@@ -121,7 +121,7 @@ metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 [sub_resource type="Resource" id="Resource_7l1vp"]
 script = ExtResource("10_bv8mh")
 has_water_pulse_effect = true
-pulse_radius = 3
+pulse_radius = 1
 pulse_duration = 3.0
 metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
 
