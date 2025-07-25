@@ -58,3 +58,6 @@ res://scenes/components/tilled_soil.gd
 res://scenes/components/field_cursor_component.gd
 res://scenes/test/wetnessoverlay.gd
 res://scenes/objects/plants/growth_cycle_component.gd
+res://Tilesets/water.shader.gdshader
+res://scripts/globals/weather_manager.gd
+res://Tilesets/waterlayereffect.gd
