@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dy00jkvirx4ps"]
+
+[ext_resource type="Texture2D" uid="uid://b5ofwn7oewi58" path="res://assets/game/objects/work_station.png" id="1_6l5su"]
+[ext_resource type="Script" uid="uid://bpxw848fbm6jv" path="res://scripts/globals/itemdata.gd" id="1_h2f0e"]
+
+[resource]
+script = ExtResource("1_h2f0e")
+item_name = "Atelier"
+description = ""
+icon = ExtResource("1_6l5su")
+stackable = true
+damage = 1
+action_type = 0
+metadata/_custom_type_script = "uid://bpxw848fbm6jv"

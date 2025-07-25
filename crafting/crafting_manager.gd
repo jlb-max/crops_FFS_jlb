@@ -1,44 +1,49 @@
 # res://managers/crafting_manager.gd
 extends Node
 
-# Signal émis quand un objet est fabriqué avec succès
+var all_recipes: Dictionary = {}
+var discovered_recipes_ids: Array[StringName] = []
+const CraftingRecipe = preload("res://crafting/crafting_recipe.gd")
 signal item_crafted(item_data: ItemData, quantity: int)
 
-# Dictionnaire de toutes les recettes du jeu, chargées au démarrage.
-# La clé est le recipe_id (StringName), la valeur est la ressource CraftingRecipe.
-var all_recipes: Dictionary = {}
-
-# Liste des IDs des recettes que le joueur a découvertes.
-# C'est cette liste que vous sauvegarderez/chargerez !
-var discovered_recipes_ids: Array[StringName] = []
+# Ce dictionnaire sera construit automatiquement au démarrage
+var item_unlock_map: Dictionary = {}
 
 func _ready() -> void:
     _load_all_recipes_from_disk()
 
-# Charge toutes les ressources de recettes depuis le dossier de projet
 func _load_all_recipes_from_disk() -> void:
-    var dir = DirAccess.open("res://crafting/recipes/") # Assurez-vous que le dossier existe
+    var dir_path = "res://crafting/recipes/"
+    var dir = DirAccess.open(dir_path)
     if dir:
-        dir.list_dir_begin()
-        var file_name = dir.get_next()
-        while file_name != "":
-            if not dir.current_is_dir() and file_name.ends_with(".tres"):
-                var recipe: CraftingRecipe = load(dir.get_current_dir() + "/" + file_name)
+        for file_name in dir.get_files():
+            if file_name.ends_with(".tres"):
+                var recipe: CraftingRecipe = load(dir_path + file_name)
                 if recipe and recipe.recipe_id != &"":
                     all_recipes[recipe.recipe_id] = recipe
-            file_name = dir.get_next()
-    print("CraftingManager: Loaded %d recipes." % all_recipes.size())
+                    
+                    # --- NOUVELLE LOGIQUE ---
+                    # Si la recette est "Toujours connue", on la découvre immédiatement
+                    if recipe.unlock_condition == CraftingRecipe.UnlockType.ALWAYS_KNOWN:
+                        discover_recipe(recipe.recipe_id)
+                    # Sinon, si elle est débloquée par un objet, on prépare notre dictionnaire
+                    elif recipe.unlock_condition == CraftingRecipe.UnlockType.ON_ITEM_DISCOVERY and recipe.unlocking_item != null:
+                        item_unlock_map[recipe.unlocking_item] = recipe.recipe_id
+    
+    print("CraftingManager: %d recettes chargées, %d recettes de base découvertes." % [all_recipes.size(), discovered_recipes_ids.size()])
 
-# --- API Publique ---
+# Nouvelle fonction appelée par InventoryManager
+func on_item_added(item_data: ItemData):
+    # On vérifie si l'objet ajouté est une clé de déblocage
+    if item_unlock_map.has(item_data):
+        var recipe_id_to_unlock = item_unlock_map[item_data]
+        discover_recipe(recipe_id_to_unlock)
 
-# Ajoute une recette à la liste des recettes découvertes
 func discover_recipe(recipe_id: StringName) -> void:
     if not discovered_recipes_ids.has(recipe_id):
         discovered_recipes_ids.append(recipe_id)
-        # Émettre un signal si l'UI doit être mise à jour
-        # signal recipe_discovered.emit(recipe_id)
+        print("Nouvelle recette découverte : ", recipe_id)
 
-# Renvoie la liste des ressources de recettes découvertes
 func get_discovered_recipes() -> Array[CraftingRecipe]:
     var recipes: Array[CraftingRecipe] = []
     for id in discovered_recipes_ids:

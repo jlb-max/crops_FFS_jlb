@@ -1,10 +1,12 @@
+res://scenes/objects/craftables
+res://assets/game/objects
+res://crafting/recipes
 res://scenes/ui
 res://crafting
 res://scenes/components
 res://scripts/globals
 res://assets/game/objects/Items
 res://scenes/objects/rocks
-res://assets/game/objects
 res://assets/game/objects/Tree animations
 res://scenes/objects/trees
 res://scenes/objects/plants

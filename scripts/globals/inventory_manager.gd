@@ -9,11 +9,7 @@ var inventory_size: int = 20
 var hotbar_slots: Array = []
 var hotbar_size: int = 5
 
-var item_to_recipe_map: Dictionary = {
-    
-    preload("res://scenes/objects/plants/tomato_seed.tres"): &"test",
 
-}
 
 
 func _ready() -> void:
@@ -21,10 +17,9 @@ func _ready() -> void:
     hotbar_slots.resize(hotbar_size)
 
 func add_item(item_data: ItemData, quantity: int = 1) -> void:
-    if get_item_count(item_data) == 0 and item_to_recipe_map.has(item_data):
-        var recipe_id_to_unlock = item_to_recipe_map[item_data]
-        CraftingManager.discover_recipe(recipe_id_to_unlock)
-        print("Nouvelle recette découverte : ", recipe_id_to_unlock)
+    var is_first_time = (get_item_count(item_data) == 0)
+    if is_first_time:
+        CraftingManager.on_item_added(item_data)
     
     if item_data.stackable:
         for i in range(slots.size()):

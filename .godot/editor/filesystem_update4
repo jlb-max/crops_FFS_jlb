@@ -66,3 +66,8 @@ res://scenes/ui/inventoryslot.gd
 res://scenes/ui/inventoryslot.tscn
 res://scenes/ui/RecipeDetailWindow.gd
 res://scenes/ui/recipe_detail_window.tscn
+res://crafting/recipes/tesssttst.tres
+res://scenes/objects/chest/chest.tscn
+res://scenes/objects/chest/atelier.tscn
+res://crafting/recipes/atelier.tres
+res://scenes/objects/craftables/atelier.tres
