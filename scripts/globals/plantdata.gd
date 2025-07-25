@@ -13,3 +13,4 @@ extends Resource
 @export var light_effect: LightEffectData
 @export var gravity_effect: GravityEffectData
 @export var heat_effect: HeatEffectData
+@export var water_pulse_effect: WaterPulseEffectData

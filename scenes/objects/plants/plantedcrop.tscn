@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://p7n5n5kk4vjo"]
+[gd_scene load_steps=27 format=3 uid="uid://p7n5n5kk4vjo"]
 
 [ext_resource type="Script" uid="uid://mwgrq6ij5y2x" path="res://scenes/objects/plants/plantedcrop.gd" id="1_urelw"]
 [ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="2_p35mx"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bq0gkk5rkk06e" path="res://assets/game/tilesets/ground tiles/disque_gravite.png" id="11_25r6l"]
 [ext_resource type="Script" uid="uid://dtd4rxgnd770l" path="res://scenes/objects/plants/heatcomponent.gd" id="11_l0xxe"]
 [ext_resource type="Material" uid="uid://bfefx2fps4a8d" path="res://scenes/objects/plants/HeatHazeMaterial.tres" id="12_25r6l"]
+[ext_resource type="Shader" uid="uid://b8uv8bus7bama" path="res://scenes/objects/plants/WaterSphereShader.gdshader" id="14_qqpvx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyutu"]
 size = Vector2(16, 16)
@@ -66,6 +67,11 @@ initial_velocity_max = 40.0
 gravity = Vector3(0, -30, 0)
 scale_curve = SubResource("CurveTexture_t2g8s")
 color_ramp = SubResource("GradientTexture1D_qqpvx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y26r2"]
+shader = ExtResource("14_qqpvx")
+shader_parameter/growth = 0.286
+shader_parameter/distortion_strength = 0.03
 
 [node name="Plantedcrop" type="Node2D" groups=["crops"]]
 script = ExtResource("1_urelw")
@@ -122,3 +128,10 @@ color = Color(0, 0, 0, 0.00392157)
 [node name="FlameParticles" type="GPUParticles2D" parent="."]
 z_index = 100
 process_material = SubResource("ParticleProcessMaterial_cmi3h")
+
+[node name="WaterSphere" type="Sprite2D" parent="."]
+visible = false
+z_index = 100
+texture_filter = 1
+material = SubResource("ShaderMaterial_y26r2")
+texture = ExtResource("11_25r6l")

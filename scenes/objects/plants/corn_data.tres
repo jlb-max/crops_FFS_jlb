@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=21 format=3 uid="uid://bgc3ymb4tf8v8"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=23 format=3 uid="uid://bgc3ymb4tf8v8"]
 
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_3njbw"]
 [ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_oqdq1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_lxvxb"]
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_2xd8w"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_sa8iu"]
+[ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="10_2xd8w"]
 
 [sub_resource type="Resource" id="Resource_tftjd"]
 script = ExtResource("1_oqdq1")
@@ -117,6 +118,13 @@ shimmer_min_factor = 0.8
 shimmer_max_factor = 1.2
 metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 
+[sub_resource type="Resource" id="Resource_sa8iu"]
+script = ExtResource("10_2xd8w")
+has_water_pulse_effect = false
+pulse_radius = 1
+pulse_duration = 3.0
+metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
+
 [resource]
 script = ExtResource("1_3njbw")
 plant_name = "Maïs"
@@ -126,4 +134,5 @@ harvest_data = SubResource("Resource_msxl0")
 light_effect = SubResource("Resource_5jqvi")
 gravity_effect = SubResource("Resource_tftjd")
 heat_effect = SubResource("Resource_u5sm4")
+water_pulse_effect = SubResource("Resource_sa8iu")
 metadata/_custom_type_script = "uid://b6isf51xji5ud"

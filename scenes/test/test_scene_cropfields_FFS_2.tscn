@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://ctlwob6j64u8g"]
+[gd_scene load_steps=31 format=4 uid="uid://ctlwob6j64u8g"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_cskto"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_6lk7k"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://c4kqwscknxc4" path="res://scenes/objects/plants/gravitron_data.tres" id="11_mkgfn"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="12_fr7jl"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="13_iwcst"]
+[ext_resource type="Resource" uid="uid://c3dji2e3pe1oc" path="res://scenes/objects/plants/carot_data.tres" id="13_xk8nh"]
 [ext_resource type="PackedScene" uid="uid://hylmhugngmrk" path="res://scenes/components/crops_cursor_component.tscn" id="14_srfpx"]
 [ext_resource type="Script" uid="uid://c7so78xdy58vn" path="res://scenes/components/crops_cursor_component.gd" id="15_0v0a4"]
 [ext_resource type="PackedScene" uid="uid://y3mgqptfb4bw" path="res://scenes/characters/player/player.tscn" id="16_gihi7"]
@@ -66,13 +67,17 @@ tile_set = ExtResource("8_dhtug")
 
 [node name="CropFields" type="Node2D" parent="."]
 
-[node name="Plantedcrop" parent="CropFields" instance=ExtResource("9_alwkh")]
+[node name="testtomato" parent="CropFields" instance=ExtResource("9_alwkh")]
 position = Vector2(99, 144)
 plant_data = ExtResource("10_4iilq")
 
-[node name="Plantedcrop2" parent="CropFields" instance=ExtResource("9_alwkh")]
+[node name="testgravitron" parent="CropFields" instance=ExtResource("9_alwkh")]
 position = Vector2(188, 144)
 plant_data = ExtResource("11_mkgfn")
+
+[node name="testcarrot" parent="CropFields" instance=ExtResource("9_alwkh")]
+position = Vector2(254, 133)
+plant_data = ExtResource("13_xk8nh")
 
 [node name="FieldCursorComponent" parent="." node_paths=PackedStringArray("grass_tilemap_layer", "tilled_soil_tilemap_layer") instance=ExtResource("12_fr7jl")]
 script = ExtResource("13_iwcst")

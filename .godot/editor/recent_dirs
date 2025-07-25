@@ -1,3 +1,4 @@
+res://scenes/objects/plants
 res://scenes/components
 res://scenes/objects/craftables
 res://assets/game/objects
@@ -9,7 +10,6 @@ res://assets/game/objects/Items
 res://scenes/objects/rocks
 res://assets/game/objects/Tree animations
 res://scenes/objects/trees
-res://scenes/objects/plants
 res://scenes/test
 res://scenes/objects
 res://assets/game/tilesets/ground tiles

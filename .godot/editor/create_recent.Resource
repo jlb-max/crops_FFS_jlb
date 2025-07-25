@@ -1,3 +1,4 @@
+Shader
 ItemData
 CraftingRecipe
 TileSet

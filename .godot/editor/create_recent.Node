@@ -1,7 +1,8 @@
-Node2D
-Node
 Sprite2D
 ColorRect
+Timer
+Node2D
+Node
 Button
 HBoxContainer
 Label
@@ -11,4 +12,3 @@ VBoxContainer
 MarginContainer
 PanelContainer
 GridContainer
-ItemList
