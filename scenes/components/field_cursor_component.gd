@@ -1,3 +1,4 @@
+#fieldcursorcomponent.gd
 class_name FieldCursorComponent
 extends Node
 

@@ -89,32 +89,38 @@ func remove_item(item_data: ItemData, quantity_to_remove: int = 1) -> void:
     for i in range(hotbar_slots.size()):
         var slot_data = hotbar_slots[i]
         
-        # Si on trouve le bon item dans la barre d'outils...
         if slot_data != null and slot_data.item == item_data:
             slot_data.quantity -= quantity_to_remove
             
-            # Si la quantité tombe à zéro, on vide la case
             if slot_data.quantity <= 0:
                 hotbar_slots[i] = null
-            
+                
+                # --- AJOUT CLÉ ---
+                # Si l'objet qu'on vient d'épuiser est celui en main, on le désélectionne.
+                if ToolManager.get_selected_item() == item_data:
+                    ToolManager.select_item(null)
+                # --- FIN DE L'AJOUT ---
+
             inventory_changed.emit()
-            print("Retiré ", quantity_to_remove, " ", item_data.item_name, " de la barre d'outils.")
-            return # On a fini, on sort de la fonction
+            return
 
     # --- Priorité n°2 : Si non trouvé, chercher dans l'inventaire principal ---
     for i in range(slots.size()):
         var slot_data = slots[i]
         
-        # Si on trouve le bon item dans l'inventaire...
         if slot_data != null and slot_data.item == item_data:
             slot_data.quantity -= quantity_to_remove
             
             if slot_data.quantity <= 0:
                 slots[i] = null
                 
+                # --- AJOUT CLÉ (identique) ---
+                if ToolManager.get_selected_item() == item_data:
+                    ToolManager.select_item(null)
+                # --- FIN DE L'AJOUT ---
+
             inventory_changed.emit()
-            print("Retiré ", quantity_to_remove, " ", item_data.item_name, " de l'inventaire.")
-            return # On a fini
+            return
 
 
 func get_item_count(item_data: ItemData) -> int:

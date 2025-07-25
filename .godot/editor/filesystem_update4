@@ -71,3 +71,15 @@ res://scenes/objects/chest/chest.tscn
 res://scenes/objects/chest/atelier.tscn
 res://crafting/recipes/atelier.tres
 res://scenes/objects/craftables/atelier.tres
+res://scenes/components/crops_cursor_component.gd
+res://scenes/components/field_cursor_component.gd
+res://scenes/characters/player/player.gd
+res://scenes/ui/tools_panel.tscn
+res://scenes/ui/toolslot.tscn
+res://scenes/ui/toolslot.gd
+res://scenes/ui/tools_panel.gd
+res://scripts/globals/tool_manager.gd
+res://scenes/test/test_scene_curseurdevisee.tscn
+res://scenes/objects/craftables/atelier.tscn
+res://scenes/components/placable_item_component.gd
+res://scenes/components/placable_item_component.tscn

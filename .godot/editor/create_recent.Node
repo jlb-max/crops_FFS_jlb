@@ -1,4 +1,7 @@
+Node2D
+Node
 Sprite2D
+ColorRect
 Button
 HBoxContainer
 Label
@@ -9,7 +12,3 @@ MarginContainer
 PanelContainer
 GridContainer
 ItemList
-HSplitContainer
-TabContainer
-GPUParticles2D
-AnimatedSprite2D

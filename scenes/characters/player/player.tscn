@@ -1306,3 +1306,7 @@ shape = SubResource("CircleShape2D_3xnwo")
 debug_color = Color(0.706022, 0.27842, 0.986825, 0.42)
 
 [node name="CurseurDeVisee" parent="." instance=ExtResource("10_3xnwo")]
+
+[node name="HeldItemSprite" type="Sprite2D" parent="."]
+position = Vector2(5, -18)
+scale = Vector2(0.5, 0.5)

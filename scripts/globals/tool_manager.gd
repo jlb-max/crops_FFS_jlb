@@ -1,14 +1,16 @@
-# tool_manager.gd (nouvelle version simplifiée)
+# tool_manager.gd (Version corrigée et complète)
 extends Node
 
-# On ne retient plus un "type" d'outil, mais les données complètes de l'item actif.
-var selected_item_data: ItemData = null
+# --- LIGNE MANQUANTE AJOUTÉE ---
+# Ce signal préviendra l'interface quand l'outil change
+signal tool_selected(item_data: ItemData)
 
-signal item_selected(item: ItemData)
+var selected_item_data: ItemData = null
 
 func select_item(item: ItemData) -> void:
 	selected_item_data = item
-	item_selected.emit(item)
+	# On émet le signal avec l'item (ou null si on désélectionne)
+	tool_selected.emit(selected_item_data) 
 	print("Item sélectionné : ", item.item_name if item else "Aucun")
 
 func get_selected_item() -> ItemData:

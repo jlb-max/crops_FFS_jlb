@@ -1,3 +1,4 @@
+#corpscursorcomponent.gd
 class_name CropsCursorComponent
 extends Node
 

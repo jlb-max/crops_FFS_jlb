@@ -3,7 +3,9 @@
 class_name ItemData
 extends Resource
 
-enum ActionType { NONE, TILL, WATER, PLANT, CHOP }
+enum ActionType { NONE, TILL, WATER, PLANT, CHOP, PLACE_CRAFTABLE }
+
+@export var scene_to_place: PackedScene
 
 
 @export var item_name: String = "Nouvel Item"
