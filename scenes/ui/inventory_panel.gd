@@ -1,6 +1,8 @@
 # inventory_panel.gd (nouvelle version)
 extends PanelContainer
 
+@export var recipe_detail_window: PanelContainer
+
 @onready var grid_container: GridContainer = $TabContainer/Inventaire/GridContainer
 var inventory_slot_scene = preload("res://scenes/ui/inventoryslot.tscn") # Adaptez le chemin
 
@@ -14,6 +16,7 @@ func _ready() -> void:
 	InventoryManager.inventory_changed.connect(redraw_inventory)
 	# On cache l'inventaire au démarrage
 	visible = false
+	$TabContainer/Artisanat.recipe_detail_window = recipe_detail_window
 
 # Fonction pour afficher/cacher l'inventaire
 func _unhandled_input(event: InputEvent) -> void:

@@ -1,18 +1,17 @@
-# res://scenes/ui/ingredient_line.gd
-extends HBoxContainer
+@tool
+extends VBoxContainer
 
-# Références directes aux nœuds enfants grâce à l'opérateur %
-@onready var icon: TextureRect = %Icon
-@onready var name_label: Label = %NameLabel
-@onready var quantity_label: Label = %QuantityLabel
+@onready var icon: TextureRect = $Icon
+@onready var quantity_label: Label = $QuantityLabel
 
-func set_data(item_icon: Texture2D, item_name: String, possessed: int, required: int) -> void:
+# La fonction est plus simple, elle ne prend plus de nom
+func set_data(item_icon: Texture2D, possessed: int, required: int) -> void:
 	await ready
-	icon.texture = item_icon
-	name_label.text = item_name
-	quantity_label.text = "%d / %d" % [possessed, required]
 	
-	# Optionnel mais très utile : change la couleur si on n'a pas assez d'ingrédients
+	icon.texture = item_icon
+	quantity_label.text = "%d/%d" % [possessed, required]
+	
+	# La logique de couleur reste la même
 	if possessed < required:
 		quantity_label.add_theme_color_override("font_color", Color.RED)
 	else:

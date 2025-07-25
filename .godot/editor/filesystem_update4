@@ -62,3 +62,7 @@ res://scenes/components/save_data_component.tscn
 res://resources/save_game_data_resource.gd
 res://scripts/globals/save_game_manager.gd
 res://scenes/components/save_level_data_component.gd
+res://scenes/ui/inventoryslot.gd
+res://scenes/ui/inventoryslot.tscn
+res://scenes/ui/RecipeDetailWindow.gd
+res://scenes/ui/recipe_detail_window.tscn
