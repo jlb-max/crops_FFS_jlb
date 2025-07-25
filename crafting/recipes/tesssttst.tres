@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=6 format=3 uid="uid://bopuf1ihhac7u"]
+
+[ext_resource type="Script" uid="uid://d31hsogdinq" path="res://crafting/ingredient.gd" id="1_nl3og"]
+[ext_resource type="Script" uid="uid://c6md6w4rnuthp" path="res://crafting/crafting_recipe.gd" id="2_id8ad"]
+[ext_resource type="Resource" uid="uid://bclleevjva4wm" path="res://scenes/objects/plants/tomato_seed.tres" id="2_rpg7u"]
+[ext_resource type="Resource" uid="uid://dfryw5ro6pd" path="res://scenes/objects/axe.tres" id="3_b8laj"]
+
+[sub_resource type="Resource" id="Resource_rsv2f"]
+script = ExtResource("1_nl3og")
+item = ExtResource("2_rpg7u")
+quantity = 1
+metadata/_custom_type_script = "uid://d31hsogdinq"
+
+[resource]
+script = ExtResource("2_id8ad")
+output_item = ExtResource("3_b8laj")
+output_quantity = 1
+ingredients = Array[ExtResource("1_nl3og")]([SubResource("Resource_rsv2f")])
+recipe_id = &"test"
+metadata/_custom_type_script = "uid://c6md6w4rnuthp"

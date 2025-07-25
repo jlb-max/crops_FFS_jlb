@@ -1,7 +1,7 @@
 # inventory_panel.gd (nouvelle version)
 extends PanelContainer
 
-@onready var grid_container: GridContainer = $MarginContainer/GridContainer # Adaptez le chemin
+@onready var grid_container: GridContainer = $TabContainer/Inventaire/GridContainer
 var inventory_slot_scene = preload("res://scenes/ui/inventoryslot.tscn") # Adaptez le chemin
 
 func _ready() -> void:

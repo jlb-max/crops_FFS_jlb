@@ -1,6 +1,7 @@
 
 # PlantData.gd (Version finale)
 class_name PlantData
+
 extends Resource
 
 @export var plant_name: String = "Nouvelle Plante"

@@ -15,5 +15,6 @@ item_name = "Hache"
 description = ""
 icon = SubResource("AtlasTexture_7hkbi")
 stackable = true
+damage = 1
 action_type = 4
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

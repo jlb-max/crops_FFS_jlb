@@ -28,6 +28,7 @@ SceneManager="*res://scripts/globals/scene_manager.gd"
 SoilManager="*res://scripts/globals/soilmanager.gd"
 CropManager="*res://scripts/globals/CropManager.gd"
 WeatherManager="*res://scripts/globals/weather_manager.gd"
+CraftingManager="*res://crafting/crafting_manager.gd"
 
 [display]
 
@@ -47,6 +48,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 folder_colors={
 "res://Tilesets/": "yellow",
 "res://assets/": "orange",
+"res://crafting/": "red",
 "res://dialogue/": "blue",
 "res://resources/": "purple",
 "res://scenes/": "green",

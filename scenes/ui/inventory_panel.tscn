@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ha4s6dv11ovu"]
+[gd_scene load_steps=4 format=3 uid="uid://ha4s6dv11ovu"]
 
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_lcq1t"]
 [ext_resource type="Script" uid="uid://b2fbfp1iknsv" path="res://scenes/ui/inventory_panel.gd" id="2_tdvod"]
+[ext_resource type="Script" uid="uid://c1buvu7iadjqb" path="res://scenes/ui/crafting_ui.gd" id="3_cvy6a"]
 
 [node name="InventoryPanel" type="PanelContainer"]
 anchors_preset = 8
@@ -19,13 +20,60 @@ theme = ExtResource("1_lcq1t")
 theme_type_variation = &"DarkWoodPanel"
 script = ExtResource("2_tdvod")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+current_tab = 0
+
+[node name="Inventaire" type="MarginContainer" parent="TabContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
+metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Inventaire"]
 layout_mode = 2
 columns = 5
+
+[node name="Artisanat" type="HSplitContainer" parent="TabContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+mouse_filter = 0
+script = ExtResource("3_cvy6a")
+metadata/_tab_index = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="TabContainer/Artisanat"]
+layout_mode = 2
+
+[node name="RecipeList" type="ItemList" parent="TabContainer/Artisanat/HSplitContainer"]
+layout_mode = 2
+
+[node name="RecipeDetailPanel" type="PanelContainer" parent="TabContainer/Artisanat/HSplitContainer"]
+layout_mode = 2
+theme = ExtResource("1_lcq1t")
+theme_type_variation = &"DarkWoodPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel"]
+layout_mode = 2
+
+[node name="OutputItemLabel" type="Label" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="OutputItemTexture" type="TextureRect" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel/VBoxContainer"]
+layout_mode = 2
+text = "ingrédients"
+
+[node name="IngredientsList" type="VBoxContainer" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CraftButton" type="Button" parent="TabContainer/Artisanat/HSplitContainer/RecipeDetailPanel/VBoxContainer"]
+layout_mode = 2
+text = "construire"

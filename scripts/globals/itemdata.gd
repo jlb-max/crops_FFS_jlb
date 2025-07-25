@@ -1,4 +1,5 @@
 # ItemData.gd
+@tool
 class_name ItemData
 extends Resource
 

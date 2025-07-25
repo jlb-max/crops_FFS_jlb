@@ -1,3 +1,4 @@
+CraftingRecipe
 ItemData
 TileSet
 PlantData

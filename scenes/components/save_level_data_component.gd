@@ -14,9 +14,7 @@ func _ready() -> void:
 
 func save_node_data() -> void:
 	var nodes = get_tree().get_nodes_in_group("save_data_component")
-	
 	game_data_resource = SaveGameDataResource.new()
-	
 	if nodes != null:
 		for node: SaveDataComponent in nodes:
 			if node is SaveDataComponent:
@@ -32,6 +30,11 @@ func save_game() -> void:
 	var level_save_file_name: String = save_file_name % level_scene_name
 	
 	save_node_data()
+	
+	# --- AJOUT ---
+	# On récupère les données du CraftingManager et on les met dans la ressource
+	game_data_resource.global_data["discovered_recipes"] = CraftingManager.discovered_recipes_ids
+	# --- FIN DE L'AJOUT ---
 	
 	var result: int = ResourceSaver.save(game_data_resource, save_game_data_path + level_save_file_name)
 	print("save result:", result)
@@ -49,9 +52,14 @@ func load_game() -> void:
 	if game_data_resource == null:
 		return
 	
+	# --- AJOUT ---
+	# On charge les données globales D'ABORD
+	if game_data_resource.global_data.has("discovered_recipes"):
+		CraftingManager.discovered_recipes_ids = game_data_resource.global_data["discovered_recipes"]
+	# --- FIN DE L'AJOUT ---
+	
 	var root_node: Window = get_tree().root
 	
 	for resource in game_data_resource.save_data_nodes:
-		if resource is Resource:
-			if resource is NodeDataResource:
-				resource._load_data(root_node)
+		if resource is Resource and resource is NodeDataResource:
+			resource._load_data(root_node)

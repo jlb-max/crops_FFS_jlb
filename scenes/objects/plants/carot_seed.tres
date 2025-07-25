@@ -16,5 +16,6 @@ item_name = "Graine de Tomate"
 description = ""
 icon = SubResource("AtlasTexture_7kbjp")
 stackable = true
+damage = 1
 action_type = 3
 plant_to_grow = ExtResource("1_pntpp")

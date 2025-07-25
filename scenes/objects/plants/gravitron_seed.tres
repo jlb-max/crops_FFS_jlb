@@ -14,5 +14,6 @@ item_name = "Graine de Gravitron"
 description = ""
 icon = SubResource("AtlasTexture_ydtw6")
 stackable = true
+damage = 1
 action_type = 3
 plant_to_grow = ExtResource("2_8t6m4")
