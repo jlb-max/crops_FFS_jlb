@@ -7,9 +7,8 @@ const Ingredient = preload("res://crafting/ingredient.gd")
 # On définit les différentes manières de débloquer une recette
 enum UnlockType { ALWAYS_KNOWN, ON_ITEM_DISCOVERY }
 
-@export_group("Output")
-@export var output_item: ItemData
-@export_range(1, 99) var output_quantity: int = 1
+@export_group("Outputs")
+@export var outputs: Array[Ingredient]
 
 @export_group("Ingredients")
 @export var ingredients: Array[Ingredient]

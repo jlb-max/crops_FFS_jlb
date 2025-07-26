@@ -27,28 +27,31 @@ func _ready() -> void:
 # --- Fonctions Publiques ---
 # C'est LA fonction que crafting_ui.gd appelle
 func show_recipe_details(recipe: CraftingRecipe):
-	
 	self.global_position.y = inventory_panel.global_position.y
-	self.global_position.x = inventory_panel.global_position.x + inventory_panel.size.x + 10 # 10px de marge
+	self.global_position.x = inventory_panel.global_position.x + inventory_panel.size.x + 10
 	
 	current_recipe = recipe
-	visible = true # On rend la fenêtre visible
+	visible = true
 	
-	# Mettre à jour les informations de l'objet à crafter
-	output_item_label.text = "%dx %s" % [recipe.output_quantity, recipe.output_item.item_name]
-	output_item_texture.texture = recipe.output_item.icon
+	# --- CORRECTION ---
+	# On s'assure qu'il y a au moins une sortie
+	if not recipe.outputs.is_empty():
+		# On prend le premier objet de la liste pour l'affichage principal
+		var main_output = recipe.outputs[0]
+		
+		output_item_label.text = "%dx %s" % [main_output.quantity, main_output.item.item_name]
+		output_item_texture.texture = main_output.item.icon
+	# --- FIN DE LA CORRECTION ---
 	
-	# Vider et remplir la liste des ingrédients
+	# Le reste de la fonction (ingrédients, bouton) ne change pas
 	for child in ingredients_list.get_children():
 		child.queue_free()
 	
 	for ingredient_data in recipe.ingredients:
 		var slot = INGREDIENT_SLOT_SCENE.instantiate()
 		ingredients_list.add_child(slot)
-		# On utilise la fonction display_item pour montrer l'ingrédient et sa quantité requise
 		slot.display_ingredient_info(ingredient_data.item, ingredient_data.quantity)
 
-	# Mettre à jour l'état du bouton "Construire"
 	craft_button.disabled = not CraftingManager.can_craft(recipe)
 
 # --- Fonctions des Boutons ---

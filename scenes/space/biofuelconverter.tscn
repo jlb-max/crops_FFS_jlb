@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2n80advawuqf"]
+[gd_scene load_steps=17 format=3 uid="uid://b2n80advawuqf"]
 
 [ext_resource type="Script" uid="uid://776c2axh50in" path="res://scenes/space/biofuelconverter.gd" id="1_3cnxf"]
 [ext_resource type="Texture2D" uid="uid://dhprnyoppdgce" path="res://assets/game/objects/new planet/biofuel.png" id="1_kivbf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://cf3iscq7xj1ql" path="res://machines/biofuel/corn_fuel.tres" id="8_ls05e"]
 [ext_resource type="Resource" uid="uid://dq2iwh1v7g8um" path="res://machines/biofuel/tomato_fuel.tres" id="9_ls05e"]
 [ext_resource type="Resource" uid="uid://btjwqfruejjth" path="res://machines/biofuel/gravitron_fuel.tres" id="10_c25li"]
+[ext_resource type="Resource" uid="uid://dr6u6jswlhevm" path="res://machines/biofuel/corn_and_tomato_fuel.tres" id="11_c25li"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtkn"]
 size = Vector2(23, 23)
@@ -18,6 +19,12 @@ size = Vector2(23, 23)
 size = Vector2(26, 63.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_44sq4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls05e"]
+bg_color = Color(0.336608, 0.336608, 0.336608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c25li"]
+bg_color = Color(0, 0.717647, 0.352941, 1)
 
 [node name="BioFuelConverter" type="StaticBody2D"]
 y_sort_enabled = true
@@ -57,7 +64,7 @@ position = Vector2(13, -50)
 scale = Vector2(0.5, 0.5)
 
 [node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_0gofn")]
-accepted_recipes = Array[ExtResource("7_ksbad")]([ExtResource("8_ls05e"), ExtResource("9_ls05e"), ExtResource("10_c25li")])
+accepted_recipes = Array[ExtResource("7_ksbad")]([ExtResource("8_ls05e"), ExtResource("9_ls05e"), ExtResource("10_c25li"), ExtResource("11_c25li")])
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 anchors_preset = -1
@@ -66,10 +73,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -12.0
-offset_top = -66.0
+offset_top = -57.0
 offset_right = 39.0
-offset_bottom = -39.0
+offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_ls05e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c25li")
 show_percentage = false

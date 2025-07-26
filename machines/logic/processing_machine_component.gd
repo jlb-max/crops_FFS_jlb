@@ -31,24 +31,26 @@ func _process(delta):
 		progress_updated.emit(percentage)
 
 # Fonction principale pour démarrer le processus
-func start_processing(input_item: ItemData) -> bool:
+func start_processing(recipe_to_process: MachineRecipe) -> bool:
 	if current_state != State.IDLE: return false
+	
+	# 1. On vérifie si on a tous les ingrédients
+	for ingredient in recipe_to_process.inputs:
+		if InventoryManager.get_item_count(ingredient.item) < ingredient.quantity:
+			return false # On s'arrête si un seul ingrédient manque
 
-	for recipe in accepted_recipes:
-		if recipe.input_item == input_item:
-			# On vérifie si le joueur a assez de ressources
-			if InventoryManager.get_item_count(recipe.input_item) >= recipe.input_quantity:
-				InventoryManager.remove_item(recipe.input_item, recipe.input_quantity)
-
-				# On prépare la sortie et on lance le timer
-				output_buffer = { "item": recipe.output_item, "quantity": recipe.output_quantity }
-				current_recipe_processing = recipe
-				timer.start(recipe.processing_time_seconds)
-
-				set_state(State.PROCESSING)
-				set_process(true)
-				return true
-	return false
+	# 2. Si tout est bon, on consomme tous les ingrédients
+	for ingredient in recipe_to_process.inputs:
+		InventoryManager.remove_item(ingredient.item, ingredient.quantity)
+	
+	# Le reste de la fonction est presque identique...
+	output_buffer = recipe_to_process.outputs # Le buffer contient maintenant le tableau de sorties
+	current_recipe_processing = recipe_to_process
+	timer.start(recipe_to_process.processing_time_seconds)
+	
+	set_state(State.PROCESSING)
+	set_process(true)
+	return true
 
 # Quand le timer est fini
 func _on_processing_finished():
@@ -56,16 +58,18 @@ func _on_processing_finished():
 	set_process(false)
 
 # Quand le joueur récupère le produit
-func collect_output() -> Dictionary:
-	if current_state != State.FINISHED: return {}
+func collect_output():
+	if current_state != State.FINISHED: return
 
-	InventoryManager.add_item(output_buffer.item, output_buffer.quantity)
-	var collected = output_buffer
+	# On ajoute chaque objet de la sortie à l'inventaire
+	for item_out in output_buffer:
+		InventoryManager.add_item(item_out.item, item_out.quantity)
+		print("Récupéré %d x %s" % [item_out.quantity, item_out.item.item_name])
+	
 	output_buffer = null
 	current_recipe_processing = null
 	set_state(State.IDLE)
 	set_process(false)
-	return collected
 
 func set_state(new_state: State):
 	current_state = new_state

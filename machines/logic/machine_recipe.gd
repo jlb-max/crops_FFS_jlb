@@ -1,13 +1,17 @@
 # machine_recipe.gd
+
 @tool
 class_name MachineRecipe
 extends Resource
 
-@export var input_item: ItemData
-@export_range(1, 99) var input_quantity: int = 1
+# On réutilise la même ressource Ingredient que pour le crafting
+const Ingredient = preload("res://crafting/ingredient.gd") 
 
-@export var output_item: ItemData
-@export_range(1, 99) var output_quantity: int = 1
+@export_group("Entrée(s)")
+@export var inputs: Array[Ingredient]
 
-# Durée du traitement en secondes de jeu
+@export_group("Sortie(s)")
+@export var outputs: Array[Ingredient]
+
+@export_group("Paramètres")
 @export var processing_time_seconds: float = 10.0

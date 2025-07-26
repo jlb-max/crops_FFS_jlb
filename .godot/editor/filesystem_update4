@@ -69,3 +69,10 @@ res://machines/logic/machine_recipe_slot.tscn
 res://machines/logic/machine_recipe_slot.gd
 res://machines/biofuel/gravitron_fuel.tres
 res://machines/biofuel/tomato_fuel.tres
+res://scenes/objects/craftables/atelier2.tscn
+res://crafting/recipes/atelier.tres
+res://crafting/crafting_manager.gd
+res://crafting/crafting_recipe.gd
+res://scenes/ui/inventoryslot.gd
+res://scenes/ui/RecipeDetailWindow.gd
+res://machines/biofuel/corn_and_tomato_fuel.tres

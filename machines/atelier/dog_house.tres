@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MachineRecipe" load_steps=2 format=3 uid="uid://b0q5wt1iy81ca"]
+
+[ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="1_wuhhx"]
+
+[resource]
+script = ExtResource("1_wuhhx")
+input_quantity = 1
+output_quantity = 1
+processing_time_seconds = 10.0
+metadata/_custom_type_script = "uid://d4l1k1io1a3n5"

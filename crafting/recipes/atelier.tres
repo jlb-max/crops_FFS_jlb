@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=8 format=3 uid="uid://bergsya2rcnut"]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=9 format=3 uid="uid://bergsya2rcnut"]
 
 [ext_resource type="Script" uid="uid://d31hsogdinq" path="res://crafting/ingredient.gd" id="1_0at6e"]
 [ext_resource type="Resource" uid="uid://d1y4wuo6h4v7j" path="res://scenes/objects/trees/small_log.tres" id="2_nk034"]
@@ -18,10 +18,15 @@ item = ExtResource("3_2cwqw")
 quantity = 5
 metadata/_custom_type_script = "uid://d31hsogdinq"
 
+[sub_resource type="Resource" id="Resource_nk034"]
+script = ExtResource("1_0at6e")
+item = ExtResource("4_aaqso")
+quantity = 1
+metadata/_custom_type_script = "uid://d31hsogdinq"
+
 [resource]
 script = ExtResource("2_vcj63")
-output_item = ExtResource("4_aaqso")
-output_quantity = 1
+outputs = Array[ExtResource("1_0at6e")]([SubResource("Resource_nk034")])
 ingredients = Array[ExtResource("1_0at6e")]([SubResource("Resource_b40ne"), SubResource("Resource_ev24g")])
 recipe_id = &"atelier"
 unlock_condition = 0

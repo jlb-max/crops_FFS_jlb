@@ -1,0 +1,83 @@
+[gd_scene load_steps=16 format=3 uid="uid://dyp00nuhmonwt"]
+
+[ext_resource type="Script" uid="uid://776c2axh50in" path="res://scenes/space/biofuelconverter.gd" id="1_hxyqq"]
+[ext_resource type="Texture2D" uid="uid://b5ofwn7oewi58" path="res://assets/game/objects/work_station.png" id="2_m62xw"]
+[ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="3_x6too"]
+[ext_resource type="PackedScene" uid="uid://cd0n4jrm0co4x" path="res://scenes/components/interactable_label_component.tscn" id="4_60mjc"]
+[ext_resource type="PackedScene" uid="uid://dagnc3wfs7lsb" path="res://scenes/components/feed_component.tscn" id="5_o701b"]
+[ext_resource type="PackedScene" uid="uid://bf8wlp2uixhjh" path="res://machines/logic/ProcessingMachineComponent.tscn" id="6_oh7fi"]
+[ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="7_01410"]
+[ext_resource type="Resource" uid="uid://cf3iscq7xj1ql" path="res://machines/biofuel/corn_fuel.tres" id="8_m18lr"]
+[ext_resource type="Resource" uid="uid://dq2iwh1v7g8um" path="res://machines/biofuel/tomato_fuel.tres" id="9_txlqc"]
+[ext_resource type="Resource" uid="uid://btjwqfruejjth" path="res://machines/biofuel/gravitron_fuel.tres" id="10_w5f4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umtkn"]
+size = Vector2(30, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cnxf"]
+size = Vector2(37, 28)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44sq4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls05e"]
+bg_color = Color(0.336608, 0.336608, 0.336608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c25li"]
+bg_color = Color(0, 0.717647, 0.352941, 1)
+
+[node name="Atelier2" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_hxyqq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_umtkn")
+debug_color = Color(0, 0.196078, 0.713726, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("2_m62xw")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_x6too")]
+position = Vector2(3, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(-3.5, 11)
+shape = SubResource("RectangleShape2D_3cnxf")
+debug_color = Color(0.151871, 0.628777, 0.419654, 0.42)
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("4_60mjc")]
+offset_left = -28.0
+offset_top = -42.0
+offset_right = -10.0
+offset_bottom = -24.0
+
+[node name="FeedComponent" parent="." instance=ExtResource("5_o701b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FeedComponent"]
+shape = SubResource("CircleShape2D_44sq4")
+debug_color = Color(0.7416, 0.580644, 0.141262, 0.419608)
+
+[node name="OutputIndicator" type="Sprite2D" parent="."]
+position = Vector2(13, -23)
+scale = Vector2(0.5, 0.5)
+
+[node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_oh7fi")]
+accepted_recipes = Array[ExtResource("7_01410")]([ExtResource("8_m18lr"), ExtResource("9_txlqc"), ExtResource("10_w5f4m")])
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -28.0
+offset_right = 39.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_ls05e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c25li")
+show_percentage = false

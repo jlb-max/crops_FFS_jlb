@@ -78,15 +78,14 @@ func craft(recipe: CraftingRecipe) -> bool:
 		push_warning("Cannot craft %s: not enough ingredients." % recipe.output_item.item_name)
 		return false
 
-	# 1. Consommer les ingrédients
+	# 1. Consommer les ingrédients (déjà une boucle, c'est parfait)
 	for ingredient in recipe.ingredients:
-		# On utilise ingredient.item et ingredient.quantity
 		InventoryManager.remove_item(ingredient.item, ingredient.quantity)
+		
+	# 2. Ajouter les objets fabriqués (MAINTENANT une boucle)
+	for item_out in recipe.outputs:
+		InventoryManager.add_item(item_out.item, item_out.quantity)
+		item_crafted.emit(item_out.item, item_out.quantity)
+		print("Crafted %d %s!" % [item_out.quantity, item_out.item.item_name])
 
-	# 2. Ajouter l'objet fabriqué
-	InventoryManager.add_item(recipe.output_item, recipe.output_quantity)
-
-	item_crafted.emit(recipe.output_item, recipe.output_quantity)
-	# On utilise .item_name
-	print("Crafted %d %s!" % [recipe.output_quantity, recipe.output_item.item_name])
 	return true
