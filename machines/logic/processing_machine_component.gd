@@ -12,6 +12,7 @@ enum State { IDLE, PROCESSING, FINISHED }
 
 var current_state: State = State.IDLE
 var output_buffer = null # Contiendra { "item": ItemData, "quantity": int }
+var current_recipe_processing: MachineRecipe = null
 
 @onready var timer: Timer = Timer.new()
 
@@ -41,6 +42,7 @@ func start_processing(input_item: ItemData) -> bool:
 
 				# On prépare la sortie et on lance le timer
 				output_buffer = { "item": recipe.output_item, "quantity": recipe.output_quantity }
+				current_recipe_processing = recipe
 				timer.start(recipe.processing_time_seconds)
 
 				set_state(State.PROCESSING)
@@ -60,6 +62,7 @@ func collect_output() -> Dictionary:
 	InventoryManager.add_item(output_buffer.item, output_buffer.quantity)
 	var collected = output_buffer
 	output_buffer = null
+	current_recipe_processing = null
 	set_state(State.IDLE)
 	set_process(false)
 	return collected

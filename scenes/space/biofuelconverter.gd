@@ -6,6 +6,10 @@ extends StaticBody2D
 @onready var output_indicator: Sprite2D = $OutputIndicator
 @onready var progress_bar: ProgressBar = $ProgressBar
 
+@export var swing_speed: float = 3.0
+@export var swing_angle: float = 15.0 # Angle maximum en degrés
+@export var pulse_speed: float = 5.0
+@export var pulse_amount: float = 0.08
 
 @export var menu_ui: PanelContainer
 
@@ -79,6 +83,12 @@ func on_state_changed(new_state):
                 output_indicator.texture = processing_component.output_buffer.item.icon
 
 func _process(delta: float):
+    if output_indicator.visible:
+        # On calcule le nouvel angle en utilisant le sinus du temps
+        var time = Time.get_ticks_msec() / 1000.0 # Temps en secondes
+        var new_angle = sin(time * swing_speed) * swing_angle
+        output_indicator.rotation_degrees = new_angle
+    
     # On met à jour la barre uniquement si la machine travaille
     if processing_component.current_state == ProcessingMachineComponent.State.PROCESSING:
         # On calcule le progrès en se basant sur le temps restant du timer
