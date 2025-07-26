@@ -4,6 +4,8 @@ extends StaticBody2D
 @onready var interactable_component: InteractableComponent = $InteractableComponent
 @onready var processing_component: ProcessingMachineComponent = $ProcessingMachineComponent
 @onready var output_indicator: Sprite2D = $OutputIndicator
+@onready var progress_bar: ProgressBar = $ProgressBar
+
 
 @export var menu_ui: PanelContainer
 
@@ -12,7 +14,7 @@ var _player_is_nearby: bool = false
 
 func _ready():
     
-    
+    set_process(true) 
     # On connecte les signaux de proximité de votre composant
     interactable_component.interactable_activated.connect(_on_player_entered)
     interactable_component.interactable_deactivated.connect(_on_player_exited)
@@ -62,13 +64,27 @@ func on_state_changed(new_state):
         ProcessingMachineComponent.State.IDLE:
             sprite.modulate = Color.WHITE
             output_indicator.visible = false
+            progress_bar.visible = false # Cacher la barre
         
         ProcessingMachineComponent.State.PROCESSING:
             sprite.modulate = Color(0.8, 0.8, 1.0)
             output_indicator.visible = false
+            progress_bar.visible = true # Afficher la barre
             
         ProcessingMachineComponent.State.FINISHED:
             sprite.modulate = Color.WHITE
             output_indicator.visible = true
+            progress_bar.visible = false # Cacher la barre
             if processing_component.output_buffer:
                 output_indicator.texture = processing_component.output_buffer.item.icon
+
+func _process(delta: float):
+    # On met à jour la barre uniquement si la machine travaille
+    if processing_component.current_state == ProcessingMachineComponent.State.PROCESSING:
+        # On calcule le progrès en se basant sur le temps restant du timer
+        var time_left = processing_component.timer.time_left
+        var total_time = processing_component.timer.wait_time
+        progress_bar.value = (1.0 - (time_left / total_time)) * 100.0
+    else:
+        # Sinon, on s'assure qu'elle est cachée
+        progress_bar.visible = false

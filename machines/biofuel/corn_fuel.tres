@@ -7,8 +7,8 @@
 [resource]
 script = ExtResource("1_gc6fb")
 input_item = ExtResource("1_s4noq")
-input_quantity = 10
+input_quantity = 1
 output_item = ExtResource("2_cy2y5")
 output_quantity = 1
-processing_time_seconds = 10.0
+processing_time_seconds = 30.0
 metadata/_custom_type_script = "uid://d4l1k1io1a3n5"

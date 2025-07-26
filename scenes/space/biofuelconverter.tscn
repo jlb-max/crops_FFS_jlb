@@ -56,3 +56,9 @@ position = Vector2(26, 0)
 
 [node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_0gofn")]
 accepted_recipes = Array[ExtResource("7_ksbad")]([ExtResource("8_ls05e")])
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+offset_top = -80.0
+offset_right = 4.0
+offset_bottom = -53.0

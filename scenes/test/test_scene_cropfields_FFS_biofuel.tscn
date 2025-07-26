@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://2qy8fhfrjbih"]
+[gd_scene load_steps=31 format=4 uid="uid://2qy8fhfrjbih"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_o16lo"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_bxgd5"]
@@ -11,10 +11,6 @@
 [ext_resource type="Resource" uid="uid://bl7mq3ojrvet1" path="res://resources/tilemap_layer_data_resource.tres" id="9_yhutp"]
 [ext_resource type="Shader" uid="uid://cl3iim11yms5i" path="res://scenes/objects/weting.gdshader" id="10_v6v47"]
 [ext_resource type="TileSet" uid="uid://bttnwin5krffe" path="res://assets/game/tilesets/ground tiles/wetness_tileset.tres" id="11_oit47"]
-[ext_resource type="PackedScene" uid="uid://p7n5n5kk4vjo" path="res://scenes/objects/plants/plantedcrop.tscn" id="12_a6mss"]
-[ext_resource type="Resource" uid="uid://bsea61ia2yqe6" path="res://scenes/objects/plants/tomato_data.tres" id="13_rc4qn"]
-[ext_resource type="Resource" uid="uid://c4kqwscknxc4" path="res://scenes/objects/plants/gravitron_data.tres" id="14_3o4av"]
-[ext_resource type="Resource" uid="uid://c3dji2e3pe1oc" path="res://scenes/objects/plants/carot_data.tres" id="15_q2lfl"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="16_mlwbc"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="17_v50sc"]
 [ext_resource type="PackedScene" uid="uid://hylmhugngmrk" path="res://scenes/components/crops_cursor_component.tscn" id="18_arjhy"]
@@ -27,6 +23,7 @@
 [ext_resource type="Resource" uid="uid://dlxrfh2t0atl7" path="res://scenes/objects/plants/corn_seed.tres" id="25_1hqux"]
 [ext_resource type="Resource" uid="uid://c8ph32wom3n6e" path="res://scenes/objects/plants/eggplant_seed.tres" id="26_c88ha"]
 [ext_resource type="Resource" uid="uid://c7p3yk3760o3s" path="res://scenes/objects/plants/carot_seed.tres" id="27_djxq2"]
+[ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="28_mpijs"]
 [ext_resource type="Resource" uid="uid://xrou4c8xrhkf" path="res://scenes/objects/plants/star_seed.tres" id="28_w1h41"]
 [ext_resource type="Resource" uid="uid://bclleevjva4wm" path="res://scenes/objects/plants/tomato_seed.tres" id="29_538xf"]
 [ext_resource type="Resource" uid="uid://cs76q1aorqlpm" path="res://scenes/objects/plants/gravitron_seed.tres" id="30_ybfts"]
@@ -84,21 +81,6 @@ tile_set = ExtResource("5_ul7ww")
 
 [node name="CropFields" type="Node2D" parent="."]
 
-[node name="testtomato" parent="CropFields" instance=ExtResource("12_a6mss")]
-visible = false
-position = Vector2(99, 144)
-plant_data = ExtResource("13_rc4qn")
-
-[node name="testgravitron" parent="CropFields" instance=ExtResource("12_a6mss")]
-visible = false
-position = Vector2(188, 144)
-plant_data = ExtResource("14_3o4av")
-
-[node name="testcarrot" parent="CropFields" instance=ExtResource("12_a6mss")]
-visible = false
-position = Vector2(254, 133)
-plant_data = ExtResource("15_q2lfl")
-
 [node name="FieldCursorComponent" parent="." node_paths=PackedStringArray("grass_tilemap_layer", "tilled_soil_tilemap_layer") instance=ExtResource("16_mlwbc")]
 script = ExtResource("17_v50sc")
 grass_tilemap_layer = NodePath("../GameTileMap/Grass")
@@ -147,3 +129,11 @@ item_data = ExtResource("30_ybfts")
 [node name="GroundLoot7" parent="." instance=ExtResource("24_klno7")]
 position = Vector2(222, 155)
 item_data = ExtResource("31_07yim")
+
+[node name="GroundLoot8" parent="." instance=ExtResource("24_klno7")]
+position = Vector2(223, 175)
+item_data = ExtResource("28_mpijs")
+
+[node name="GroundLoot9" parent="." instance=ExtResource("24_klno7")]
+position = Vector2(243, 175)
+item_data = ExtResource("28_mpijs")

@@ -4,6 +4,7 @@ extends Node
 
 # Signal émis quand l'état de la machine change
 signal state_changed(new_state)
+signal progress_updated(progress_percentage)
 enum State { IDLE, PROCESSING, FINISHED }
 
 # La liste des recettes que CETTE machine accepte
@@ -19,6 +20,14 @@ func _ready():
 	timer.one_shot = true
 	timer.timeout.connect(_on_processing_finished)
 	set_state(State.IDLE)
+	set_process(false)
+
+func _process(delta):
+	if current_state == State.PROCESSING and timer.wait_time > 0:
+		var time_left = timer.time_left
+		var total_time = timer.wait_time
+		var percentage = (1.0 - (time_left / total_time)) * 100.0
+		progress_updated.emit(percentage)
 
 # Fonction principale pour démarrer le processus
 func start_processing(input_item: ItemData) -> bool:
@@ -35,12 +44,14 @@ func start_processing(input_item: ItemData) -> bool:
 				timer.start(recipe.processing_time_seconds)
 
 				set_state(State.PROCESSING)
+				set_process(true)
 				return true
 	return false
 
 # Quand le timer est fini
 func _on_processing_finished():
 	set_state(State.FINISHED)
+	set_process(false)
 
 # Quand le joueur récupère le produit
 func collect_output() -> Dictionary:
@@ -50,6 +61,7 @@ func collect_output() -> Dictionary:
 	var collected = output_buffer
 	output_buffer = null
 	set_state(State.IDLE)
+	set_process(false)
 	return collected
 
 func set_state(new_state: State):

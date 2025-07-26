@@ -4,7 +4,7 @@ extends PanelContainer
 @onready var item_grid: GridContainer = $VBoxContainer/ItemGrid
 @onready var close_button: Button = $VBoxContainer/CloseButton
 
-var slot_scene = preload("res://scenes/ui/inventoryslot.tscn")
+var slot_scene = preload("res://machines/logic/machine_recipe_slot.tscn")
 var current_machine_component: ProcessingMachineComponent
 
 func _ready():
@@ -19,32 +19,35 @@ func open_menu(machine_component: ProcessingMachineComponent):
 	redraw_recipes()
 
 func redraw_recipes():
-	# Vider la grille
 	for child in item_grid.get_children():
 		child.queue_free()
 
-	# On récupère les recettes possibles de la machine
 	var recipes = current_machine_component.accepted_recipes
 
 	for recipe in recipes:
 		var slot = slot_scene.instantiate()
 		item_grid.add_child(slot)
 		
-		# Afficher l'ingrédient requis
-		slot.display_item(recipe.input_item, recipe.input_quantity)
-		
 		var can_process = InventoryManager.get_item_count(recipe.input_item) >= recipe.input_quantity
 		
-		if can_process:
-			slot.modulate = Color.WHITE
-			slot.gui_input.connect(_on_recipe_clicked.bind(recipe))
-		else:
+		# --- MODIFICATION ---
+		# On passe l'information "can_process" à la fonction display_recipe
+		slot.display_recipe(recipe, current_machine_component)
+		
+		if not can_process:
 			slot.modulate = Color(0.5, 0.5, 0.5, 0.8)
+		else:
+			slot.modulate = Color.WHITE
+			slot.recipe_selected.connect(_on_recipe_clicked)
 
-func _on_recipe_clicked(event: InputEvent, recipe: MachineRecipe):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
-		if current_machine_component.start_processing(recipe.input_item):
-			close_menu()
+# La fonction est plus simple, elle ne prend plus l'event
+func _on_recipe_clicked(recipe: MachineRecipe):
+	# On lance le traitement, mais on ne ferme plus le menu
+	if current_machine_component.start_processing(recipe.input_item):
+		print("Conversion de '%s' démarrée !" % recipe.input_item.item_name)
+		# --- NOUVEAU ---
+		# On redessine la grille pour montrer que la machine est occupée
+		redraw_recipes() 
 
 func close_menu():
 	hide()

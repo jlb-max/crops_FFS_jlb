@@ -1,4 +1,7 @@
+ProgressBar
 Button
+TextureRect
+HBoxContainer
 GridContainer
 Label
 VBoxContainer
@@ -9,6 +12,3 @@ ColorRect
 GPUParticles2D
 Timer
 Node2D
-Node
-HBoxContainer
-TextureRect

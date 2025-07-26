@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://csuuoje5imy1b"]
+
+[ext_resource type="PackedScene" uid="uid://dvvru02sinatn" path="res://scenes/ui/inventoryslot.tscn" id="1_4u4wl"]
+[ext_resource type="Script" uid="uid://c44t7deecx6i4" path="res://machines/logic/machine_recipe_slot.gd" id="1_eb5jc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eb5jc"]
+load_path = "res://.godot/imported/all_ui_sprites.png-8f790274e39e8a769e78cacf4edd15e5.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk5i4"]
+atlas = SubResource("CompressedTexture2D_eb5jc")
+region = Rect2(48, 512, 16, 16)
+
+[node name="MachineRecipeSlot" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_eb5jc")
+
+[node name="InputSlot" parent="." instance=ExtResource("1_4u4wl")]
+layout_mode = 2
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vk5i4")
+
+[node name="OutputSlot" parent="." instance=ExtResource("1_4u4wl")]
+layout_mode = 2
+
+[node name="ConvertButton" type="Button" parent="."]
+layout_mode = 2
+text = "convertir"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
