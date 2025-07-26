@@ -50,6 +50,7 @@ folder_colors={
 "res://assets/": "orange",
 "res://crafting/": "red",
 "res://dialogue/": "blue",
+"res://machines/": "teal",
 "res://resources/": "purple",
 "res://scenes/": "green",
 "res://scripts/": "pink"

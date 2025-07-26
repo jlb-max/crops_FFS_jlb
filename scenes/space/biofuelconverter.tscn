@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2n80advawuqf"]
+
+[ext_resource type="Script" uid="uid://776c2axh50in" path="res://scenes/space/biofuelconverter.gd" id="1_3cnxf"]
+[ext_resource type="Texture2D" uid="uid://dhprnyoppdgce" path="res://assets/game/objects/new planet/biofuel.png" id="1_kivbf"]
+[ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="3_btptw"]
+[ext_resource type="PackedScene" uid="uid://cd0n4jrm0co4x" path="res://scenes/components/interactable_label_component.tscn" id="4_dyiuj"]
+[ext_resource type="PackedScene" uid="uid://dagnc3wfs7lsb" path="res://scenes/components/feed_component.tscn" id="5_7500x"]
+[ext_resource type="PackedScene" uid="uid://bf8wlp2uixhjh" path="res://machines/logic/ProcessingMachineComponent.tscn" id="6_0gofn"]
+[ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="7_ksbad"]
+[ext_resource type="Resource" uid="uid://cf3iscq7xj1ql" path="res://machines/biofuel/corn_fuel.tres" id="8_ls05e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umtkn"]
+size = Vector2(23, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cnxf"]
+size = Vector2(26, 63.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44sq4"]
+
+[node name="BioFuelConverter" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_3cnxf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -11.5)
+shape = SubResource("RectangleShape2D_umtkn")
+debug_color = Color(0, 0.196078, 0.713726, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -26)
+texture = ExtResource("1_kivbf")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_btptw")]
+position = Vector2(3, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(-3, -1.25)
+shape = SubResource("RectangleShape2D_3cnxf")
+debug_color = Color(0.151871, 0.628777, 0.419654, 0.42)
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("4_dyiuj")]
+offset_left = -28.0
+offset_top = -62.0
+offset_right = -10.0
+offset_bottom = -44.0
+
+[node name="FeedComponent" parent="." instance=ExtResource("5_7500x")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FeedComponent"]
+shape = SubResource("CircleShape2D_44sq4")
+debug_color = Color(0.7416, 0.580644, 0.141262, 0.419608)
+
+[node name="OutputIndicator" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(26, 0)
+
+[node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_0gofn")]
+accepted_recipes = Array[ExtResource("7_ksbad")]([ExtResource("8_ls05e")])

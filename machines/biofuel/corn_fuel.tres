@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MachineRecipe" load_steps=4 format=3 uid="uid://cf3iscq7xj1ql"]
+
+[ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="1_gc6fb"]
+[ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="1_s4noq"]
+[ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="2_cy2y5"]
+
+[resource]
+script = ExtResource("1_gc6fb")
+input_item = ExtResource("1_s4noq")
+input_quantity = 10
+output_item = ExtResource("2_cy2y5")
+output_quantity = 1
+processing_time_seconds = 10.0
+metadata/_custom_type_script = "uid://d4l1k1io1a3n5"

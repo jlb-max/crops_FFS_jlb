@@ -132,3 +132,19 @@ func get_item_count(item_data: ItemData) -> int:
 		if slot_data != null and slot_data.item == item_data:
 			total_quantity += slot_data.quantity
 	return total_quantity
+
+
+func get_all_items() -> Array:
+	var all_items = []
+	
+	# On parcourt d'abord la barre d'outils
+	for slot_data in hotbar_slots:
+		if slot_data != null:
+			all_items.append(slot_data)
+			
+	# Ensuite, on parcourt l'inventaire principal
+	for slot_data in slots:
+		if slot_data != null:
+			all_items.append(slot_data)
+			
+	return all_items

@@ -1,3 +1,4 @@
+#game_input_events.gd
 class_name GameInputEvents
 
 static var direction: Vector2

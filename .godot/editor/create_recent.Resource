@@ -1,5 +1,6 @@
-Shader
 ItemData
+MachineRecipe
+Shader
 CraftingRecipe
 TileSet
 PlantData

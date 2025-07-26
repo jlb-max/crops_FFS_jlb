@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=22 format=3 uid="uid://dm7aupe2py7xa"]
+[gd_resource type="TileSet" load_steps=23 format=3 uid="uid://dm7aupe2py7xa"]
 
 [ext_resource type="Texture2D" uid="uid://d4j613xqw08xf" path="res://assets/game/tilesets/ground tiles/water frames/water.png" id="1_m70i2"]
 [ext_resource type="Texture2D" uid="uid://bequudr4xbpla" path="res://assets/game/tilesets/ground tiles/New tiles/grass_tiles_v2.png" id="2_cbdxd"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://es2on243oiib" path="res://scenes/objects/rocks/rock.tscn" id="10_o2x3h"]
 [ext_resource type="Texture2D" uid="uid://bioik8b5vpahi" path="res://assets/game/tilesets/ground tiles/Old tiles/Tilled_Dirt_Wide_v2.png" id="12_skfke"]
 [ext_resource type="PackedScene" uid="uid://c6gu2dlyo0q6x" path="res://scenes/objects/chest/chest.tscn" id="12_tl0r4"]
+[ext_resource type="PackedScene" uid="uid://b2n80advawuqf" path="res://scenes/space/biofuelconverter.tscn" id="13_qblla"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbdxd"]
 texture = ExtResource("1_m70i2")
@@ -485,6 +486,7 @@ scenes/3/scene = ExtResource("8_4agr7")
 scenes/4/scene = ExtResource("9_mt8is")
 scenes/5/scene = ExtResource("10_o2x3h")
 scenes/6/scene = ExtResource("12_tl0r4")
+scenes/7/scene = ExtResource("13_qblla")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tl0r4"]
 texture = ExtResource("12_skfke")
