@@ -108,3 +108,4 @@ res://crafting/ingredient.gd
 res://scripts/globals/itemdata.gd
 res://scripts/globals/plantdata.gd
 res://scenes/components/crops_cursor_component.gd
+res://scenes/components/day_night_cycle_component.gd

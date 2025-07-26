@@ -1,6 +1,10 @@
 class_name DayNightCycleComponent
 extends CanvasModulate
 
+@export_group("Scene Layers")
+@export var tilled_soil_layer: TileMapLayer
+@export var wetness_overlay: TileMapLayer
+
 @export var initial_day: int = 1:
 	set(id):
 		initial_day = id
@@ -22,6 +26,11 @@ extends CanvasModulate
 @export var day_night_gradient_texture: GradientTexture1D
 
 func _ready() -> void:
+	if tilled_soil_layer and wetness_overlay:
+		SoilManager.init_layers(tilled_soil_layer, wetness_overlay)
+	else:
+		push_warning("Les couches TilledSoil ou WetnessOverlay ne sont pas assignées sur le DayNightCycleComponent!")
+	
 	DayAndNightCycleManager.initial_day = initial_day
 	DayAndNightCycleManager.initial_hour = initial_hour
 	DayAndNightCycleManager.initial_minute = initial_minute

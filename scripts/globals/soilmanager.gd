@@ -35,6 +35,10 @@ func add_wet_tile(tile : Vector2i) -> void:
 		push_warning("SoilManager : tilled_soil_layer NULL")
 	if not wetness_overlay:
 		push_warning("SoilManager : wetness_overlay NULL")
+	if not tilled_soil_layer:
+		push_error("SoilManager: Impossible d'arroser, la couche TilledSoil n'a pas été enregistrée !")
+		return
+
 	if tilled_soil_layer.get_cell_source_id(tile) == -1:
 		return                                  # pas de TilledSoil → on ignore
 	if _wet_tiles.has(tile):
