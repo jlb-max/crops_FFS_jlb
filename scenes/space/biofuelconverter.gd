@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var interactable_component: InteractableComponent = $InteractableComponent
+@onready var interactable_label_component: Control = $InteractableLabelComponent
 @onready var processing_component: ProcessingMachineComponent = $ProcessingMachineComponent
 @onready var output_indicator: Sprite2D = $OutputIndicator
 @onready var progress_bar: ProgressBar = $ProgressBar
@@ -17,30 +18,34 @@ extends StaticBody2D
 var _player_is_nearby: bool = false
 
 func _ready():
+    set_process(true)
+    # --- MODIFICATION ---
+    # On se connecte aux signaux de base de l'Area2D
+    interactable_component.body_entered.connect(_on_body_entered)
+    interactable_component.body_exited.connect(_on_body_exited)
     
-    set_process(true) 
-    # On connecte les signaux de proximité de votre composant
-    interactable_component.interactable_activated.connect(_on_player_entered)
-    interactable_component.interactable_deactivated.connect(_on_player_exited)
-    
-    # On connecte le signal du composant de traitement
     processing_component.state_changed.connect(on_state_changed)
     on_state_changed(processing_component.current_state)
     
-    # On désactive l'écoute des touches par défaut
     set_process_input(false)
+    # On s'assure que le label est bien caché au démarrage
+    interactable_label_component.hide()
 
 # Cette fonction est appelée quand le joueur entre dans la zone
-func _on_player_entered():
-    _player_is_nearby = true
-    # On commence à écouter les touches
-    set_process_input(true)
+func _on_body_entered(body: Node2D):
+    # On vérifie si c'est bien le joueur
+    if body is Player:
+        _player_is_nearby = true
+        set_process_input(true)
+        interactable_label_component.show()
 
 # Cette fonction est appelée quand le joueur sort de la zone
-func _on_player_exited():
-    _player_is_nearby = false
-    # On arrête d'écouter les touches
-    set_process_input(false)
+func _on_body_exited(body: Node2D):
+    # On vérifie si c'est bien le joueur
+    if body is Player:
+        _player_is_nearby = false
+        set_process_input(false)
+        interactable_label_component.hide()
 
 # Cette fonction ne s'exécute que lorsque le joueur est dans la zone
 func _input(event: InputEvent):

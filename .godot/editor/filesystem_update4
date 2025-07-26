@@ -78,3 +78,5 @@ res://scenes/ui/RecipeDetailWindow.gd
 res://machines/biofuel/corn_and_tomato_fuel.tres
 res://scenes/ui/recipe_detail_window.tscn
 res://crafting/recipes/craft_test.tres
+res://scenes/components/interactable_component.gd
+res://scenes/objects/chest/chest.gd
