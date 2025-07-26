@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca7ilrmahamlq"]
+[gd_scene load_steps=12 format=3 uid="uid://ca7ilrmahamlq"]
 
 [ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="1_cw1j0"]
 [ext_resource type="Texture2D" uid="uid://dukkaex5emsha" path="res://assets/game/objects/new planet/analyzer.png" id="1_lhmv5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="6_bo022"]
 [ext_resource type="Script" uid="uid://cl4puo50cqmuf" path="res://machines/ordinateur/cumulative_reward.gd" id="7_y6wup"]
 [ext_resource type="Resource" uid="uid://kdnwclrt1285" path="res://machines/ordinateur/recompense_palier_1.tres" id="8_68vuk"]
+[ext_resource type="Resource" uid="uid://ckv4s3isxs1xv" path="res://machines/ordinateur/recompense_palier_2.tres" id="9_bo022"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqn44"]
 size = Vector2(56, 46)
@@ -42,4 +43,4 @@ offset_bottom = -49.0
 
 [node name="RewardMachineComponent" parent="." instance=ExtResource("3_xlq0o")]
 fuel_item = ExtResource("6_bo022")
-reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk")])
+reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk"), ExtResource("9_bo022")])

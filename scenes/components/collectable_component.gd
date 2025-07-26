@@ -2,8 +2,11 @@
 class_name CollectableComponent
 extends Area2D
 
+
+
 # On remplace le nom par une référence directe à la ressource ItemData
-@export var item_data: ItemData
+@export var item_data: CollectibleData
+
 
 func _ready() -> void:
 	# On connecte le signal ici pour être sûr que tout est prêt
@@ -11,13 +14,11 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		# On vérifie qu'un item a bien été assigné dans l'éditeur
 		if not item_data:
-			print("ERREUR: Aucun ItemData n'est assigné à ce CollectableComponent.")
+			print("ERREUR: Aucun CollectibleData n'est assigné.")
 			return
 
-		# On utilise la nouvelle fonction de l'inventaire
+		# Votre InventoryManager doit pouvoir accepter des CollectibleData
 		InventoryManager.add_item(item_data, 1)
 		
-		# La suite ne change pas : l'objet parent est détruit
 		get_parent().queue_free()

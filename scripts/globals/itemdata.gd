@@ -1,17 +1,14 @@
 # ItemData.gd
 @tool
 class_name ItemData
-extends Resource
+extends CollectibleData
 
 enum ActionType { NONE, TILL, WATER, PLANT, CHOP, PLACE_CRAFTABLE }
 
 @export var scene_to_place: PackedScene
 
 
-@export var item_name: String = "Nouvel Item"
-@export var description: String = ""
-@export var icon: Texture2D
-@export var stackable: bool = true
+
 @export var damage: int = 1
 
 @export var action_type: ActionType = ActionType.NONE

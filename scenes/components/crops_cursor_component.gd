@@ -103,7 +103,7 @@ func add_crop() -> void:
 		CropManager.register_crop(cell_position, crop_instance)
 		InventoryManager.remove_item(selected_item, 1)
 		
-		print("Plantation de '", plant_recipe.plant_name, "' réussie.")
+		print("Plantation de '", plant_recipe.item_name, "' réussie.")
 	else:
 		print("ERREUR: Le noeud 'CropFields' est introuvable pour y placer la plante.")
 		

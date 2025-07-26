@@ -101,3 +101,10 @@ res://machines/recipes/tomato_fuel.tres
 res://machines/recipes/corn_and_tomato_fuel.tres
 res://machines/recipes/star_fuel.tres
 res://machines/recipes/gravitron_fuel.tres
+res://machines/ordinateur/recompense_palier_2.tres
+res://scenes/components/collectable_component.gd
+res://scripts/globals/CollectibleData.gd
+res://crafting/ingredient.gd
+res://scripts/globals/itemdata.gd
+res://scripts/globals/plantdata.gd
+res://scenes/components/crops_cursor_component.gd

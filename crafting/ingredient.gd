@@ -3,5 +3,6 @@
 class_name Ingredient
 extends Resource
 
-@export var item: Resource
+# On remplace "Resource" par "CollectibleData" pour plus de sécurité
+@export var item: CollectibleData 
 @export_range(1, 999) var quantity: int = 1

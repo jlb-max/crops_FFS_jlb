@@ -10,10 +10,10 @@ region = Rect2(2, 2, 12, 13)
 
 [resource]
 script = ExtResource("3_2gumf")
+damage = 1
+action_type = 3
+plant_to_grow = ExtResource("2_xyfgl")
 item_name = "Graine de Maïs"
 description = ""
 icon = SubResource("AtlasTexture_ydtw6")
 stackable = true
-damage = 1
-action_type = 3
-plant_to_grow = ExtResource("2_xyfgl")
