@@ -93,3 +93,5 @@ res://machines/ordinateur/reward_machine_component.tscn
 res://machines/ordinateur/monolithe_ancien.tscn
 res://machines/ordinateur/monolithe_ancien.gd
 res://machines/ordinateur/reward_machine_menu.gd
+res://machines/biofuel/star_fuel.tres
+res://scripts/globals/machine_recipe_manager.gd

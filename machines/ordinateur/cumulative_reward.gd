@@ -13,3 +13,4 @@ const Ingredient = preload("res://crafting/ingredient.gd")
 @export var reward_items: Array[Ingredient]
 # Une liste de recettes de craft à débloquer
 @export var reward_crafting_recipes: Array[CraftingRecipe]
+@export var reward_machine_recipes: Array[MachineRecipe]

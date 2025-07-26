@@ -1,3 +1,5 @@
+res://scripts/globals
+res://machines/biofuel
 res://machines/ordinateur
 res://scenes/test
 res://assets/game/objects/Items
@@ -6,7 +8,6 @@ res://machines/atelier
 res://assets/game/ui/UI Sprites
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
-res://machines/biofuel
 res://Tilesets
 res://scenes/space
 res://scenes/objects/plants
@@ -15,7 +16,6 @@ res://assets/game/objects
 res://crafting/recipes
 res://scenes/ui
 res://crafting
-res://scripts/globals
 res://scenes/objects/rocks
 res://assets/game/objects/Tree animations
 res://scenes/objects/trees

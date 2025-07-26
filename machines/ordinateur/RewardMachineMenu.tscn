@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmwckryxuprqe"]
+[gd_scene load_steps=6 format=3 uid="uid://bmwckryxuprqe"]
 
 [ext_resource type="Script" uid="uid://orrj1x2v467n" path="res://machines/ordinateur/reward_machine_menu.gd" id="1_2q766"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_jhjc5"]
 [ext_resource type="PackedScene" uid="uid://dvvru02sinatn" path="res://scenes/ui/inventoryslot.tscn" id="3_t5q5p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5q5p"]
+bg_color = Color(0.180005, 0.180005, 0.180005, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhhe0"]
+bg_color = Color(0.118519, 0.296331, 0.709818, 1)
 
 [node name="RewardMachineMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 300)
@@ -31,6 +37,8 @@ horizontal_alignment = 1
 
 [node name="FuelInputRow" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="FuelSlot" parent="VBoxContainer/FuelInputRow" instance=ExtResource("3_t5q5p")]
 layout_mode = 2
@@ -40,12 +48,18 @@ layout_mode = 2
 
 [node name="AddFuelButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("1_jhjc5")
 text = "ajouter carburant"
 
 [node name="CloseButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "fermer"
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_t5q5p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fhhe0")
+show_percentage = false

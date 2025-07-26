@@ -23,9 +23,16 @@ func redraw_recipes():
 	for child in item_grid.get_children():
 		child.queue_free()
 
-	var recipes = current_machine_component.accepted_recipes
-
-	for recipe in recipes:
+	var all_discovered_recipes = MachineRecipeManager.get_discovered_recipes()
+	
+	# On filtre pour ne garder que celles que CETTE machine peut utiliser
+	var recipes_for_this_machine = []
+	for recipe in all_discovered_recipes:
+		# On suppose que vous ajouterez un "type de machine" à vos recettes
+		# Pour l'instant, on les prend toutes.
+		recipes_for_this_machine.append(recipe)
+	
+	for recipe in recipes_for_this_machine:
 		var slot = slot_scene.instantiate()
 		item_grid.add_child(slot)
 		

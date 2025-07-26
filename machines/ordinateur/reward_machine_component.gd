@@ -47,6 +47,9 @@ func _grant_rewards():
 	for recipe_reward in current_tier.reward_crafting_recipes:
 		CraftingManager.discover_recipe(recipe_reward.recipe_id)
 		print("Recette apprise : ", recipe_reward.recipe_id)
+		
+	for machine_recipe_reward in current_tier.reward_machine_recipes:
+		MachineRecipeManager.discover_recipe(machine_recipe_reward)
 
 	# Passer au palier suivant
 	current_fuel_progress -= current_tier.fuel_required

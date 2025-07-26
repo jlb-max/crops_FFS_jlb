@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dagnc3wfs7lsb" path="res://scenes/components/feed_component.tscn" id="5_o701b"]
 [ext_resource type="PackedScene" uid="uid://bf8wlp2uixhjh" path="res://machines/logic/ProcessingMachineComponent.tscn" id="6_oh7fi"]
 [ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="7_01410"]
-[ext_resource type="Resource" uid="uid://b0q5wt1iy81ca" path="res://machines/atelier/planche_recipe.tres" id="8_vgoxy"]
+[ext_resource type="Resource" uid="uid://b0q5wt1iy81ca" path="res://machines/recipes/planche_recipe.tres" id="8_vgoxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtkn"]
 size = Vector2(30, 20)
