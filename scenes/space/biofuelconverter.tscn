@@ -65,6 +65,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_0gofn")]
 accepted_recipes = Array[ExtResource("7_ksbad")]([ExtResource("8_ls05e"), ExtResource("9_ls05e"), ExtResource("10_c25li"), ExtResource("11_c25li")])
+machine_type = &"BioFuelConverter"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 anchors_preset = 8

@@ -23,7 +23,7 @@ bg_color = Color(0.336608, 0.336608, 0.336608, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c25li"]
 bg_color = Color(0, 0.717647, 0.352941, 1)
 
-[node name="Atelier2" type="StaticBody2D"]
+[node name="Atelier" type="StaticBody2D"]
 y_sort_enabled = true
 script = ExtResource("1_hxyqq")
 
@@ -62,6 +62,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_oh7fi")]
 accepted_recipes = Array[ExtResource("7_01410")]([ExtResource("8_vgoxy")])
+machine_type = &"Atelier"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 anchors_preset = 8

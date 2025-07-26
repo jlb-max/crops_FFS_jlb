@@ -1,31 +1,37 @@
-# machine_recipe_manager.gd
 extends Node
 
 var all_recipes: Dictionary = {}
-var discovered_recipe_ids: Array[StringName] = []
+var discovered_recipe_ids: Array[String] = [] # On utilise le chemin du fichier (String)
 
 func _ready():
 	_load_all_recipes()
 
 func _load_all_recipes():
-	# Charge TOUTES les recettes de machine du jeu
-	var dir = DirAccess.open("res://machines/recipes/") # Assurez-vous de créer ce dossier
+	var dir = DirAccess.open("res://machines/recipes/")
 	if dir:
 		for file in dir.get_files():
 			if file.ends_with(".tres"):
-				var recipe = load("res://machines/recipes/" + file)
-				all_recipes[recipe.get_instance_id()] = recipe # On utilise une clé unique
+				var recipe: MachineRecipe = load("res://machines/recipes/" + file)
+				# On utilise le chemin du fichier comme ID unique et permanent
+				all_recipes[recipe.resource_path] = recipe
+				
+				# --- NOUVELLE LOGIQUE ---
+				# Si la recette doit être connue dès le début, on la découvre
+				if recipe.unlock_condition == MachineRecipe.UnlockType.ALWAYS_KNOWN:
+					discover_recipe(recipe)
 
 func discover_recipe(recipe: MachineRecipe):
-	var id = recipe.get_instance_id()
+	var id = recipe.resource_path
 	if not discovered_recipe_ids.has(id):
 		discovered_recipe_ids.append(id)
-		print("Nouvelle recette de machine apprise !")
+		print("Nouvelle recette de machine apprise : ", recipe.resource_path)
 
-# Renvoie toutes les recettes découvertes
-func get_discovered_recipes() -> Array[MachineRecipe]:
-	var discovered = []
+func get_discovered_recipes_for_machine(type: StringName) -> Array[MachineRecipe]:
+	var discovered: Array[MachineRecipe] = []
 	for id in discovered_recipe_ids:
 		if all_recipes.has(id):
-			discovered.append(all_recipes[id])
+			var recipe = all_recipes[id]
+			# On ajoute la recette à la liste seulement si son type correspond
+			if recipe.machine_type == type:
+				discovered.append(recipe)
 	return discovered

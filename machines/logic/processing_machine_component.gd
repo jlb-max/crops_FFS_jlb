@@ -10,6 +10,9 @@ enum State { IDLE, PROCESSING, FINISHED }
 # La liste des recettes que CETTE machine accepte
 @export var accepted_recipes: Array[MachineRecipe]
 
+@export var machine_type: StringName
+
+
 var current_state: State = State.IDLE
 var output_buffer = null # Contiendra { "item": ItemData, "quantity": int }
 var current_recipe_processing: MachineRecipe = null

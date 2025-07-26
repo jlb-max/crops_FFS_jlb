@@ -23,32 +23,27 @@ func redraw_recipes():
 	for child in item_grid.get_children():
 		child.queue_free()
 
-	var all_discovered_recipes = MachineRecipeManager.get_discovered_recipes()
+	# --- CORRECTION ---
+	# On appelle la nouvelle fonction du manager pour récupérer UNIQUEMENT
+	# les recettes découvertes qui correspondent au type de cette machine.
+	var recipes = MachineRecipeManager.get_discovered_recipes_for_machine(current_machine_component.machine_type)
 	
-	# On filtre pour ne garder que celles que CETTE machine peut utiliser
-	var recipes_for_this_machine = []
-	for recipe in all_discovered_recipes:
-		# On suppose que vous ajouterez un "type de machine" à vos recettes
-		# Pour l'instant, on les prend toutes.
-		recipes_for_this_machine.append(recipe)
-	
-	for recipe in recipes_for_this_machine:
+	# On parcourt la liste déjà filtrée des bonnes recettes
+	for recipe in recipes:
 		var slot = slot_scene.instantiate()
 		item_grid.add_child(slot)
 		
-		# --- CORRECTION DE LA LOGIQUE ---
-		
-		# 1. On vérifie si le joueur a TOUS les ingrédients
+		# On vérifie si le joueur a TOUS les ingrédients
 		var can_process = true
 		for ingredient in recipe.inputs:
 			if InventoryManager.get_item_count(ingredient.item) < ingredient.quantity:
 				can_process = false
-				break # Pas la peine de vérifier les autres si un seul manque
+				break
 
-		# 2. On affiche la recette dans le slot
+		# On affiche la recette dans le slot
 		slot.display_recipe(recipe, current_machine_component)
 		
-		# 3. On met à jour le visuel et la connexion
+		# On met à jour le visuel et la connexion
 		if not can_process:
 			slot.modulate = Color(0.5, 0.5, 0.5, 0.8)
 		else:

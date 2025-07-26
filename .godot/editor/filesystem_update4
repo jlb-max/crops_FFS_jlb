@@ -95,3 +95,9 @@ res://machines/ordinateur/monolithe_ancien.gd
 res://machines/ordinateur/reward_machine_menu.gd
 res://machines/biofuel/star_fuel.tres
 res://scripts/globals/machine_recipe_manager.gd
+res://machines/recipes/planche_recipe.tres
+res://machines/recipes/corn_fuel.tres
+res://machines/recipes/tomato_fuel.tres
+res://machines/recipes/corn_and_tomato_fuel.tres
+res://machines/recipes/star_fuel.tres
+res://machines/recipes/gravitron_fuel.tres

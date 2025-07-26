@@ -38,7 +38,7 @@ func update_display():
 	if required > 0:
 		progress_bar.max_value = required
 		progress_bar.value = current_progress
-		progress_label.text = "Progression : %d / %d" % [current_progress, required]
+		
 	else:
 		progress_bar.value = progress_bar.max_value
 		progress_label.text = "Machine terminée !"

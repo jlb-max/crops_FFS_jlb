@@ -42,4 +42,4 @@ offset_bottom = -49.0
 
 [node name="RewardMachineComponent" parent="." instance=ExtResource("3_xlq0o")]
 fuel_item = ExtResource("6_bo022")
-reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk"), null])
+reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk")])
