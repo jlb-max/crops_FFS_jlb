@@ -80,3 +80,7 @@ res://scenes/ui/recipe_detail_window.tscn
 res://crafting/recipes/craft_test.tres
 res://scenes/components/interactable_component.gd
 res://scenes/objects/chest/chest.gd
+res://machines/atelier/planche.tres
+res://scenes/objects/craftables/planche.tres
+res://machines/atelier/planche_recipe.tres
+res://scenes/test/test_scene_cropfields_FFS_atelier.tscn

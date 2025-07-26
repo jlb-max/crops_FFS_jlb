@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyp00nuhmonwt"]
+[gd_scene load_steps=14 format=3 uid="uid://dyp00nuhmonwt"]
 
 [ext_resource type="Script" uid="uid://776c2axh50in" path="res://scenes/space/biofuelconverter.gd" id="1_hxyqq"]
 [ext_resource type="Texture2D" uid="uid://b5ofwn7oewi58" path="res://assets/game/objects/work_station.png" id="2_m62xw"]
@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dagnc3wfs7lsb" path="res://scenes/components/feed_component.tscn" id="5_o701b"]
 [ext_resource type="PackedScene" uid="uid://bf8wlp2uixhjh" path="res://machines/logic/ProcessingMachineComponent.tscn" id="6_oh7fi"]
 [ext_resource type="Script" uid="uid://d4l1k1io1a3n5" path="res://machines/logic/machine_recipe.gd" id="7_01410"]
-[ext_resource type="Resource" uid="uid://cf3iscq7xj1ql" path="res://machines/biofuel/corn_fuel.tres" id="8_m18lr"]
-[ext_resource type="Resource" uid="uid://dq2iwh1v7g8um" path="res://machines/biofuel/tomato_fuel.tres" id="9_txlqc"]
-[ext_resource type="Resource" uid="uid://btjwqfruejjth" path="res://machines/biofuel/gravitron_fuel.tres" id="10_w5f4m"]
+[ext_resource type="Resource" uid="uid://b0q5wt1iy81ca" path="res://machines/atelier/planche_recipe.tres" id="8_vgoxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtkn"]
 size = Vector2(30, 20)
@@ -63,7 +61,7 @@ position = Vector2(13, -23)
 scale = Vector2(0.5, 0.5)
 
 [node name="ProcessingMachineComponent" parent="." instance=ExtResource("6_oh7fi")]
-accepted_recipes = Array[ExtResource("7_01410")]([ExtResource("8_m18lr"), ExtResource("9_txlqc"), ExtResource("10_w5f4m")])
+accepted_recipes = Array[ExtResource("7_01410")]([ExtResource("8_vgoxy")])
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 anchors_preset = 8

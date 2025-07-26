@@ -1,5 +1,5 @@
-MachineRecipe
 ItemData
+MachineRecipe
 Shader
 CraftingRecipe
 TileSet

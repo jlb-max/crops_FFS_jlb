@@ -1,15 +1,15 @@
+res://scenes/test
+res://assets/game/objects/Items
+res://scenes/objects/craftables
 res://machines/atelier
 res://assets/game/ui/UI Sprites
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
 res://machines/biofuel
-res://scenes/test
 res://Tilesets
-res://assets/game/objects/Items
 res://scenes/space
 res://scenes/objects/plants
 res://scenes/components
-res://scenes/objects/craftables
 res://assets/game/objects
 res://crafting/recipes
 res://scenes/ui
