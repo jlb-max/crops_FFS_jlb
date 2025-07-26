@@ -15,17 +15,17 @@ size = Vector2(56, 46)
 [sub_resource type="CircleShape2D" id="CircleShape2D_xlq0o"]
 radius = 43.1856
 
-[node name="MonolitheAncien" type="Area2D"]
+[node name="MonolitheAncien" type="StaticBody2D"]
 script = ExtResource("1_uspbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_eqn44")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -55)
 texture = ExtResource("1_lhmv5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -24)
-shape = SubResource("RectangleShape2D_eqn44")
 
 [node name="InteractableComponent" parent="." instance=ExtResource("1_cw1j0")]
 

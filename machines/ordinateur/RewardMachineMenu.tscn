@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmwckryxuprqe"]
+[gd_scene load_steps=4 format=3 uid="uid://bmwckryxuprqe"]
 
 [ext_resource type="Script" uid="uid://orrj1x2v467n" path="res://machines/ordinateur/reward_machine_menu.gd" id="1_2q766"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_jhjc5"]
+[ext_resource type="PackedScene" uid="uid://dvvru02sinatn" path="res://scenes/ui/inventoryslot.tscn" id="3_t5q5p"]
 
 [node name="RewardMachineMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(400, 300)
@@ -25,12 +26,17 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "?"
+text = "... besoin... aide....."
 horizontal_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="VBoxContainer"]
+[node name="FuelInputRow" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
+
+[node name="FuelSlot" parent="VBoxContainer/FuelInputRow" instance=ExtResource("3_t5q5p")]
+layout_mode = 2
+
+[node name="QuantitySpinBox" type="SpinBox" parent="VBoxContainer/FuelInputRow"]
+layout_mode = 2
 
 [node name="AddFuelButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2

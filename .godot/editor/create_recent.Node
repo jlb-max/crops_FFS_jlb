@@ -1,3 +1,6 @@
+StaticBody2D
+SpinBox
+HBoxContainer
 GridContainer
 Node
 ProcessingMachineComponent
@@ -5,10 +8,8 @@ CollisionShape2D
 Sprite2D
 Area2D
 Button
-SpinBox
 ProgressBar
 Label
 VBoxContainer
 PanelContainer
-HBoxContainer
 TextureRect

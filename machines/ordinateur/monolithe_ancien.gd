@@ -1,5 +1,5 @@
 # monolithe_ancien.gd
-extends Area2D # Ou le type de votre noeud racine
+extends StaticBody2D # Ou le type de votre noeud racine
 
 # --- Références aux Nœuds ---
 @onready var sprite: Sprite2D = $Sprite2D
