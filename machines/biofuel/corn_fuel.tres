@@ -21,5 +21,5 @@ metadata/_custom_type_script = "uid://d31hsogdinq"
 script = ExtResource("1_gc6fb")
 inputs = Array[ExtResource("1_cy2y5")]([SubResource("Resource_dbqfy")])
 outputs = Array[ExtResource("1_cy2y5")]([SubResource("Resource_8n4pu")])
-processing_time_seconds = 30.0
+processing_time_seconds = 10.0
 metadata/_custom_type_script = "uid://d4l1k1io1a3n5"

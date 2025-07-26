@@ -2,8 +2,8 @@
 extends PanelContainer
 
 # --- Références aux noeuds enfants ---
-@onready var output_item_label: Label = $VBoxContainer/OutputItemLabel
-@onready var output_item_texture: TextureRect = $VBoxContainer/AspectRatioContainer/OutputItemTexture
+@onready var output_items_list: HBoxContainer = $VBoxContainer/OutputItemsList
+
 @onready var ingredients_list: HBoxContainer = $VBoxContainer/IngredientsList
 @onready var craft_button: Button = $VBoxContainer/CraftButton
 @onready var close_button: Button = $VBoxContainer/CloseButton
@@ -31,19 +31,21 @@ func show_recipe_details(recipe: CraftingRecipe):
 	self.global_position.x = inventory_panel.global_position.x + inventory_panel.size.x + 10
 	
 	current_recipe = recipe
-	visible = true
+	show()
 	
-	# --- CORRECTION ---
-	# On s'assure qu'il y a au moins une sortie
-	if not recipe.outputs.is_empty():
-		# On prend le premier objet de la liste pour l'affichage principal
-		var main_output = recipe.outputs[0]
-		
-		output_item_label.text = "%dx %s" % [main_output.quantity, main_output.item.item_name]
-		output_item_texture.texture = main_output.item.icon
-	# --- FIN DE LA CORRECTION ---
+	# --- NOUVELLE LOGIQUE D'AFFICHAGE DES SORTIES ---
+	# On vide la liste des anciennes sorties
+	for child in output_items_list.get_children():
+		child.queue_free()
 	
-	# Le reste de la fonction (ingrédients, bouton) ne change pas
+	# On remplit avec les nouvelles sorties
+	for output_ingredient in recipe.outputs:
+		var slot = INGREDIENT_SLOT_SCENE.instantiate()
+		output_items_list.add_child(slot)
+		slot.display_item(output_ingredient.item, output_ingredient.quantity)
+	# --- FIN DE LA NOUVELLE LOGIQUE ---
+	
+	# La logique pour les ingrédients en entrée ne change pas
 	for child in ingredients_list.get_children():
 		child.queue_free()
 	

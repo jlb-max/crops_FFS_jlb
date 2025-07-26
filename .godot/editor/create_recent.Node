@@ -1,9 +1,9 @@
+HBoxContainer
+Label
 ProgressBar
 Button
 TextureRect
-HBoxContainer
 GridContainer
-Label
 VBoxContainer
 PanelContainer
 TileMapLayer

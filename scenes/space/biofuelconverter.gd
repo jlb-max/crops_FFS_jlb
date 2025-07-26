@@ -77,10 +77,16 @@ func on_state_changed(new_state):
             
         ProcessingMachineComponent.State.FINISHED:
             sprite.modulate = Color.WHITE
-            output_indicator.visible = true
             progress_bar.visible = false # Cacher la barre
-            if processing_component.output_buffer:
-                output_indicator.texture = processing_component.output_buffer.item.icon
+            
+            # --- CORRECTION ---
+            # On vérifie que le buffer de sortie n'est pas vide
+            if not processing_component.output_buffer.is_empty():
+                # On rend l'indicateur visible
+                output_indicator.visible = true
+                # On prend le PREMIER item du tableau pour l'afficher
+                var first_output_item = processing_component.output_buffer[0].item
+                output_indicator.texture = first_output_item.icon
 
 func _process(delta: float):
     if output_indicator.visible:

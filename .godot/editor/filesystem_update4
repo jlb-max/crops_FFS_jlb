@@ -76,3 +76,5 @@ res://crafting/crafting_recipe.gd
 res://scenes/ui/inventoryslot.gd
 res://scenes/ui/RecipeDetailWindow.gd
 res://machines/biofuel/corn_and_tomato_fuel.tres
+res://scenes/ui/recipe_detail_window.tscn
+res://crafting/recipes/craft_test.tres

@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=8 format=3 uid="uid://cu5q1ctuo7xn"]
+
+[ext_resource type="Script" uid="uid://d31hsogdinq" path="res://crafting/ingredient.gd" id="1_jyupm"]
+[ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="2_145ua"]
+[ext_resource type="Resource" uid="uid://dy00jkvirx4ps" path="res://scenes/objects/craftables/atelier.tres" id="4_kv0c7"]
+[ext_resource type="Script" uid="uid://c6md6w4rnuthp" path="res://crafting/crafting_recipe.gd" id="5_v7fo8"]
+
+[sub_resource type="Resource" id="Resource_b40ne"]
+script = ExtResource("1_jyupm")
+item = ExtResource("2_145ua")
+quantity = 1
+metadata/_custom_type_script = "uid://d31hsogdinq"
+
+[sub_resource type="Resource" id="Resource_ev24g"]
+script = ExtResource("1_jyupm")
+item = ExtResource("2_145ua")
+quantity = 1
+metadata/_custom_type_script = "uid://d31hsogdinq"
+
+[sub_resource type="Resource" id="Resource_nk034"]
+script = ExtResource("1_jyupm")
+item = ExtResource("4_kv0c7")
+quantity = 1
+metadata/_custom_type_script = "uid://d31hsogdinq"
+
+[resource]
+script = ExtResource("5_v7fo8")
+outputs = Array[ExtResource("1_jyupm")]([SubResource("Resource_nk034")])
+ingredients = Array[ExtResource("1_jyupm")]([SubResource("Resource_b40ne"), SubResource("Resource_ev24g")])
+recipe_id = &"craft_test"
+unlock_condition = 0
+metadata/_custom_type_script = "uid://c6md6w4rnuthp"

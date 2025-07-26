@@ -2,8 +2,10 @@ extends HBoxContainer
 
 signal recipe_selected(recipe)
 
-@onready var input_slot = $InputSlot
-@onready var output_slot = $OutputSlot
+@onready var input_items_container: HBoxContainer = $InputItemsContainer
+@onready var output_items_container: HBoxContainer = $OutputItemsContainer
+
+
 @onready var convert_button: Button = $ConvertButton
 @onready var progress_bar: ProgressBar = $ProgressBar
 
@@ -18,16 +20,23 @@ func display_recipe(recipe: MachineRecipe, machine: ProcessingMachineComponent):
 	current_recipe = recipe
 	machine_component_ref = machine
 	
-	# On affiche le PREMIER ingrédient et la PREMIÈRE sortie comme icônes
-	if not recipe.inputs.is_empty():
-		input_slot.display_item(recipe.inputs[0].item, recipe.inputs[0].quantity)
-	else:
-		input_slot.display_empty()
+	# Vider les anciens slots
+	for child in input_items_container.get_children():
+		child.queue_free()
+	for child in output_items_container.get_children():
+		child.queue_free()
+
+	# Remplir avec les nouveaux inputs
+	for input_ingredient in recipe.inputs:
+		var slot = preload("res://scenes/ui/inventoryslot.tscn").instantiate() # Précharger la scène du slot
+		input_items_container.add_child(slot)
+		slot.display_item(input_ingredient.item, input_ingredient.quantity)
 		
-	if not recipe.outputs.is_empty():
-		output_slot.display_item(recipe.outputs[0].item, recipe.outputs[0].quantity)
-	else:
-		output_slot.display_empty()
+	# Remplir avec les nouveaux outputs
+	for output_ingredient in recipe.outputs:
+		var slot = preload("res://scenes/ui/inventoryslot.tscn").instantiate() # Précharger la scène du slot
+		output_items_container.add_child(slot)
+		slot.display_item(output_ingredient.item, output_ingredient.quantity)
 
 	# On vérifie si la machine est en train de traiter CETTE recette spécifique
 	if machine.current_state == ProcessingMachineComponent.State.PROCESSING and machine.current_recipe_processing == recipe:
