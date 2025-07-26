@@ -84,3 +84,12 @@ res://machines/atelier/planche.tres
 res://scenes/objects/craftables/planche.tres
 res://machines/atelier/planche_recipe.tres
 res://scenes/test/test_scene_cropfields_FFS_atelier.tscn
+res://machines/ordinateur/cumulative_reward.gd
+res://scenes/test/test_scene_cropfields_FFS_ordinateur.tscn
+res://machines/ordinateur/recompense_palier_1.tres
+res://machines/ordinateur/reward_machine_component.gd
+res://machines/ordinateur/RewardMachineMenu.tscn
+res://machines/ordinateur/reward_machine_component.tscn
+res://machines/ordinateur/monolithe_ancien.tscn
+res://machines/ordinateur/monolithe_ancien.gd
+res://machines/ordinateur/reward_machine_menu.gd

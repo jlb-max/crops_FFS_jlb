@@ -1,3 +1,4 @@
+res://machines/ordinateur
 res://scenes/test
 res://assets/game/objects/Items
 res://scenes/objects/craftables
@@ -19,4 +20,3 @@ res://scenes/objects/rocks
 res://assets/game/objects/Tree animations
 res://scenes/objects/trees
 res://scenes/objects
-res://assets/game/tilesets/ground tiles

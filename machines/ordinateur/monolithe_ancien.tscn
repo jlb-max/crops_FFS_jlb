@@ -1,0 +1,45 @@
+[gd_scene load_steps=11 format=3 uid="uid://ca7ilrmahamlq"]
+
+[ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="1_cw1j0"]
+[ext_resource type="Texture2D" uid="uid://dukkaex5emsha" path="res://assets/game/objects/new planet/analyzer.png" id="1_lhmv5"]
+[ext_resource type="Script" uid="uid://c2ecl70hlcsv4" path="res://machines/ordinateur/monolithe_ancien.gd" id="1_uspbo"]
+[ext_resource type="PackedScene" uid="uid://cd0n4jrm0co4x" path="res://scenes/components/interactable_label_component.tscn" id="2_lhmv5"]
+[ext_resource type="PackedScene" uid="uid://c7twf2kcdb7ly" path="res://machines/ordinateur/reward_machine_component.tscn" id="3_xlq0o"]
+[ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="6_bo022"]
+[ext_resource type="Script" uid="uid://cl4puo50cqmuf" path="res://machines/ordinateur/cumulative_reward.gd" id="7_y6wup"]
+[ext_resource type="Resource" uid="uid://kdnwclrt1285" path="res://machines/ordinateur/recompense_palier_1.tres" id="8_68vuk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqn44"]
+size = Vector2(56, 46)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlq0o"]
+radius = 43.1856
+
+[node name="MonolitheAncien" type="Area2D"]
+script = ExtResource("1_uspbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -55)
+texture = ExtResource("1_lhmv5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_eqn44")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("1_cw1j0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(-1, -24)
+shape = SubResource("CircleShape2D_xlq0o")
+debug_color = Color(0.116189, 0.633881, 0.385325, 0.42)
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("2_lhmv5")]
+offset_left = -42.0
+offset_top = -67.0
+offset_right = -24.0
+offset_bottom = -49.0
+
+[node name="RewardMachineComponent" parent="." instance=ExtResource("3_xlq0o")]
+fuel_item = ExtResource("6_bo022")
+reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk"), null])

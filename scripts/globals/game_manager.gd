@@ -2,6 +2,8 @@ extends Node
 
 var game_menu_screen = preload("res://scenes/ui/game_menu_screen.tscn")
 var biofuel_menu
+var reward_machine_menu
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_menu"):
@@ -10,6 +12,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func register_biofuel_menu(menu_node):
 	biofuel_menu = menu_node
 
+func register_reward_machine_menu(menu_node):
+	reward_machine_menu = menu_node
+
+func open_reward_machine_menu(machine_component: RewardMachineComponent):
+	if reward_machine_menu:
+		reward_machine_menu.open_menu(machine_component)
 
 func open_biofuel_menu(machine_component: ProcessingMachineComponent):
 	if biofuel_menu:

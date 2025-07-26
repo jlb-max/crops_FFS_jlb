@@ -15,6 +15,7 @@ offset_bottom = 40.0
 script = ExtResource("1_eb5jc")
 
 [node name="InputItemsContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="Arrow" type="TextureRect" parent="."]
@@ -22,6 +23,7 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_vk5i4")
 
 [node name="OutputItemsContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="ConvertButton" type="Button" parent="."]

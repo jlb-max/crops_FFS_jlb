@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqg3k2c6eqa6m"]
+[gd_scene load_steps=9 format=3 uid="uid://cqg3k2c6eqa6m"]
 
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_e2vrk"]
 [ext_resource type="PackedScene" uid="uid://xs18jhgnkkjk" path="res://scenes/ui/emotes_panel.tscn" id="2_0kkfd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c76fptlwg8nin" path="res://scenes/ui/day_and_night_panel.tscn" id="4_gkbp4"]
 [ext_resource type="PackedScene" uid="uid://g2g0p7afvlyh" path="res://scenes/ui/recipe_detail_window.tscn" id="6_nwa5a"]
 [ext_resource type="PackedScene" uid="uid://dx4n3qvx1lahm" path="res://machines/biofuel/bio_fuel_converter_menu.tscn" id="7_ooiym"]
+[ext_resource type="PackedScene" uid="uid://bmwckryxuprqe" path="res://machines/ordinateur/RewardMachineMenu.tscn" id="8_ce4rh"]
 
 [node name="GameScreen" type="CanvasLayer"]
 
@@ -51,4 +52,7 @@ recipe_detail_window = NodePath("../RecipeDetailWindow")
 inventory_panel = NodePath("../InventoryPanel")
 
 [node name="BioFuelConverterMenu" parent="." instance=ExtResource("7_ooiym")]
+visible = false
+
+[node name="RewardMachineMenu" parent="." instance=ExtResource("8_ce4rh")]
 visible = false

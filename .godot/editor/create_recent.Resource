@@ -1,3 +1,4 @@
+CumulativeReward
 ItemData
 MachineRecipe
 Shader
