@@ -1,3 +1,4 @@
+ScrollContainer
 StaticBody2D
 SpinBox
 HBoxContainer
@@ -12,4 +13,3 @@ ProgressBar
 Label
 VBoxContainer
 PanelContainer
-TextureRect

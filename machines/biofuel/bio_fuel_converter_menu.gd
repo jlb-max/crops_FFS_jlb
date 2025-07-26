@@ -1,7 +1,7 @@
 extends PanelContainer
 
 # On garde uniquement les références aux noeuds qui existent VRAIMENT dans votre scène
-@onready var item_grid: GridContainer = $VBoxContainer/ItemGrid
+@onready var item_grid: GridContainer = $VBoxContainer/ScrollContainer/ItemGrid
 @onready var close_button: Button = $VBoxContainer/CloseButton
 
 var slot_scene = preload("res://machines/logic/machine_recipe_slot.tscn")
