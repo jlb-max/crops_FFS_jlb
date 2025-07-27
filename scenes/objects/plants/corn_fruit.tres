@@ -9,10 +9,10 @@ region = Rect2(80, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_bjd7b")
+damage = 1
+action_type = 0
 item_name = "Maïs"
 description = ""
 icon = SubResource("AtlasTexture_y2jcg")
 stackable = true
-damage = 1
-action_type = 0
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

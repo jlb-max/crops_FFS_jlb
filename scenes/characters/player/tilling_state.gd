@@ -26,6 +26,7 @@ func _on_enter() -> void:
 	elif player.player_direction == Vector2.DOWN:
 		animated_sprite_2d.play("tilling_front")
 	elif player.player_direction == Vector2.LEFT:
+		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.play("tilling_left")
 	else:
 		animated_sprite_2d.play("tilling_front")

@@ -44,6 +44,7 @@ shader_parameter/radius = 0.5
 shader_parameter/softness = 0.331
 
 [node name="TestSceneFFSAtelier" type="Node2D"]
+y_sort_enabled = true
 
 [node name="TestSceneSaveDataManagerComponent" parent="." instance=ExtResource("1_oqwly")]
 
@@ -77,8 +78,13 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_recgw")
 tile_set = ExtResource("11_hrpx3")
 
+[node name="Player" parent="GameTileMap" node_paths=PackedStringArray("game_tilemap") instance=ExtResource("17_hyl4j")]
+position = Vector2(152, 150)
+game_tilemap = NodePath("../Grass")
+
 [node name="Objects" type="TileMapLayer" parent="GameTileMap"]
-tile_map_data = PackedByteArray("AAAGAAwABgAAAAAABwALAAwABgAAAAAACAASAAgABgAAAAAACQA=")
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAALAAwABgAAAAAACAASAAgABgAAAAAACQAHAAMABgAAAAAAAwAJAAMABgAAAAAAAwALAAQABgAAAAAACgAEAAYABgAAAAAACgAGAAwABgAAAAAABwA=")
 tile_set = ExtResource("5_afnvc")
 
 [node name="CropFields" type="Node2D" parent="."]
@@ -95,10 +101,6 @@ tilled_soil_tilemap_layer = NodePath("../GameTileMap/TilledSoil")
 [node name="PlacableItemComponent" parent="." node_paths=PackedStringArray("game_tilemap", "objects_container") instance=ExtResource("16_f6ldn")]
 game_tilemap = NodePath("../GameTileMap/Grass")
 objects_container = NodePath("../GameTileMap/Grass")
-
-[node name="Player" parent="." node_paths=PackedStringArray("game_tilemap") instance=ExtResource("17_hyl4j")]
-position = Vector2(152, 150)
-game_tilemap = NodePath("../GameTileMap/Grass")
 
 [node name="GameScreen" parent="." instance=ExtResource("18_llvlu")]
 

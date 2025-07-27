@@ -127,7 +127,6 @@ metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
 
 [resource]
 script = ExtResource("2_ayohc")
-plant_name = "Gravitron"
 harvest_item = ExtResource("1_ulaau")
 growth_data = SubResource("Resource_mobbw")
 harvest_data = SubResource("Resource_wwcr4")
@@ -135,4 +134,7 @@ light_effect = SubResource("Resource_xvu6c")
 gravity_effect = SubResource("Resource_i3a4v")
 heat_effect = SubResource("Resource_el7a0")
 water_pulse_effect = SubResource("Resource_o3ujp")
+item_name = "Nouvel Objet"
+description = ""
+stackable = true
 metadata/_custom_type_script = "uid://b6isf51xji5ud"

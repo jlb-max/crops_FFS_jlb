@@ -11,10 +11,10 @@ region = Rect2(32, 64, 16, 16)
 
 [resource]
 script = ExtResource("1_0l0kr")
+damage = 1
+action_type = 0
 item_name = "Planche"
 description = ""
 icon = SubResource("AtlasTexture_wdlxi")
 stackable = true
-damage = 1
-action_type = 0
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

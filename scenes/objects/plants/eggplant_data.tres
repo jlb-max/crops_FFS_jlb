@@ -119,11 +119,13 @@ metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 
 [resource]
 script = ExtResource("2_l22ae")
-plant_name = "Aubergine"
 harvest_item = ExtResource("1_i8crl")
 growth_data = SubResource("Resource_q2cb8")
 harvest_data = SubResource("Resource_7cwxw")
 light_effect = SubResource("Resource_gg6gw")
 gravity_effect = SubResource("Resource_knfr2")
 heat_effect = SubResource("Resource_dywq2")
+item_name = "Nouvel Objet"
+description = ""
+stackable = true
 metadata/_custom_type_script = "uid://b6isf51xji5ud"

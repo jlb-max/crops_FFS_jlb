@@ -20,6 +20,7 @@ func _on_physics_process(_delta : float) -> void:
 	elif direction == Vector2.DOWN:
 		animated_sprite_2d.play("walk_front")
 	elif direction == Vector2.LEFT:
+		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.play("walk_left")
 		
 	if direction != Vector2.ZERO:

@@ -11,10 +11,10 @@ region = Rect2(0, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_xg5tq")
+damage = 1
+action_type = 2
 item_name = "Arrosoir"
 description = ""
 icon = SubResource("AtlasTexture_3xl7a")
 stackable = true
-damage = 1
-action_type = 2
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

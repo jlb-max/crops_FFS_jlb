@@ -127,7 +127,6 @@ metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
 
 [resource]
 script = ExtResource("1_3njbw")
-plant_name = "Maïs"
 harvest_item = ExtResource("1_ykp8u")
 growth_data = SubResource("Resource_jq51b")
 harvest_data = SubResource("Resource_msxl0")
@@ -135,4 +134,7 @@ light_effect = SubResource("Resource_5jqvi")
 gravity_effect = SubResource("Resource_tftjd")
 heat_effect = SubResource("Resource_u5sm4")
 water_pulse_effect = SubResource("Resource_sa8iu")
+item_name = "Nouvel Objet"
+description = ""
+stackable = true
 metadata/_custom_type_script = "uid://b6isf51xji5ud"

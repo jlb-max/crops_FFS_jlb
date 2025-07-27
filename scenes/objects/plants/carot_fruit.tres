@@ -11,10 +11,10 @@ region = Rect2(16, 32, 16, 16)
 
 [resource]
 script = ExtResource("1_1fcml")
+damage = 1
+action_type = 0
 item_name = "Aubergine"
 description = ""
 icon = SubResource("AtlasTexture_ut1l6")
 stackable = true
-damage = 1
-action_type = 0
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

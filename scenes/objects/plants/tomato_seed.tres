@@ -10,10 +10,10 @@ region = Rect2(2, 18, 12, 13)
 
 [resource]
 script = ExtResource("3_0tsln")
+damage = 1
+action_type = 3
+plant_to_grow = ExtResource("2_lmg6y")
 item_name = "Graine de Tomate"
 description = ""
 icon = SubResource("AtlasTexture_ydtw6")
 stackable = true
-damage = 1
-action_type = 3
-plant_to_grow = ExtResource("2_lmg6y")

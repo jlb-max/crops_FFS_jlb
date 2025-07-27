@@ -11,10 +11,10 @@ region = Rect2(112, 160, 16, 16)
 
 [resource]
 script = ExtResource("1_q2x2b")
+damage = 1
+action_type = 0
 item_name = "Biocarburant"
 description = ""
 icon = SubResource("AtlasTexture_tl32n")
 stackable = true
-damage = 1
-action_type = 0
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

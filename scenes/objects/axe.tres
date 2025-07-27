@@ -11,10 +11,10 @@ region = Rect2(16, 0, 16, 16)
 
 [resource]
 script = ExtResource("1_0btbj")
+damage = 1
+action_type = 4
 item_name = "Hache"
 description = ""
 icon = SubResource("AtlasTexture_7hkbi")
 stackable = true
-damage = 1
-action_type = 4
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

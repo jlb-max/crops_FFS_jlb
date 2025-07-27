@@ -12,10 +12,10 @@ region = Rect2(0, 208, 16, 16)
 
 [resource]
 script = ExtResource("2_kefo1")
+damage = 1
+action_type = 3
+plant_to_grow = ExtResource("1_xvm45")
 item_name = "Graine de Lumina"
 description = ""
 icon = SubResource("AtlasTexture_7kbjp")
 stackable = true
-damage = 1
-action_type = 3
-plant_to_grow = ExtResource("1_xvm45")

@@ -1,8 +1,8 @@
-CumulativeReward
 ItemData
+CraftingRecipe
+CumulativeReward
 MachineRecipe
 Shader
-CraftingRecipe
 TileSet
 PlantData
 Resource

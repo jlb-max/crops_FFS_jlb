@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_t2igm"]
 
 [node name="BioFuelConverterMenu" type="PanelContainer"]
+custom_minimum_size = Vector2(400, 300)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
