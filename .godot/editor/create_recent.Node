@@ -1,3 +1,5 @@
+Node2D
+TileMap
 CollisionShape2D
 Area2D
 TileMapLayer
@@ -11,4 +13,3 @@ GridContainer
 Node
 ProcessingMachineComponent
 Sprite2D
-Button

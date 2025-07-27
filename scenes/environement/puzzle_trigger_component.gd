@@ -4,72 +4,86 @@ extends Area2D
 @export var required_plant: PlantData
 @export var template_scene_to_apply: PackedScene
 @export var target_game_tilemap: Node2D
-@export var animation_delay_per_tile: float = 0.1
+@export var base_grass_tile_coords: Vector2i
+@export var grass_tile_source_id: int = 1
+
+
+# --- NOUVELLE VARIABLE ---
+# Le rayon de la zone à rafraîchir autour du pont (en nombre de tuiles)
+@export var terrain_update_radius: int = 5
 
 var listening_to_plant: PlantedCrop = null
 
 func _ready():
-	# --- CORRECTION : On utilise les signaux pour les Area2D ---
-	area_entered.connect(_on_area_entered)
-	area_exited.connect(_on_area_exited)
+    area_entered.connect(_on_area_entered)
+    area_exited.connect(_on_area_exited)
 
-# La fonction reçoit maintenant l'Area2D d'un des composants de la plante
 func _on_area_entered(area: Area2D):
-	# On vérifie si le "propriétaire" de la zone qui est entrée est une plante
-	if area.owner is PlantedCrop:
-		var plant = area.owner as PlantedCrop
-		
-		# On vérifie si c'est la bonne plante requise par le puzzle
-		if plant.plant_data == required_plant:
-			listening_to_plant = plant
-			listening_to_plant.growth_cycle_component.crop_harvesting.connect(on_puzzle_solved)
-			print("Déclencheur de puzzle : La bonne plante est dans la zone, en attente de maturité.")
+    if area.owner is PlantedCrop and area.owner.plant_data == required_plant:
+        listening_to_plant = area.owner as PlantedCrop
+        listening_to_plant.growth_cycle_component.crop_harvesting.connect(on_puzzle_solved)
 
 func _on_area_exited(area: Area2D):
-	# On vérifie si la plante qui sort est bien celle qu'on écoute
-	if area.owner == listening_to_plant:
-		if is_instance_valid(listening_to_plant) and listening_to_plant.growth_cycle_component.crop_harvesting.is_connected(on_puzzle_solved):
-			listening_to_plant.growth_cycle_component.crop_harvesting.disconnect(on_puzzle_solved)
-		listening_to_plant = null
-		print("Déclencheur de puzzle : La plante a été retirée.")
-
+    if area.owner == listening_to_plant:
+        if is_instance_valid(listening_to_plant) and listening_to_plant.growth_cycle_component.crop_harvesting.is_connected(on_puzzle_solved):
+            listening_to_plant.growth_cycle_component.crop_harvesting.disconnect(on_puzzle_solved)
+        listening_to_plant = null
 
 func on_puzzle_solved():
-	print("PUZZLE RÉSOLU ! Démarrage de l'animation du pont...")
-	if template_scene_to_apply and target_game_tilemap:
-		var template_instance = template_scene_to_apply.instantiate()
-		
-		# --- LIGNE À AJOUTER ---
-		# On ajoute temporairement le modèle à la scène pour pouvoir le lire
-		add_child(template_instance)
-		
-		# On lance l'animation
-		animate_bridge_creation(template_instance)
-		# On se détruit pour que le puzzle ne se déclenche qu'une fois
-		
+    if not template_scene_to_apply or not target_game_tilemap:
+        return
 
-func animate_bridge_creation(source_layer: TileMapLayer):
-	var water_layer: TileMapLayer = target_game_tilemap.find_child("Water")
-	var grass_layer: TileMapLayer = target_game_tilemap.find_child("Grass")
-	
-	if not water_layer or not grass_layer:
-		push_error("Impossible de trouver les couches Water ou Grass.")
-		return
+    var template_instance = template_scene_to_apply.instantiate() as TileMapLayer
+    var water_layer: TileMapLayer = target_game_tilemap.find_child("Water")
+    var grass_layer: TileMapLayer = target_game_tilemap.find_child("Grass")
+    
+    if not water_layer or not grass_layer:
+        push_error("Couches Water ou Grass introuvables.")
+        template_instance.queue_free()
+        return
+    
+    # --- ÉTAPE 1 : On construit le pont "brut" ---
+    var bridge_cells = template_instance.get_used_cells()
+    for cell in bridge_cells:
+        water_layer.erase_cell(cell)
+        grass_layer.set_cell(cell, grass_tile_source_id, base_grass_tile_coords)
 
-	var tween = create_tween()
-	tween.finished.connect(queue_free)
-	# --- CORRECTION : get_used_cells() n'a pas d'argument ---
-	var cells_to_build = source_layer.get_used_cells()
+    # --- ÉTAPE 2 : On attend une frame ---
+    await get_tree().process_frame
+    
+    # --- ÉTAPE 3 : On force la mise à jour des terrains ---
+    # On identifie toutes les tuiles à rafraîchir (le pont + ses voisins)
+    var cells_to_update = bridge_cells.duplicate()
+    for cell in bridge_cells:
+        for x in range(-1, 2):
+            for y in range(-1, 2):
+                cells_to_update.append(cell + Vector2i(x,y))
+    
+    # On "redessine" chaque tuile sur elle-même.
+    # Cet acte force Godot à regarder ses voisins et à choisir la bonne connexion.
+    for cell_to_update in cells_to_update:
+        var source_id = grass_layer.get_cell_source_id(cell_to_update)
+        if source_id != -1: # On ne met à jour que les tuiles qui existent
+            var atlas_coords = grass_layer.get_cell_atlas_coords(cell_to_update)
+            grass_layer.set_cell(cell_to_update, source_id, atlas_coords)
 
-	cells_to_build.sort_custom(func(a, b): return a.x < b.x)
+    template_instance.queue_free()
+    queue_free()
 
-	for cell in cells_to_build:
-		# --- CORRECTION : Ces fonctions ne prennent que les coordonnées ---
-		var source_id = source_layer.get_cell_source_id(cell)
-		var atlas_coords = source_layer.get_cell_atlas_coords(cell)
-		
-		tween.tween_callback(func():
-			water_layer.erase_cell(cell)
-			grass_layer.set_cell(cell, source_id, atlas_coords)
-		)
-		tween.tween_interval(animation_delay_per_tile)
+# --- NOUVELLE FONCTION DE MISE À JOUR ---
+func update_terrain_around_bridge(bridge_cells: Array, layer: TileMapLayer):
+    var cells_to_update = {} # Utiliser un dictionnaire pour éviter les doublons
+
+    # On prend chaque tuile du pont et on ajoute une zone autour d'elle
+    for cell in bridge_cells:
+        for x in range(-terrain_update_radius, terrain_update_radius + 1):
+            for y in range(-terrain_update_radius, terrain_update_radius + 1):
+                var update_pos = cell + Vector2i(x, y)
+                cells_to_update[update_pos] = true
+
+    # On force la mise à jour de toutes les tuiles dans la zone
+    for cell_to_update in cells_to_update.keys():
+        var source_id = layer.get_cell_source_id(cell_to_update)
+        if source_id != -1:
+            var atlas_coords = layer.get_cell_atlas_coords(cell_to_update)
+            layer.set_cell(cell_to_update, source_id, atlas_coords)
