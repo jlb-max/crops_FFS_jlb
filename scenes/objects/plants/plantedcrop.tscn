@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://p7n5n5kk4vjo"]
+[gd_scene load_steps=29 format=3 uid="uid://p7n5n5kk4vjo"]
 
 [ext_resource type="Script" uid="uid://mwgrq6ij5y2x" path="res://scenes/objects/plants/plantedcrop.gd" id="1_urelw"]
 [ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="2_p35mx"]
@@ -94,6 +94,8 @@ collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 0.3
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_uyutu"]
+
 [node name="Plantedcrop" type="Node2D" groups=["crops"]]
 script = ExtResource("1_urelw")
 
@@ -163,3 +165,11 @@ amount = 250
 lifetime = 1.3
 one_shot = true
 process_material = SubResource("ParticleProcessMaterial_uyutu")
+
+[node name="PuzzleComponent" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PuzzleComponent"]
+shape = SubResource("CircleShape2D_uyutu")
+debug_color = Color(0.941176, 0.92549, 0, 0.67451)

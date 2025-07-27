@@ -101,7 +101,6 @@ tile_map_data = PackedByteArray("AABq/4v/BQADAAMAAABx/6L/BQADAAMAAABz/43/BQADAAM
 tile_set = ExtResource("1_bdtp5")
 
 [node name="Player" parent="GameTileMap" node_paths=PackedStringArray("game_tilemap") instance=ExtResource("11_uasaq")]
-z_index = 0
 position = Vector2(-1365, -1596)
 game_tilemap = NodePath("../Grass")
 

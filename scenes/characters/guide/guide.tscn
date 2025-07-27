@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6snwhyvyjtcb"]
+[gd_scene load_steps=18 format=3 uid="uid://b6snwhyvyjtcb"]
 
 [ext_resource type="Script" uid="uid://bwoptsis24mv3" path="res://scenes/characters/guide/guide.gd" id="1_pdv8u"]
 [ext_resource type="Shader" uid="uid://dhasj5tbujfv6" path="res://scenes/characters/guide/replace_color.gdshader" id="1_rl4q2"]
-[ext_resource type="Texture2D" uid="uid://cqvck2bvic0d6" path="res://assets/game/characters/premium_charakter_spritesheet.png" id="2_g6y3g"]
 [ext_resource type="Resource" uid="uid://dbj6edmtqr777" path="res://scenes/objects/hoe.tres" id="2_rdkl4"]
 [ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="3_g6y3g"]
 [ext_resource type="Resource" uid="uid://r0mmp3aausrk" path="res://scenes/objects/watering_can.tres" id="3_tq85q"]
@@ -10,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cd0n4jrm0co4x" path="res://scenes/components/interactable_label_component.tscn" id="4_yvxhl"]
 [ext_resource type="Resource" uid="uid://bclleevjva4wm" path="res://scenes/objects/plants/tomato_seed.tres" id="5_temh0"]
 [ext_resource type="Resource" uid="uid://dfryw5ro6pd" path="res://scenes/objects/axe.tres" id="6_6tcs3"]
+[ext_resource type="Texture2D" uid="uid://bqqvae5xn2jh2" path="res://assets/game/characters/npc_idle.png" id="8_rdkl4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvxhl"]
 shader = ExtResource("1_rl4q2")
@@ -18,64 +18,36 @@ shader_parameter/original_1 = Color(0.462745, 0.427451, 0.666667, 1)
 shader_parameter/replace_0 = Color(0.470588, 0.823529, 0, 1)
 shader_parameter/replace_1 = Color(0, 0.360784, 0.94902, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pdv8u"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qnx84"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xo3ut"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7sry"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vv70q"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rdkl4"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(240, 0, 48, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tq85q"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(288, 0, 48, 48)
+atlas = ExtResource("8_rdkl4")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3cl1"]
-atlas = ExtResource("2_g6y3g")
-region = Rect2(336, 0, 48, 48)
+atlas = ExtResource("8_rdkl4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_temh0"]
+atlas = ExtResource("8_rdkl4")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tcs3"]
+atlas = ExtResource("8_rdkl4")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_temh0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pdv8u")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qnx84")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xo3ut")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d7sry")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vv70q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rdkl4")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_tq85q")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l3cl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_temh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tcs3")
 }],
 "loop": true,
 "name": &"idle",
@@ -99,7 +71,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_temh0")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.940477
+frame_progress = 0.26069
 
 [node name="InteractableComponent" parent="." instance=ExtResource("3_g6y3g")]
 position = Vector2(3, -7)

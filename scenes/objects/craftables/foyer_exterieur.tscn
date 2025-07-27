@@ -71,7 +71,7 @@ y_sort_enabled = true
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_fjl0i")
 autoplay = "default"
-frame_progress = 0.674876
+frame_progress = 0.796876
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ru6r1")

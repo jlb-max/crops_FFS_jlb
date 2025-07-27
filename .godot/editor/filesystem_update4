@@ -75,3 +75,7 @@ res://scenes/characters/player/chopping_state.gd
 res://scenes/characters/player/tilling_state.gd
 res://scenes/characters/player/walk_state.gd
 res://scenes/characters/player/watering_state.gd
+res://scenes/characters/guide/guide.tscn
+res://scenes/environement/PuzzleTriggerZone.tscn
+res://scenes/environement/bridge_template.tscn
+res://scenes/environement/puzzle_trigger_component.gd
