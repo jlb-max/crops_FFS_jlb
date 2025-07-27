@@ -109,3 +109,6 @@ res://scripts/globals/itemdata.gd
 res://scripts/globals/plantdata.gd
 res://scenes/components/crops_cursor_component.gd
 res://scenes/components/day_night_cycle_component.gd
+res://scenes/objects/plants/grape_data.tres
+res://scenes/objects/plants/grape_fruit.tres
+res://scenes/objects/plants/grape_seed.tres

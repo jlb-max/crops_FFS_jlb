@@ -127,7 +127,6 @@ metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
 
 [resource]
 script = ExtResource("2_yn436")
-plant_name = "Carote"
 harvest_item = ExtResource("1_ylrju")
 growth_data = SubResource("Resource_lih70")
 harvest_data = SubResource("Resource_xwpdj")
@@ -135,4 +134,7 @@ light_effect = SubResource("Resource_vdx34")
 gravity_effect = SubResource("Resource_st70y")
 heat_effect = SubResource("Resource_nq3bi")
 water_pulse_effect = SubResource("Resource_7l1vp")
+item_name = "Nouvel Objet"
+description = ""
+stackable = true
 metadata/_custom_type_script = "uid://b6isf51xji5ud"
