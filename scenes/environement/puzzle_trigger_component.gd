@@ -4,13 +4,6 @@ extends Area2D
 @export var required_plant: PlantData
 @export var template_scene_to_apply: PackedScene
 @export var target_game_tilemap: Node2D
-@export var base_grass_tile_coords: Vector2i
-@export var grass_tile_source_id: int = 1
-
-
-# --- NOUVELLE VARIABLE ---
-# Le rayon de la zone à rafraîchir autour du pont (en nombre de tuiles)
-@export var terrain_update_radius: int = 5
 
 var listening_to_plant: PlantedCrop = null
 
@@ -29,61 +22,75 @@ func _on_area_exited(area: Area2D):
             listening_to_plant.growth_cycle_component.crop_harvesting.disconnect(on_puzzle_solved)
         listening_to_plant = null
 
-func on_puzzle_solved():
+func on_puzzle_solved() -> void:
+    # ----------------------------------------------------------------------
+    # 0. Vérifications rapides
+    # ----------------------------------------------------------------------
     if not template_scene_to_apply or not target_game_tilemap:
         return
 
-    var template_instance = template_scene_to_apply.instantiate() as TileMapLayer
+    # ----------------------------------------------------------------------
+    # 1. Récupère les couches nécessaires
+    # ----------------------------------------------------------------------
+    var template: TileMapLayer = template_scene_to_apply.instantiate()
     var water_layer: TileMapLayer = target_game_tilemap.find_child("Water")
     var grass_layer: TileMapLayer = target_game_tilemap.find_child("Grass")
-    
+
     if not water_layer or not grass_layer:
         push_error("Couches Water ou Grass introuvables.")
-        template_instance.queue_free()
+        template.queue_free()
         return
-    
-    # --- ÉTAPE 1 : On construit le pont "brut" ---
-    var bridge_cells = template_instance.get_used_cells()
-    for cell in bridge_cells:
+
+    # ------------------------------------------------------------------
+    # 2. Construit la liste des cases à traiter  (pont + voisins)
+    # ------------------------------------------------------------------
+    var cell_set: Dictionary = {}
+    var template_cells: Array[Vector2i] = template.get_used_cells()
+
+    for cell: Vector2i in template_cells:
+        cell_set[cell] = true
+        for n: Vector2i in grass_layer.get_surrounding_cells(cell):
+            cell_set[n] = true
+
+    # -- conversion sûre vers Array[Vector2i] --------------------------
+    var bridge_cells: Array[Vector2i] = []
+    bridge_cells.assign(cell_set.keys())   # copy + typage OK
+
+    # ----------------------------------------------------------------------
+    # 3. Regroupe les cases du pont par (terrain_set, terrain)
+    #    -> obligatoire car set_cells_terrain_connect() ne gère qu’un terrain à la fois
+    # ----------------------------------------------------------------------
+    var by_terrain: Dictionary = {}
+    for cell: Vector2i in template_cells:
+        var td := template.get_cell_tile_data(cell)
+        if not td:
+            continue
+        var key := Vector2i(td.terrain_set, td.terrain)   # (x = set, y = terrain)
+        by_terrain[key] = by_terrain.get(key, []) + [cell]
+
+    # ----------------------------------------------------------------------
+    # 4. Efface d’abord toute case d’eau qui sera recouverte par le pont
+    # ----------------------------------------------------------------------
+    for cell: Vector2i in bridge_cells:
         water_layer.erase_cell(cell)
-        grass_layer.set_cell(cell, grass_tile_source_id, base_grass_tile_coords)
 
-    # --- ÉTAPE 2 : On attend une frame ---
-    await get_tree().process_frame
-    
-    # --- ÉTAPE 3 : On force la mise à jour des terrains ---
-    # On identifie toutes les tuiles à rafraîchir (le pont + ses voisins)
-    var cells_to_update = bridge_cells.duplicate()
-    for cell in bridge_cells:
-        for x in range(-1, 2):
-            for y in range(-1, 2):
-                cells_to_update.append(cell + Vector2i(x,y))
-    
-    # On "redessine" chaque tuile sur elle-même.
-    # Cet acte force Godot à regarder ses voisins et à choisir la bonne connexion.
-    for cell_to_update in cells_to_update:
-        var source_id = grass_layer.get_cell_source_id(cell_to_update)
-        if source_id != -1: # On ne met à jour que les tuiles qui existent
-            var atlas_coords = grass_layer.get_cell_atlas_coords(cell_to_update)
-            grass_layer.set_cell(cell_to_update, source_id, atlas_coords)
+    # ----------------------------------------------------------------------
+    # 5. Peint les terrains et laisse Godot recoller bords & coins
+    # ----------------------------------------------------------------------
+    for terrain_key: Vector2i in by_terrain.keys():
+        grass_layer.set_cells_terrain_connect(
+            by_terrain[terrain_key],   # cellules à peindre (pont)
+            terrain_key.x,             # terrain_set
+            terrain_key.y              # terrain_id
+        )
 
-    template_instance.queue_free()
-    queue_free()
+    # ----------------------------------------------------------------------
+    # 6. Force le rafraîchissement immédiat (optionnel mais sûr)
+    # ----------------------------------------------------------------------
+    grass_layer.update_internals()
 
-# --- NOUVELLE FONCTION DE MISE À JOUR ---
-func update_terrain_around_bridge(bridge_cells: Array, layer: TileMapLayer):
-    var cells_to_update = {} # Utiliser un dictionnaire pour éviter les doublons
-
-    # On prend chaque tuile du pont et on ajoute une zone autour d'elle
-    for cell in bridge_cells:
-        for x in range(-terrain_update_radius, terrain_update_radius + 1):
-            for y in range(-terrain_update_radius, terrain_update_radius + 1):
-                var update_pos = cell + Vector2i(x, y)
-                cells_to_update[update_pos] = true
-
-    # On force la mise à jour de toutes les tuiles dans la zone
-    for cell_to_update in cells_to_update.keys():
-        var source_id = layer.get_cell_source_id(cell_to_update)
-        if source_id != -1:
-            var atlas_coords = layer.get_cell_atlas_coords(cell_to_update)
-            layer.set_cell(cell_to_update, source_id, atlas_coords)
+    # ----------------------------------------------------------------------
+    # 7. Nettoyage
+    # ----------------------------------------------------------------------
+    template.queue_free()   # on n’a plus besoin du modèle
+    queue_free()            # le trigger s’auto‑détruit (facultatif)
