@@ -1,3 +1,4 @@
+#day_night_cycle_manager.gd
 extends Node
 
 const MINUTES_PER_DAY: int = 24 * 60

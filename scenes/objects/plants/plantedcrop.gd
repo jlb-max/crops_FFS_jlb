@@ -21,10 +21,6 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 @onready var water_sphere: Sprite2D = $WaterSphere
 @onready var water_burst_particles: GPUParticles2D = $WaterSphere/WaterBurstParticles
 
-# --------------------------------------------------------------------
-# Dans PlantedCrop.gd
-
-# Dans PlantedCrop.gd
 
 func _ready() -> void:
     if plant_data == null:
@@ -39,16 +35,14 @@ func _ready() -> void:
        wetness_overlay = SoilManager.wetness_overlay
 
     # --- 1. Initialisation de la Croissance ---
-    # On vérifie que les données de croissance existent avant de les utiliser
     if plant_data.growth_data:
-        # On lit depuis la sous-ressource
-        growth_cycle_component.days_per_stage = plant_data.growth_data.time_to_maturity
-        # On utilise le bon chemin pour les sprite_frames
+        # sprite_frames → détermine le nombre de stades
         growth_cycle_component.total_stages = plant_data.growth_data.sprite_frames.get_animation_names().size() - 1
-        # On assigne les animations à notre sprite
+
         animated_sprite.sprite_frames = plant_data.growth_data.sprite_frames
-    
-    growth_cycle_component.plant_data_ref = plant_data # Passe la référence pour les calculs de sensibilité
+
+        # passe simplement la référence (on n’écrit plus de variable locale)
+        growth_cycle_component.plant_data_ref = plant_data
 
     # --- 2. Initialisation des Données Générales ---
     animated_sprite.play("stage_0")
