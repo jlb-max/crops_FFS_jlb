@@ -79,3 +79,8 @@ res://scenes/characters/guide/guide.tscn
 res://scenes/environement/PuzzleTriggerZone.tscn
 res://scenes/environement/bridge_template.tscn
 res://scenes/environement/puzzle_trigger_component.gd
+res://scenes/environement/noise64_rg.tres
+res://scenes/objects/plants/tournesol_data.tres
+res://scenes/objects/plants/tournesol_fruit.tres
+res://scenes/objects/plants/tournesol_seed.tres
+res://scenes/test/test_scene_cropfields_FFS_carte_mobile.tscn
