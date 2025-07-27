@@ -86,3 +86,8 @@ res://scenes/objects/plants/tournesol_seed.tres
 res://scenes/test/test_scene_cropfields_FFS_carte_mobile.tscn
 res://scripts/globals/day_and_night_cycle_manager.gd
 res://scenes/objects/plants/growth_cycle_component.gd
+res://scripts/globals/plantdata.gd
+res://machines/ordinateur/monolithe_ancien.gd
+res://machines/ordinateur/vie_etrange.tscn
+res://scenes/characters/cow/cow.tscn
+res://scenes/characters/dog/dog.tscn

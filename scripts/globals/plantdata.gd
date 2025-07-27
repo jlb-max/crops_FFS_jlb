@@ -6,6 +6,7 @@ extends CollectibleData
 
 @export var harvest_item: ItemData
 
+@export var sprite_offset: Vector2 = Vector2.ZERO
 
 @export var growth_data: GrowthData
 @export var harvest_data: HarvestData

@@ -1,10 +1,10 @@
+AnimatedSprite2D
 Node2D
 TileMap
 CollisionShape2D
 Area2D
 TileMapLayer
 PointLight2D
-AnimatedSprite2D
 StaticBody2D
 ScrollContainer
 SpinBox
@@ -12,4 +12,3 @@ HBoxContainer
 GridContainer
 Node
 ProcessingMachineComponent
-Sprite2D

@@ -40,6 +40,8 @@ func _ready() -> void:
         growth_cycle_component.total_stages = plant_data.growth_data.sprite_frames.get_animation_names().size() - 1
 
         animated_sprite.sprite_frames = plant_data.growth_data.sprite_frames
+        animated_sprite.offset = plant_data.sprite_offset
+
 
         # passe simplement la référence (on n’écrit plus de variable locale)
         growth_cycle_component.plant_data_ref = plant_data

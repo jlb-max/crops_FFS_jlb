@@ -2,7 +2,7 @@
 extends StaticBody2D # Ou le type de votre noeud racine
 
 # --- Références aux Nœuds ---
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var interactable_component: InteractableComponent = $InteractableComponent
 @onready var interactable_label_component: Control = $InteractableLabelComponent
 @onready var reward_machine_component: RewardMachineComponent = $RewardMachineComponent

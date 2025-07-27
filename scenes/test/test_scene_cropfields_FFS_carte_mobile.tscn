@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://baihn11846lp"]
+[gd_scene load_steps=36 format=4 uid="uid://baihn11846lp"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_ryyc4"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_o2is4"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b3wo7lepqiie6" path="res://scenes/environement/PuzzleTriggerZone.tscn" id="13_ecwk0"]
 [ext_resource type="Resource" uid="uid://bgc3ymb4tf8v8" path="res://scenes/objects/plants/corn_data.tres" id="14_viaxs"]
 [ext_resource type="PackedScene" uid="uid://7pxvrc0bljka" path="res://scenes/environement/bridge_template.tscn" id="15_nhdkp"]
+[ext_resource type="PackedScene" uid="uid://cruhxvhfs6l1n" path="res://scenes/characters/dog/dog.tscn" id="16_5stmf"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="16_whdr6"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="17_hual4"]
 [ext_resource type="PackedScene" uid="uid://hylmhugngmrk" path="res://scenes/components/crops_cursor_component.tscn" id="18_x6csg"]
@@ -88,7 +89,7 @@ game_tilemap = NodePath("../Grass")
 
 [node name="Objects" type="TileMapLayer" parent="GameTileMap"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAALAAwABgAAAAAACAASAAgABgAAAAAACQAHAAMABgAAAAAAAwAJAAMABgAAAAAAAwALAAQABgAAAAAACgAEAAYABgAAAAAACgAGAAwABgAAAAAABwA=")
+tile_map_data = PackedByteArray("AAALAAwABgAAAAAACAASAAgABgAAAAAACQAHAAMABgAAAAAAAwAJAAMABgAAAAAAAwALAAQABgAAAAAACgAEAAYABgAAAAAACgAGAAwABgAAAAAABwAQAA4ABgAAAAAACwA=")
 tile_set = ExtResource("5_mdwd5")
 
 [node name="PuzzleTriggerZone" parent="GameTileMap" node_paths=PackedStringArray("target_game_tilemap") instance=ExtResource("13_ecwk0")]
@@ -96,6 +97,9 @@ position = Vector2(83, 227)
 required_plant = ExtResource("14_viaxs")
 template_scene_to_apply = ExtResource("15_nhdkp")
 target_game_tilemap = NodePath("..")
+
+[node name="Cow" parent="GameTileMap" instance=ExtResource("16_5stmf")]
+position = Vector2(169, 238)
 
 [node name="CropFields" type="Node2D" parent="."]
 
