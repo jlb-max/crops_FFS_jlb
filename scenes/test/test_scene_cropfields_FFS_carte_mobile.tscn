@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://baihn11846lp"]
+[gd_scene load_steps=37 format=4 uid="uid://baihn11846lp"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_ryyc4"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_o2is4"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cruhxvhfs6l1n" path="res://scenes/characters/dog/dog.tscn" id="16_5stmf"]
 [ext_resource type="PackedScene" uid="uid://c1ghyac311p4a" path="res://scenes/components/field_cursor_component.tscn" id="16_whdr6"]
 [ext_resource type="Script" uid="uid://dvb88s6rvkdxg" path="res://scenes/components/field_cursor_component.gd" id="17_hual4"]
+[ext_resource type="PackedScene" uid="uid://3eh2mt7ohqtl" path="res://scenes/space/sphere_glow.tscn" id="17_scces"]
 [ext_resource type="PackedScene" uid="uid://hylmhugngmrk" path="res://scenes/components/crops_cursor_component.tscn" id="18_x6csg"]
 [ext_resource type="Script" uid="uid://c7so78xdy58vn" path="res://scenes/components/crops_cursor_component.gd" id="19_vkhnr"]
 [ext_resource type="PackedScene" uid="uid://d2utrrlned6yw" path="res://scenes/components/placable_item_component.tscn" id="20_peswl"]
@@ -100,6 +101,10 @@ target_game_tilemap = NodePath("..")
 
 [node name="Cow" parent="GameTileMap" instance=ExtResource("16_5stmf")]
 position = Vector2(169, 238)
+
+[node name="SphereGlow" parent="GameTileMap" instance=ExtResource("17_scces")]
+position = Vector2(83, 227)
+scale = Vector2(0.05, 0.05)
 
 [node name="CropFields" type="Node2D" parent="."]
 

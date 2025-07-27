@@ -91,3 +91,8 @@ res://machines/ordinateur/monolithe_ancien.gd
 res://machines/ordinateur/vie_etrange.tscn
 res://scenes/characters/cow/cow.tscn
 res://scenes/characters/dog/dog.tscn
+res://scenes/objects/trees/small_tree.tscn
+res://scenes/objects/trees/large_tree.tscn
+res://scenes/objects/rocks/rock.tscn
+res://scenes/objects/rocks/stone.tscn
+res://scenes/space/sphere_glow.tscn

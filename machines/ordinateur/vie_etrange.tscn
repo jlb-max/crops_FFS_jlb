@@ -79,7 +79,7 @@ y_sort_enabled = true
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_tbtwb")
 autoplay = "default"
-frame_progress = 0.613611
+frame_progress = 0.948277
 
 [node name="InteractableComponent" parent="." instance=ExtResource("3_a2tfs")]
 

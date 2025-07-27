@@ -1,7 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://es2on243oiib"]
 
 [ext_resource type="Shader" uid="uid://bx4d7ah5era7e" path="res://scenes/objects/shake.gdshader" id="1_bntui"]
-[ext_resource type="Texture2D" uid="uid://bmmtsl5jahgp0" path="res://assets/game/objects/mushroom_flowers_stones.png" id="1_f5itc"]
 [ext_resource type="Script" uid="uid://bjnluuj7m34vq" path="res://scenes/objects/rocks/rock.gd" id="2_bntui"]
 [ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="3_8i8v8"]
 [ext_resource type="Resource" uid="uid://tm2vgs752rm6" path="res://scenes/objects/rocks/stone.tres" id="4_8i8v8"]
@@ -13,9 +12,12 @@ shader = ExtResource("1_bntui")
 shader_parameter/shake_intensity = 0.0
 shader_parameter/shake_speed = 20.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bntui"]
+load_path = "res://.godot/imported/PC _ Computer - Stardew Valley - Environment - Mines.png-755395336585547a0dcdc4da4929e421.ctex"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ms1l0"]
-atlas = ExtResource("1_f5itc")
-region = Rect2(80, 16, 16, 16)
+atlas = SubResource("CompressedTexture2D_bntui")
+region = Rect2(192, 16, 16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ab37s"]
 radius = 4.12311

@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://1ba8mrtswdvh"]
 
-[ext_resource type="Texture2D" uid="uid://cb4sjd3lforv3" path="res://assets/game/objects/trees_stumps_bushes.png" id="1_a8qts"]
 [ext_resource type="Shader" uid="uid://bx4d7ah5era7e" path="res://scenes/objects/shake.gdshader" id="1_w057i"]
 [ext_resource type="Script" uid="uid://b0v5qyub6s56e" path="res://scenes/objects/trees/small_tree.gd" id="2_g5iuu"]
+[ext_resource type="Texture2D" uid="uid://clupy5snr3vsl" path="res://assets/game/objects/new planet/PC _ Computer - Stardew Valley - Environment - Trees.png" id="2_skbjc"]
 [ext_resource type="PackedScene" uid="uid://1wyysx5dad3u" path="res://scenes/components/hurt_component.tscn" id="2_xyb6m"]
 [ext_resource type="PackedScene" uid="uid://vp158f76aul3" path="res://scenes/components/damage_component.tscn" id="3_au4vd"]
 [ext_resource type="Resource" uid="uid://d1y4wuo6h4v7j" path="res://scenes/objects/trees/small_log.tres" id="4_skbjc"]
@@ -13,15 +13,15 @@ shader = ExtResource("1_w057i")
 shader_parameter/shake_intensity = 0.0
 shader_parameter/shake_speed = 20.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_skbjc"]
-atlas = ExtResource("1_a8qts")
-region = Rect2(0, 0, 16, 29)
+[sub_resource type="AtlasTexture" id="AtlasTexture_elu1k"]
+atlas = ExtResource("2_skbjc")
+region = Rect2(0, 96, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_elu1k"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_skbjc")
+"texture": SubResource("AtlasTexture_elu1k")
 }],
 "loop": true,
 "name": &"default",
