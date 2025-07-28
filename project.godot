@@ -30,6 +30,7 @@ CropManager="*res://scripts/globals/CropManager.gd"
 WeatherManager="*res://scripts/globals/weather_manager.gd"
 CraftingManager="*res://crafting/crafting_manager.gd"
 MachineRecipeManager="*res://scripts/globals/machine_recipe_manager.gd"
+EnvironmentManager="*res://scripts/globals/EnvironmentManager.gd"
 
 [display]
 

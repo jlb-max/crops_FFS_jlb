@@ -128,6 +128,7 @@ metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
 [resource]
 script = ExtResource("2_ayohc")
 harvest_item = ExtResource("1_ulaau")
+sprite_offset = Vector2(0, 0)
 growth_data = SubResource("Resource_mobbw")
 harvest_data = SubResource("Resource_wwcr4")
 light_effect = SubResource("Resource_xvu6c")

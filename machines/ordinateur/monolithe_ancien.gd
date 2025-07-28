@@ -6,6 +6,8 @@ extends StaticBody2D # Ou le type de votre noeud racine
 @onready var interactable_component: InteractableComponent = $InteractableComponent
 @onready var interactable_label_component: Control = $InteractableLabelComponent
 @onready var reward_machine_component: RewardMachineComponent = $RewardMachineComponent
+@onready var aura: ShipAuraComponent = $Aura
+
 
 # --- Variables ---
 var _player_is_nearby: bool = false

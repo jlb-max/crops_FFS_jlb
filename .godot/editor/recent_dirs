@@ -1,22 +1,22 @@
+res://scenes/space
+res://scenes/components
+res://scripts/globals
+res://assets/game/ui/UI Sprites
+res://scenes/characters/player
 res://assets/game/objects/new planet
 res://assets/game/objects/crops_2
 res://scenes/test
 res://scenes/environement
 res://assets/game/characters
 res://scenes/objects/craftables
-res://scripts/globals
 res://machines/biofuel
 res://machines/ordinateur
 res://assets/game/objects/Items
 res://machines/atelier
-res://assets/game/ui/UI Sprites
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
 res://Tilesets
-res://scenes/space
 res://scenes/objects/plants
-res://scenes/components
 res://assets/game/objects
 res://crafting/recipes
 res://scenes/ui
-res://crafting
