@@ -1,10 +1,7 @@
 class_name ShipAuraComponent
-extends Area2D
+extends EffectSource2D
 
-@export var effect_radius  : float = 200.0      # px
-@export var heat_power     : float = 6.0        # > pertes globales
-@export var oxygen_power   : float = 6.0
-@export var gravity_power  : float = 6.0
+
 
 func _ready() -> void:
     EnvironmentManager.register(self)

@@ -71,3 +71,6 @@ res://machines/ordinateur/monolithe_ancien.tscn
 res://scripts/globals/EnvironmentManager.gd
 res://machines/ordinateur/monolithe_ancien.gd
 res://scenes/characters/player/player_status_component.gd
+res://scripts/globals/effect_source_2d.gd
+res://scenes/components/plant_aura_component.gd
+res://scenes/objects/plants/heatcomponent.gd

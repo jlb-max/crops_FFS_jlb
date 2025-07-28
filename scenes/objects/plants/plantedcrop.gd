@@ -1,9 +1,10 @@
 class_name PlantedCrop
 extends Node2D
-
 # --------------------------------------------------------------------
 @export var plant_data : PlantData
 var wetness_overlay    : TileMapLayer        # assignée par le cursor
+
+
 
 # --- Références internes (onready) ----------------------------------
 @onready var animated_sprite      : AnimatedSprite2D   = $AnimatedSprite2D
@@ -226,9 +227,17 @@ func on_growth_stage_changed(stage: int) -> void:
     if animated_sprite.sprite_frames.has_animation(anim):
         animated_sprite.play(anim)
 
-    # ---------- Gravité : ne s’active qu’au stade final -----------------
+    # Gravité : ne s’active qu’au stade final
     if stage == growth_cycle_component.total_stages - 1:
         flowering_particles.emitting = true
+        
+    if stage == growth_cycle_component.total_stages - 1:
+        flowering_particles.emitting = true
+
+    # plus besoin de PlantAuraComponent :
+    if plant_data.heat_effect.emits_heat:
+        heat_component.init(plant_data.heat_effect)
+        
         
 
 # --------------------------------------------------------------------
@@ -267,6 +276,8 @@ func on_crop_harvesting() -> void:
 # 6. Nettoyage quand la plante est supprimée
 # --------------------------------------------------------------------
 func _notification(what: int) -> void:
+    
+        
     if what == NOTIFICATION_PREDELETE:
         # On ajoute la même vérification ici
         if gravity_fx:

@@ -7,23 +7,19 @@ extends CanvasLayer
 @onready var gauge_grv: TextureProgressBar = $HUDContainer/HBox/GaugeGravity
 
 
-
+var player_status : PlayerStatusComponent
 
 
 func _ready() -> void:
-	assert(gauge_hp,   "GaugeHealth introuvable")
-	assert(gauge_o2,   "GaugeOxygen introuvable")
-	assert(gauge_tmp,  "GaugeHeat introuvable")
-	assert(gauge_grv,  "GaugeGravity introuvable")
-
-	var status := get_tree().get_first_node_in_group("player_status") \
-		as PlayerStatusComponent
-	if status:
-		status.status_changed.connect(_on_status)
-
+	# 1. récupère le composant dans le groupe
+	player_status = get_tree().get_first_node_in_group("player_status") \
+					as PlayerStatusComponent
+	if player_status:
+		player_status.status_changed.connect(_on_status)
 
 func _on_status(h, o2, t, g) -> void:
 	gauge_hp.value  = h
 	gauge_o2.value  = o2
-	gauge_tmp.value = t
+	# ratio 0-1 -> utilise le helper de gauge.gd
+	gauge_tmp.set_ratio( t / player_status.max_heat )
 	gauge_grv.value = g
