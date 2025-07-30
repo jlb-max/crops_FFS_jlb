@@ -1,3 +1,4 @@
+AuraComponent
 CollisionShape2D
 Area2D
 TextureProgressBar
@@ -11,4 +12,3 @@ PointLight2D
 StaticBody2D
 ScrollContainer
 SpinBox
-GridContainer

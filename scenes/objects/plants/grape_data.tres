@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=23 format=3 uid="uid://cuanvvl88ea6k"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=25 format=3 uid="uid://cuanvvl88ea6k"]
 
 [ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_3c26t"]
 [ext_resource type="Script" uid="uid://cp0l8mepclpvf" path="res://scripts/globals/GrowthData.gd" id="2_gl885"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://uuuadwct7gp2" path="res://scripts/globals/HarvestData.gd" id="6_lqyns"]
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="7_0xb6w"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="8_gbabw"]
+[ext_resource type="Script" uid="uid://1o5didd3c6kg" path="res://scripts/globals/OxygenEffectData.gd" id="8_gl885"]
 [ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="9_4lg5x"]
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="9_11p3o"]
 
@@ -129,6 +130,14 @@ shimmer_min_factor = 0.8
 shimmer_max_factor = 1.2
 metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 
+[sub_resource type="Resource" id="Resource_4lg5x"]
+script = ExtResource("8_gl885")
+emits_oxygen = true
+oxygen_power = 8.0
+oxygen_radius = 128.0
+oxygen_sensitivity = 0.0
+metadata/_custom_type_script = "uid://1o5didd3c6kg"
+
 [sub_resource type="Resource" id="Resource_pecr5"]
 script = ExtResource("9_4lg5x")
 has_water_pulse_effect = false
@@ -146,6 +155,7 @@ light_effect = SubResource("Resource_gg6gw")
 gravity_effect = SubResource("Resource_knfr2")
 heat_effect = SubResource("Resource_dywq2")
 water_pulse_effect = SubResource("Resource_pecr5")
+oxygen_effect = SubResource("Resource_4lg5x")
 item_name = "Raisin"
 description = ""
 stackable = true

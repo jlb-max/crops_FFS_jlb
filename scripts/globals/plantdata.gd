@@ -14,3 +14,4 @@ extends CollectibleData
 @export var gravity_effect: GravityEffectData
 @export var heat_effect: HeatEffectData
 @export var water_pulse_effect: WaterPulseEffectData
+@export var oxygen_effect : OxygenEffectData

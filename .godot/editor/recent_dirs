@@ -1,3 +1,4 @@
+res://scenes/objects/plants
 res://scenes/space
 res://scenes/components
 res://scripts/globals
@@ -16,7 +17,6 @@ res://machines/atelier
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
 res://Tilesets
-res://scenes/objects/plants
 res://assets/game/objects
 res://crafting/recipes
 res://scenes/ui

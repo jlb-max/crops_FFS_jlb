@@ -10,7 +10,7 @@
 [ext_resource type="Shader" uid="uid://bm3s4ueuilofj" path="res://scenes/objects/lightemitter.gdshader" id="8_2wwbq"]
 [ext_resource type="Shader" uid="uid://cri82b3cif8tx" path="res://scenes/objects/plants/dique_gravity.gdshader" id="10_l0xxe"]
 [ext_resource type="Texture2D" uid="uid://bq0gkk5rkk06e" path="res://assets/game/tilesets/ground tiles/disque_gravite.png" id="11_25r6l"]
-[ext_resource type="Script" uid="uid://dtd4rxgnd770l" path="res://scenes/objects/plants/heatcomponent.gd" id="11_l0xxe"]
+[ext_resource type="Script" uid="uid://dtd4rxgnd770l" path="res://scenes/objects/plants/aura_component.gd" id="11_l0xxe"]
 [ext_resource type="Material" uid="uid://bfefx2fps4a8d" path="res://scenes/objects/plants/HeatHazeMaterial.tres" id="12_25r6l"]
 [ext_resource type="Shader" uid="uid://b8uv8bus7bama" path="res://scenes/objects/plants/WaterSphereShader.gdshader" id="14_qqpvx"]
 
@@ -136,10 +136,11 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_uyutu")
 texture = ExtResource("11_25r6l")
 
-[node name="HeatComponent" type="Area2D" parent="."]
+[node name="AuraComponent" type="Area2D" parent="."]
 script = ExtResource("11_l0xxe")
+metadata/_custom_type_script = "uid://dtd4rxgnd770l"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeatComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraComponent"]
 shape = SubResource("CircleShape2D_25r6l")
 
 [node name="HeatWarp" type="ColorRect" parent="."]

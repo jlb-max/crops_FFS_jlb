@@ -26,8 +26,12 @@ func get_local_effects(pos: Vector2) -> Dictionary:
     var oxygen  : float = BASE_OXY_LOSS
     var gravity : float = BASE_GRAV_IMBALANCE
 
+    var dH : float = 0.0
+    var dO : float = 0.0
+    var dG : float = 0.0
+
     if DEBUG_ENV:
-        print()   # ligne vide pour aérer
+        print()
 
     for s in _sources:
         if not s.is_inside_tree():
@@ -36,19 +40,24 @@ func get_local_effects(pos: Vector2) -> Dictionary:
         if d > s.effect_radius:
             continue
 
-        var t      : float = d / s.effect_radius
-        var factor : float = 1.0 - t * t        # décroissance quadratique
+        var factor : float = 1.0 - (d / s.effect_radius) ** 2
 
-        heat    += s.heat_power    * factor
-        oxygen  += s.oxygen_power  * factor
-        gravity += s.gravity_power * factor
+        var dh := s.heat_power    * factor
+        var do := s.oxygen_power  * factor
+        var dg := s.gravity_power * factor
+
+        heat    += dh
+        oxygen  += do
+        gravity += dg
+
+        dH += dh;  dO += do;  dG += dg   # <– cumul
 
         if DEBUG_ENV:
-            print("%-12s  d=%6.1f  f=%4.2f  heat+=%6.1f"
-                % [s.name, d, factor,  s.heat_power * factor])
-    # ---- résumé ----------------------------------------------------
+            print("%-12s  d=%6.1f  f=%4.2f  ΔH=%6.1f  ΔO₂=%6.1f  ΔG=%5.1f"
+                  % [s.name, d, factor, dh, do, dg])
+
     if DEBUG_ENV:
-        print("eff.heat = %8.2f   eff.o2 = %6.2f   eff.grav = %6.2f"
-            % [heat, oxygen, gravity])
+        print("eff.heat = %6.2f   eff.o2 = %6.2f   eff.grav = %6.2f"
+              % [dH, dO, dG])
 
     return {heat = heat, oxygen = oxygen, gravity = gravity}

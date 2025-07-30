@@ -16,7 +16,9 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 @onready var light_emitter        : PointLight2D       = $LightEmitter
 @onready var gravity_fx : BackBufferCopy = $GravityFX
 @onready var gravity_warp : Sprite2D = $GravityWarp
-@onready var heat_component: HeatComponent = $HeatComponent
+@onready var aura_component: AuraComponent = $AuraComponent
+
+
 @onready var heat_warp: ColorRect = $HeatWarp
 @onready var flame_particles: GPUParticles2D = $FlameParticles
 @onready var water_sphere: Sprite2D = $WaterSphere
@@ -84,11 +86,11 @@ func _ready() -> void:
         _start_pulse()
     
     # Effet de Chaleur
-    heat_component.visible = false
+    aura_component.visible = false
     heat_warp.visible = false
     flame_particles.emitting = false
     if plant_data.heat_effect and plant_data.heat_effect.emits_heat:
-        heat_component.init(plant_data.heat_effect)
+        aura_component.init(plant_data.heat_effect)
         
         flame_particles.emitting = true
         var material = flame_particles.process_material as ParticleProcessMaterial
@@ -231,12 +233,14 @@ func on_growth_stage_changed(stage: int) -> void:
     if stage == growth_cycle_component.total_stages - 1:
         flowering_particles.emitting = true
         
-    if stage == growth_cycle_component.total_stages - 1:
-        flowering_particles.emitting = true
 
-    # plus besoin de PlantAuraComponent :
-    if plant_data.heat_effect.emits_heat:
-        heat_component.init(plant_data.heat_effect)
+    if aura_component and not aura_component._registered:
+            aura_component.init(
+                plant_data.heat_effect,
+                plant_data.gravity_effect,
+                plant_data.oxygen_effect   # nouvelle prop
+            )
+            aura_component.name = "%s_Aura" % plant_data.resource_name
         
         
 
