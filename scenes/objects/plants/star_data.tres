@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=21 format=3 uid="uid://e1sg8hu6p87x"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=25 format=3 uid="uid://e1sg8hu6p87x"]
 
 [ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_8f0mn"]
 [ext_resource type="Resource" uid="uid://cu13fr1wekvwu" path="res://scenes/objects/plants/star_fruit.tres" id="1_e7cpb"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://uuuadwct7gp2" path="res://scripts/globals/HarvestData.gd" id="4_von5d"]
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_iurbg"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_vc0qe"]
+[ext_resource type="Script" uid="uid://1o5didd3c6kg" path="res://scripts/globals/OxygenEffectData.gd" id="9_vc0qe"]
+[ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="11_vl1di"]
 
 [sub_resource type="Resource" id="Resource_vl1di"]
 script = ExtResource("1_8f0mn")
@@ -117,6 +119,21 @@ shimmer_min_factor = 0.8
 shimmer_max_factor = 1.2
 metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 
+[sub_resource type="Resource" id="Resource_5yy7f"]
+script = ExtResource("9_vc0qe")
+emits_oxygen = false
+oxygen_power = 1.0
+oxygen_radius = 64.0
+oxygen_sensitivity = 0.0
+metadata/_custom_type_script = "uid://1o5didd3c6kg"
+
+[sub_resource type="Resource" id="Resource_441lb"]
+script = ExtResource("11_vl1di")
+has_water_pulse_effect = false
+pulse_radius = 1
+pulse_duration = 3.0
+metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
+
 [resource]
 script = ExtResource("2_buyi8")
 harvest_item = ExtResource("1_e7cpb")
@@ -126,6 +143,8 @@ harvest_data = SubResource("Resource_ish6r")
 light_effect = SubResource("Resource_qjutw")
 gravity_effect = SubResource("Resource_vl1di")
 heat_effect = SubResource("Resource_5akck")
+water_pulse_effect = SubResource("Resource_441lb")
+oxygen_effect = SubResource("Resource_5yy7f")
 item_name = "Nouvel Objet"
 description = ""
 stackable = true

@@ -6,6 +6,8 @@ extends Node
 # ------------------------------------------------------------------
 const DEBUG_ENV       : bool  = true      # activer / désactiver le log
 const DEBUG_INTERVAL  : int   = 1000      # durée entre 2 dumps (ms)
+const DEBUG_DETAILS  : bool  = false  # ← changez à true pour le TOP N
+const DEBUG_TOP_N    : int   = 5      # n-b de sources affichées
 
 # pertes de base quand il n’y a AUCUNE source
 const BASE_HEAT_LOSS      : float = -2.0
@@ -74,13 +76,17 @@ func get_local_effects(pos: Vector2) -> Dictionary:
     if DEBUG_ENV:
         var now := Time.get_ticks_msec()
         if now - _last_dump_ms >= DEBUG_INTERVAL:
-            for line in _debug_accum:
-                print(line)
+            if DEBUG_DETAILS and DEBUG_TOP_N > 0:
+                # on trie les sources par distance croissante (les plus « influentes »)
+                _debug_accum.sort_custom(func(a,b):
+                    return float(a.split()[1]) < float(b.split()[1]))   # tri sur la 2ᵉ colonne « dist »
+                _debug_accum = _debug_accum.slice(0, DEBUG_TOP_N)
+                for line in _debug_accum:
+                    print(line)
 
-            print("Σ ΔH=%6.2f  Σ ΔO₂=%6.2f  Σ ΔG=%6.2f"
-                  % [dH, dO, dG])
+            print("Σ ΔH=%6.2f  Σ ΔO₂=%6.2f  Σ ΔG=%6.2f    (sources actives : %d)"
+                % [dH, dO, dG, _sources.size()])
             print("-".repeat(54))
-
             _debug_accum.clear()
             _last_dump_ms = now
     # --------------------------------------------------------------------------
