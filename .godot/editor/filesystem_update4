@@ -68,3 +68,4 @@ res://scenes/ui/Gauge.tscn
 res://machines/ordinateur/monolithe_ancien.tscn
 res://scenes/space/aura.tscn
 res://scripts/globals/EnvironmentManager.gd
+res://scenes/objects/plants/growth_cycle_component.gd

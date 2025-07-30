@@ -29,6 +29,13 @@ func _ready() -> void:
     if plant_data == null:
         queue_free(); return
     
+    if aura_component:                               # ← existe dans la scène
+        aura_component.init(
+            plant_data.heat_effect,
+            plant_data.gravity_effect,
+            plant_data.oxygen_effect)               # nouvelle propriété
+        aura_component.name = "%s_Aura" % plant_data.resource_name
+    
     var pmat := water_burst_particles.process_material as ParticleProcessMaterial
     if pmat:
         pmat.direction = Vector3(1, 0, 0)   # horizontale
@@ -234,14 +241,7 @@ func on_growth_stage_changed(stage: int) -> void:
         flowering_particles.emitting = true
         
 
-    if aura_component and not aura_component._registered:
-            aura_component.init(
-                plant_data.heat_effect,
-                plant_data.gravity_effect,
-                plant_data.oxygen_effect   # nouvelle prop
-            )
-            aura_component.name = "%s_Aura" % plant_data.resource_name
-        
+       
         
 
 # --------------------------------------------------------------------

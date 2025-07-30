@@ -133,7 +133,7 @@ metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 [sub_resource type="Resource" id="Resource_4lg5x"]
 script = ExtResource("8_gl885")
 emits_oxygen = true
-oxygen_power = 8.0
+oxygen_power = 20.0
 oxygen_radius = 128.0
 oxygen_sensitivity = 0.0
 metadata/_custom_type_script = "uid://1o5didd3c6kg"
