@@ -31,6 +31,7 @@ WeatherManager="*res://scripts/globals/weather_manager.gd"
 CraftingManager="*res://crafting/crafting_manager.gd"
 MachineRecipeManager="*res://scripts/globals/machine_recipe_manager.gd"
 EnvironmentManager="*res://scripts/globals/EnvironmentManager.gd"
+GameConfig="*res://scripts/globals/game_config.gd"
 
 [display]
 
@@ -62,6 +63,7 @@ folder_colors={
 
 navigation_polygon_source_geometry_group=""
 player=""
+ship_anchor="s/p fainted teleport"
 
 [input]
 

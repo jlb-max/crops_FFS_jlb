@@ -4,3 +4,7 @@
 
 [node name="StatusComponent" type="Node"]
 script = ExtResource("1_xv4i0")
+max_health = null
+max_oxygen = null
+max_heat = null
+max_gravity = null

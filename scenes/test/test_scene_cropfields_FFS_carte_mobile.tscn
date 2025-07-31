@@ -125,6 +125,9 @@ objects_container = NodePath("../GameTileMap/Grass")
 
 [node name="TestSceneEnableToolButtonsComponent" parent="." instance=ExtResource("22_imqm7")]
 
+[node name="ShipAnchor" type="Node2D" parent="." groups=["ship_anchor"]]
+position = Vector2(295, 175)
+
 [node name="GroundLoot" parent="." instance=ExtResource("23_bol5m")]
 position = Vector2(100, 97)
 item_data = ExtResource("24_0fg6g")

@@ -1,3 +1,4 @@
+Node2D
 AuraComponent
 CollisionShape2D
 Area2D
@@ -5,7 +6,6 @@ TextureProgressBar
 HBoxContainer
 MarginContainer
 AnimatedSprite2D
-Node2D
 TileMap
 TileMapLayer
 PointLight2D

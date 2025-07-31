@@ -22,14 +22,13 @@ res://machines/recipes/planche_recipe.tres
 res://machines/ordinateur/recompense_palier_2.tres
 res://Tilesets/game_tile_set.tres
 res://scenes/ui/RainShaderMaterial.tres
-res://scenes/objects/plants/aura_component.gd
 res://Tilesets/water.shader.gdshader
 res://scenes/objects/weting.gdshader
 res://assets/game/tilesets/ground tiles/wetness_tileset.tres
-res://scenes/objects/lightemitter.gdshader
-res://scenes/objects/plants/dique_gravity.gdshader
 res://scenes/objects/plants/HeatHaze.gdshader
 res://scenes/objects/plants/HeatHazeMaterial.tres
+res://scenes/objects/lightemitter.gdshader
+res://scenes/objects/plants/dique_gravity.gdshader
 res://scenes/objects/plants/WaterSphereShader.gdshader
 res://scenes/objects/plants/corn_data.tres
 res://scenes/objects/plants/corn_seed.tres
@@ -57,7 +56,11 @@ res://scenes/objects/gravityeffect.gdshader
 res://scenes/objects/gravity_shader.gdshader
 res://scenes/objects/plants/gravity_ripple.gdshader
 res://scenes/objects/rocks/grav_stone.gdshader
+res://scripts/globals/EnvironmentManager.gd
+res://scripts/globals/game_config.gd
+res://scenes/objects/plants/growth_cycle_component.gd
 res://scenes/objects/plants/plantedcrop.gd
+res://scenes/characters/player/player_status_component.gd
 res://scenes/characters/player/player.tscn
 res://scenes/objects/plants/plantedcrop.tscn
 res://scenes/test/test_scene_cropfields_FFS_carte_mobile.tscn
@@ -66,7 +69,4 @@ res://scenes/ui/game_screen.tscn
 res://scenes/components/StatusComponent.tscn
 res://scenes/ui/Gauge.tscn
 res://machines/ordinateur/monolithe_ancien.tscn
-res://scenes/space/aura.tscn
-res://scripts/globals/EnvironmentManager.gd
-res://scenes/objects/plants/growth_cycle_component.gd
-res://scenes/characters/player/player_status_component.gd
+res://scripts/globals/game_manager.gd
