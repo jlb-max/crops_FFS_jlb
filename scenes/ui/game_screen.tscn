@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cqg3k2c6eqa6m"]
+[gd_scene load_steps=11 format=3 uid="uid://cqg3k2c6eqa6m"]
 
 [ext_resource type="Script" uid="uid://rd2bq3o18fef" path="res://scenes/ui/game_screen.gd" id="1_c0p0g"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_e2vrk"]
@@ -10,44 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dx4n3qvx1lahm" path="res://machines/biofuel/bio_fuel_converter_menu.tscn" id="7_ooiym"]
 [ext_resource type="PackedScene" uid="uid://bmwckryxuprqe" path="res://machines/ordinateur/RewardMachineMenu.tscn" id="8_ce4rh"]
 [ext_resource type="PackedScene" uid="uid://goc2r5pjajyj" path="res://scenes/ui/Gauge.tscn" id="10_nktmq"]
-
-[sub_resource type="Gradient" id="Gradient_c0p0g"]
-offsets = PackedFloat32Array(0, 0.19697, 0.390152, 0.57197, 0.757576, 0.912879, 1)
-colors = PackedColorArray(0, 1, 0, 1, 0.243137, 0.835294, 0.160784, 1, 0.666667, 0.858824, 0.219608, 1, 0.92549, 0.952941, 0.364706, 1, 0.831287, 0.479451, 0.209094, 1, 0.913725, 0.239216, 0.223529, 1, 1, 0.14902, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nktmq"]
-gradient = SubResource("Gradient_c0p0g")
-height = 12
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="Gradient" id="Gradient_dscta"]
-offsets = PackedFloat32Array(0, 0.19697, 0.390152, 0.57197, 0.757576, 0.912879, 1)
-colors = PackedColorArray(0, 0.113725, 1, 1, 0.243137, 0.517647, 0.905882, 1, 0.243137, 0.858824, 0.929412, 1, 0.92549, 0.952941, 0.364706, 1, 0.831287, 0.479451, 0.209094, 1, 0.913725, 0.239216, 0.223529, 1, 1, 0.14902, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wwq64"]
-gradient = SubResource("Gradient_dscta")
-height = 12
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="Gradient" id="Gradient_ywp2c"]
-offsets = PackedFloat32Array(0, 0.19697, 0.390152, 0.57197, 0.757576, 0.912879, 1)
-colors = PackedColorArray(0.564706, 0.113725, 0.894118, 1, 0.054902, 0.152941, 0.905882, 1, 0.243137, 0.858824, 0.929412, 1, 0.92549, 0.952941, 0.364706, 1, 0.831287, 0.479451, 0.209094, 1, 0.913725, 0.239216, 0.223529, 1, 1, 0.14902, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pwika"]
-gradient = SubResource("Gradient_ywp2c")
-height = 12
-
-[sub_resource type="Gradient" id="Gradient_4gsc8"]
-offsets = PackedFloat32Array(0, 0.204545, 0.390152, 0.57197, 0.757576, 0.912879, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.167665, 0.000192956, 0.477514, 1, 0.243137, 0.811765, 0.701961, 1, 0.92549, 0.952941, 0.756863, 1, 0.982025, 0.802028, 0.684889, 1, 0.998298, 0.953698, 0.947613, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4pji1"]
-gradient = SubResource("Gradient_4gsc8")
-height = 12
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
 
 [node name="GameScreen" type="CanvasLayer"]
 script = ExtResource("1_c0p0g")
@@ -103,22 +65,37 @@ offset_right = 396.0
 offset_bottom = 64.0
 
 [node name="HBox" type="HBoxContainer" parent="HUDContainer"]
+custom_minimum_size = Vector2(120, 15)
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="GaugeHealth" parent="HUDContainer/HBox" instance=ExtResource("10_nktmq")]
+modulate = Color(0.839014, 0, 0.139074, 1)
 layout_mode = 2
 size_flags_vertical = 0
-texture_progress = SubResource("GradientTexture2D_nktmq")
+tooltip_text = "Health"
 
 [node name="GaugeOxygen" parent="HUDContainer/HBox" instance=ExtResource("10_nktmq")]
+modulate = Color(0.12549, 0.698039, 1, 1)
 layout_mode = 2
-texture_progress = SubResource("GradientTexture2D_wwq64")
+tooltip_text = "Oxygen"
 
 [node name="GaugeHeat" parent="HUDContainer/HBox" instance=ExtResource("10_nktmq")]
+modulate = Color(1, 0.337255, 0, 1)
 layout_mode = 2
-texture_progress = SubResource("GradientTexture2D_pwika")
+tooltip_text = "Body Temperature"
 
 [node name="GaugeGravity" parent="HUDContainer/HBox" instance=ExtResource("10_nktmq")]
+modulate = Color(0.485651, 0.00195729, 0.726353, 1)
 layout_mode = 2
-texture_progress = SubResource("GradientTexture2D_4pji1")
+tooltip_text = "Gravity Balance"
+
+[node name="ScreenFade" type="ColorRect" parent="." groups=["screen_fade"]]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

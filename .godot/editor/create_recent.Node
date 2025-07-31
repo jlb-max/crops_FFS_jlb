@@ -1,9 +1,11 @@
+ColorRect
+HBoxContainer
+TextureProgressBar
+TextureRect
 Node2D
 AuraComponent
 CollisionShape2D
 Area2D
-TextureProgressBar
-HBoxContainer
 MarginContainer
 AnimatedSprite2D
 TileMap
@@ -11,4 +13,3 @@ TileMapLayer
 PointLight2D
 StaticBody2D
 ScrollContainer
-SpinBox

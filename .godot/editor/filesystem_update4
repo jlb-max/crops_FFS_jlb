@@ -70,3 +70,5 @@ res://scenes/components/StatusComponent.tscn
 res://scenes/ui/Gauge.tscn
 res://machines/ordinateur/monolithe_ancien.tscn
 res://scripts/globals/game_manager.gd
+res://scenes/ui/game_screen.gd
+res://scenes/ui/gauge.gd
