@@ -1,6 +1,9 @@
 extends StaticBody2D
 
-@onready var sprite: Sprite2D = $Sprite2D
+
+#@onready var sprite_anim: AnimatedSprite2D = $SpriteAnim
+@onready var sprite_anim: AnimatedSprite2D = $SpriteAnim
+
 @onready var interactable_component: InteractableComponent = $InteractableComponent
 @onready var interactable_label_component: Control = $InteractableLabelComponent
 @onready var processing_component: ProcessingMachineComponent = $ProcessingMachineComponent
@@ -18,18 +21,22 @@ extends StaticBody2D
 var _player_is_nearby: bool = false
 
 func _ready():
-	set_process(true)
-	# --- MODIFICATION ---
-	# On se connecte aux signaux de base de l'Area2D
-	interactable_component.body_entered.connect(_on_body_entered)
-	interactable_component.body_exited.connect(_on_body_exited)
+	# --- CORRECTION : On assigne le noeud à la variable ---
+	sprite_anim = get_node("SpriteAnim")
 	
+	# On active l'input une seule fois.
+	set_process_input(true)
+	
+	# On connecte les signaux de nos composants
+	interactable_component.interactable_activated.connect(_on_interactable_activated)
+	interactable_component.interactable_deactivated.connect(_on_interactable_deactivated)
 	processing_component.state_changed.connect(on_state_changed)
+	
+	# On met à jour l'état initial
 	on_state_changed(processing_component.current_state)
 	
-	set_process_input(false)
-	# On s'assure que le label est bien caché au démarrage
-	interactable_label_component.hide()
+	if interactable_label_component:
+		interactable_label_component.hide()
 
 # Cette fonction est appelée quand le joueur entre dans la zone
 func _on_body_entered(body: Node2D):
@@ -49,9 +56,12 @@ func _on_body_exited(body: Node2D):
 
 # Cette fonction ne s'exécute que lorsque le joueur est dans la zone
 func _input(event: InputEvent):
-	# On utilise "Input" au lieu de "event", et "show_dialogue" au lieu de "interact"
+	# Si le joueur n'est pas à côté, on ne fait absolument rien.
+	if not _player_is_nearby:
+		return
+
+	# Si le joueur EST à côté, alors on écoute la touche d'action.
 	if Input.is_action_just_pressed("show_dialogue"):
-		# On appelle la logique d'interaction
 		on_interacted()
 
 # C'est ici que se trouve la logique de la machine
@@ -71,27 +81,34 @@ func on_interacted():
 func on_state_changed(new_state):
 	match new_state:
 		ProcessingMachineComponent.State.IDLE:
-			sprite.modulate = Color.WHITE
+			sprite_anim.modulate = Color.WHITE
 			output_indicator.visible = false
 			progress_bar.visible = false # Cacher la barre
+			
+			# MODIFICATION 2 : Lancer l'animation "off"
+			sprite_anim.play("off")
 		
 		ProcessingMachineComponent.State.PROCESSING:
-			sprite.modulate = Color(0.8, 0.8, 1.0)
+			sprite_anim.modulate = Color(0.8, 0.8, 1.0)
 			output_indicator.visible = false
 			progress_bar.visible = true # Afficher la barre
 			
+			# MODIFICATION 3 : Lancer l'animation "on"
+			sprite_anim.play("on")
+			
 		ProcessingMachineComponent.State.FINISHED:
-			sprite.modulate = Color.WHITE
+			sprite_anim.modulate = Color.WHITE
 			progress_bar.visible = false # Cacher la barre
 			
-			# --- CORRECTION ---
-			# On vérifie que le buffer de sortie n'est pas vide
+			# MODIFICATION 4 : Lancer l'animation "off"
+			sprite_anim.play("off")
+			
+			# Le reste de la logique pour l'indicateur de sortie ne change pas
 			if not processing_component.output_buffer.is_empty():
-				# On rend l'indicateur visible
 				output_indicator.visible = true
-				# On prend le PREMIER item du tableau pour l'afficher
 				var first_output_item = processing_component.output_buffer[0].item
 				output_indicator.texture = first_output_item.icon
+
 
 func _process(delta: float):
 	if output_indicator.visible:
@@ -109,3 +126,15 @@ func _process(delta: float):
 	else:
 		# Sinon, on s'assure qu'elle est cachée
 		progress_bar.visible = false
+
+
+func _on_interactable_activated():
+	_player_is_nearby = true
+	if interactable_label_component:
+		interactable_label_component.show()
+
+
+func _on_interactable_deactivated():
+	_player_is_nearby = false
+	if interactable_label_component:
+		interactable_label_component.hide()

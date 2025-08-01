@@ -323,7 +323,7 @@ position = Vector2(0, -14)
 sprite_frames = SubResource("SpriteFrames_f1mue")
 animation = &"on"
 autoplay = "off"
-frame_progress = 0.263886
+frame_progress = 0.175421
 
 [node name="InteractableComponent" parent="." instance=ExtResource("5_c2dfj")]
 position = Vector2(3, -20)

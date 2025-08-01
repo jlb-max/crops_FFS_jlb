@@ -2,8 +2,9 @@ res://scenes/main_scene.tscn
 res://scenes/ui/game_ui_theme.tres
 res://Tilesets/house_tile_set.tres
 res://scenes/objects/trees/small_log.tres
-res://scenes/objects/plants/tournesol_fruit.tres
 res://machines/biofuel/biofuel.tres
+res://machines/recipes/heater_fuel_recipe.tres
+res://scenes/objects/plants/tournesol_fruit.tres
 res://scenes/objects/plants/star_fruit.tres
 res://machines/recipes/star_fuel.tres
 res://machines/ordinateur/recompense_palier_1.tres
@@ -56,41 +57,22 @@ res://scenes/objects/gravityeffect.gdshader
 res://scenes/objects/gravity_shader.gdshader
 res://scenes/objects/plants/gravity_ripple.gdshader
 res://scenes/objects/rocks/grav_stone.gdshader
-res://scripts/globals/EnvironmentManager.gd
-res://scripts/globals/game_config.gd
-res://scenes/objects/plants/growth_cycle_component.gd
-res://scenes/objects/plants/plantedcrop.gd
-res://scenes/characters/player/player_status_component.gd
-res://scenes/characters/player/player.tscn
-res://scenes/objects/plants/plantedcrop.tscn
-res://scenes/test/test_scene_cropfields_FFS_carte_mobile.tscn
-res://scenes/levels/level_1_1.tscn
-res://scenes/ui/game_screen.tscn
-res://scenes/components/StatusComponent.tscn
-res://scenes/ui/Gauge.tscn
-res://machines/ordinateur/monolithe_ancien.tscn
 res://scripts/globals/game_manager.gd
 res://scenes/ui/game_screen.gd
 res://scenes/ui/gauge.gd
-res://machines/heater_machine.gd
-res://machines/machine_component.gd
-res://scenes/objects/plants/aura_component.tscn
-res://machines/heater_machine.tscn
-res://scripts/globals/plantdata.gd
-res://machines/MachineAura.tscn
-res://machines/machine.gd
-res://machines/machine_heater.tscn
-res://scenes/test/test_scene_cropfields_FFS_effect_machines.tscn
-res://machines/recipes/heater_fuel_recipe.tres
-res://scenes/space/biofuelconverter.tscn
-res://machines/HeaterMachine.tscn
-res://scripts/globals/HeatEffectData.gd
-res://machines/aura production/heater_machine.gd
-res://machines/aura production/machine_heater.tscn
-res://machines/aura production/HeaterMachine.tscn
-res://machines/aura production/heater_menu.gd
-res://machines/aura production/heater_menu.tscn
-res://machines/biofuel/bio_fuel_converter_menu.gd
 res://machines/aura production/GenericAuraMachine.gd
-res://machines/aura production/OxygenPump.tscn
-res://machines/aura production/GravityMachine.tscn
+res://scenes/objects/plants/growth_cycle_component.gd
+res://scenes/objects/plants/plantedcrop.gd
+res://scenes/characters/player/player.tscn
+res://scenes/objects/plants/plantedcrop.tscn
+res://scenes/levels/level_1_1.tscn
+res://scenes/ui/game_screen.tscn
+res://machines/aura production/machine_heater.tscn
+res://scenes/test/test_scene_cropfields_FFS_effect_machines.tscn
+res://machines/aura production/HeaterMachine.tscn
+res://machines/aura production/heater_menu.tscn
+res://scenes/space/biofuelconverter.tscn
+res://scenes/space/biofuelconverter.gd
+res://scenes/objects/craftables/atelier2.tscn
+res://scenes/space/biofuelconverter_OLD.tscn
+res://scenes/test/test_scene_cropfields_FFS_effect_machines_bis.tscn

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqg3k2c6eqa6m"]
+[gd_scene load_steps=12 format=3 uid="uid://cqg3k2c6eqa6m"]
 
 [ext_resource type="Script" uid="uid://rd2bq3o18fef" path="res://scenes/ui/game_screen.gd" id="1_c0p0g"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_e2vrk"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bmwckryxuprqe" path="res://machines/ordinateur/RewardMachineMenu.tscn" id="8_ce4rh"]
 [ext_resource type="PackedScene" uid="uid://c03jyijxggjcm" path="res://machines/aura production/heater_menu.tscn" id="10_dscta"]
 [ext_resource type="PackedScene" uid="uid://goc2r5pjajyj" path="res://scenes/ui/Gauge.tscn" id="10_nktmq"]
-[ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="11_dscta"]
 
 [node name="GameScreen" type="CanvasLayer"]
 script = ExtResource("1_c0p0g")
@@ -68,7 +67,6 @@ offset_left = -200.0
 offset_top = -150.0
 offset_right = 200.0
 offset_bottom = 150.0
-biofuel_item_resource = ExtResource("11_dscta")
 
 [node name="HUDContainer" type="MarginContainer" parent="."]
 offset_right = 396.0

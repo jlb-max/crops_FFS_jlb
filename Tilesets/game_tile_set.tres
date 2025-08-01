@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://es2on243oiib" path="res://scenes/objects/rocks/rock.tscn" id="10_o2x3h"]
 [ext_resource type="Texture2D" uid="uid://bioik8b5vpahi" path="res://assets/game/tilesets/ground tiles/Old tiles/Tilled_Dirt_Wide_v2.png" id="12_skfke"]
 [ext_resource type="PackedScene" uid="uid://c6gu2dlyo0q6x" path="res://scenes/objects/chest/chest.tscn" id="12_tl0r4"]
-[ext_resource type="PackedScene" uid="uid://b2n80advawuqf" path="res://scenes/space/biofuelconverter.tscn" id="13_qblla"]
+[ext_resource type="PackedScene" uid="uid://djnct3aboxv5o" path="res://scenes/space/biofuelconverter.tscn" id="13_qblla"]
 [ext_resource type="PackedScene" uid="uid://dyp00nuhmonwt" path="res://scenes/objects/craftables/atelier2.tscn" id="14_cv0k1"]
 [ext_resource type="PackedScene" uid="uid://ca7ilrmahamlq" path="res://machines/ordinateur/monolithe_ancien.tscn" id="15_jw5ls"]
 [ext_resource type="Texture2D" uid="uid://2m44cgxgncrh" path="res://assets/game/tilesets/tiles_v2/Tileset Grass Spring_v3.png" id="16_ej0tc"]
@@ -492,12 +492,12 @@ scenes/3/scene = ExtResource("8_4agr7")
 scenes/4/scene = ExtResource("9_mt8is")
 scenes/5/scene = ExtResource("10_o2x3h")
 scenes/6/scene = ExtResource("12_tl0r4")
-scenes/7/scene = ExtResource("13_qblla")
 scenes/8/scene = ExtResource("14_cv0k1")
 scenes/9/scene = ExtResource("15_jw5ls")
 scenes/10/scene = ExtResource("8_qaixi")
 scenes/11/scene = ExtResource("8_y4bu0")
 scenes/12/scene = ExtResource("10_85lhn")
+scenes/13/scene = ExtResource("13_qblla")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4bu0"]
 texture = ExtResource("16_ej0tc")
