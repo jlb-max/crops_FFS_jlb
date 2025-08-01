@@ -72,3 +72,16 @@ res://machines/ordinateur/monolithe_ancien.tscn
 res://scripts/globals/game_manager.gd
 res://scenes/ui/game_screen.gd
 res://scenes/ui/gauge.gd
+res://machines/heater_machine.gd
+res://machines/machine_component.gd
+res://scenes/objects/plants/aura_component.tscn
+res://machines/heater_machine.tscn
+res://scripts/globals/plantdata.gd
+res://machines/MachineAura.tscn
+res://machines/machine.gd
+res://machines/machine_heater.tscn
+res://scenes/test/test_scene_cropfields_FFS_effect_machines.tscn
+res://machines/recipes/heater_fuel_recipe.tres
+res://scenes/space/biofuelconverter.tscn
+res://machines/HeaterMachine.tscn
+res://scripts/globals/HeatEffectData.gd

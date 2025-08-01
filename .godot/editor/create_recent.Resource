@@ -1,8 +1,8 @@
+MachineRecipe
 NoiseTexture2D
 ItemData
 CraftingRecipe
 CumulativeReward
-MachineRecipe
 Shader
 TileSet
 PlantData

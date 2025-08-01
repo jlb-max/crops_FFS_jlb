@@ -1,10 +1,12 @@
-res://scripts/globals
+res://assets/game/objects/new planet
+res://machines/recipes
+res://machines
 res://scenes/objects/plants
+res://scripts/globals
 res://scenes/space
 res://scenes/components
 res://assets/game/ui/UI Sprites
 res://scenes/characters/player
-res://assets/game/objects/new planet
 res://assets/game/objects/crops_2
 res://scenes/test
 res://scenes/environement
@@ -18,5 +20,3 @@ res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
 res://Tilesets
 res://assets/game/objects
-res://crafting/recipes
-res://scenes/ui

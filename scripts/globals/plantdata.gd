@@ -15,3 +15,7 @@ extends CollectibleData
 @export var heat_effect: HeatEffectData
 @export var water_pulse_effect: WaterPulseEffectData
 @export var oxygen_effect : OxygenEffectData
+
+@export var min_heat : float = 0.0
+@export var min_oxy  : float = 0.0
+@export var min_grav : float = -10.0
