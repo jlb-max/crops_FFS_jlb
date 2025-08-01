@@ -76,3 +76,4 @@ res://scenes/space/biofuelconverter.gd
 res://scenes/objects/craftables/atelier2.tscn
 res://scenes/space/biofuelconverter_OLD.tscn
 res://scenes/test/test_scene_cropfields_FFS_effect_machines_bis.tscn
+res://scenes/characters/player/player_status_component.gd

@@ -1093,3 +1093,8 @@ position = Vector2(5, -18)
 scale = Vector2(0.5, 0.5)
 
 [node name="StatusComponent" parent="." groups=["player_status"] instance=ExtResource("17_4kqyw")]
+invincible_pour_tests = true
+max_health = 100
+max_oxygen = 100
+max_heat = 100
+max_gravity = 100
