@@ -1,4 +1,5 @@
 res://assets/game/objects/new planet
+res://assets/game/objects/Items
 res://machines/recipes
 res://machines
 res://scenes/objects/plants
@@ -14,7 +15,6 @@ res://assets/game/characters
 res://scenes/objects/craftables
 res://machines/biofuel
 res://machines/ordinateur
-res://assets/game/objects/Items
 res://machines/atelier
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic

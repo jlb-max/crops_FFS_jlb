@@ -85,3 +85,12 @@ res://machines/recipes/heater_fuel_recipe.tres
 res://scenes/space/biofuelconverter.tscn
 res://machines/HeaterMachine.tscn
 res://scripts/globals/HeatEffectData.gd
+res://machines/aura production/heater_machine.gd
+res://machines/aura production/machine_heater.tscn
+res://machines/aura production/HeaterMachine.tscn
+res://machines/aura production/heater_menu.gd
+res://machines/aura production/heater_menu.tscn
+res://machines/biofuel/bio_fuel_converter_menu.gd
+res://machines/aura production/GenericAuraMachine.gd
+res://machines/aura production/OxygenPump.tscn
+res://machines/aura production/GravityMachine.tscn

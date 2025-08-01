@@ -90,7 +90,7 @@ game_tilemap = NodePath("../Grass")
 
 [node name="Objects" type="TileMapLayer" parent="GameTileMap"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAALAAwABgAAAAAACAASAAgABgAAAAAACQAHAAMABgAAAAAAAwAJAAMABgAAAAAAAwALAAQABgAAAAAACgAEAAYABgAAAAAACgAQAA4ABgAAAAAACwAGAAwABgAAAAAABwAZAAgABgAAAAAACgA=")
+tile_map_data = PackedByteArray("AAALAAwABgAAAAAACAASAAgABgAAAAAACQAHAAMABgAAAAAAAwAJAAMABgAAAAAAAwALAAQABgAAAAAACgAQAA4ABgAAAAAACwAGAAwABgAAAAAABwAZAAgABgAAAAAACgAEAAYABgAAAAAADAA=")
 tile_set = ExtResource("5_uj7lm")
 
 [node name="PuzzleTriggerZone" parent="GameTileMap" node_paths=PackedStringArray("target_game_tilemap") instance=ExtResource("13_oambw")]

@@ -1,3 +1,6 @@
+Label
+TextureRect
+HBoxContainer
 AnimatedSprite2D
 Timer
 CollisionShape2D
@@ -6,9 +9,7 @@ Node
 Sprite2D
 Area2D
 ColorRect
-HBoxContainer
 TextureProgressBar
-TextureRect
 AuraComponent
 MarginContainer
 TileMap

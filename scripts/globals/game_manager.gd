@@ -2,8 +2,10 @@
 extends Node
 
 var game_menu_screen = preload("res://scenes/ui/game_menu_screen.tscn")
+
 var biofuel_menu
 var reward_machine_menu
+var heater_fuel_menu
 
 const FADE_OUT  : float = 0.2      # noir rapide
 const FADE_IN   : float = 2.0      # retour en douceur
@@ -74,6 +76,13 @@ func open_reward_machine_menu(machine_component: RewardMachineComponent):
 func open_biofuel_menu(machine_component: ProcessingMachineComponent):
     if biofuel_menu:
         biofuel_menu.open_menu(machine_component)
+
+func register_heater_fuel_menu(menu_node): # <--- 2. AJOUTER CETTE FONCTION
+    heater_fuel_menu = menu_node
+
+func open_heater_menu(machine_node: Node): # <--- 3. AJOUTER CETTE FONCTION
+    if heater_fuel_menu:
+        heater_fuel_menu.open_menu(machine_node)
 
 func start_game() -> void:
     SceneManager.load_main_scene_container()

@@ -1,3 +1,4 @@
+#biofuelconvertermenu.gd
 extends PanelContainer
 
 # On garde uniquement les références aux noeuds qui existent VRAIMENT dans votre scène
