@@ -73,3 +73,5 @@ res://scenes/test/test_scene_cropfields_FFS_germination.tscn
 res://scenes/objects/plants/aura_component.gd
 res://scripts/globals/EnvironmentManager.gd
 res://machines/aura production/MachineAura.tscn
+res://scenes/ui/HealthBar.tscn
+res://scenes/ui/Gauge.tscn

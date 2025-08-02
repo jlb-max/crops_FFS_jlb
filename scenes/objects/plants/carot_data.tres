@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=25 format=3 uid="uid://c3dji2e3pe1oc"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=27 format=3 uid="uid://c3dji2e3pe1oc"]
 
 [ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_1rx6k"]
 [ext_resource type="Resource" uid="uid://dtj8h3c7ot05b" path="res://scenes/objects/plants/carot_fruit.tres" id="1_ylrju"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_1rx6k"]
 [ext_resource type="Script" uid="uid://uuuadwct7gp2" path="res://scripts/globals/HarvestData.gd" id="4_ypp0c"]
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_bv8mh"]
+[ext_resource type="Texture2D" uid="uid://i5atmg3akgkd" path="res://assets/game/objects/new planet/PC _ Computer - Stardew Valley - Environment - Crops.png" id="5_st70y"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_7l1vp"]
 [ext_resource type="Script" uid="uid://1o5didd3c6kg" path="res://scripts/globals/OxygenEffectData.gd" id="9_7l1vp"]
 [ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="10_bv8mh"]
@@ -42,6 +43,10 @@ region = Rect2(48, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lih70"]
 atlas = ExtResource("4_1rx6k")
 region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwpdj"]
+atlas = ExtResource("5_st70y")
+region = Rect2(240, 384, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xwpdj"]
 animations = [{
@@ -83,6 +88,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"stage_4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwpdj")
+}],
+"loop": true,
+"name": &"stage_dead",
 "speed": 5.0
 }]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://p7n5n5kk4vjo"]
+[gd_scene load_steps=30 format=3 uid="uid://p7n5n5kk4vjo"]
 
 [ext_resource type="Script" uid="uid://mwgrq6ij5y2x" path="res://scenes/objects/plants/plantedcrop.gd" id="1_urelw"]
 [ext_resource type="PackedScene" uid="uid://8tpm441eojb2" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="2_p35mx"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dtd4rxgnd770l" path="res://scenes/objects/plants/aura_component.gd" id="11_l0xxe"]
 [ext_resource type="Material" uid="uid://bfefx2fps4a8d" path="res://scenes/objects/plants/HeatHazeMaterial.tres" id="12_25r6l"]
 [ext_resource type="Shader" uid="uid://b8uv8bus7bama" path="res://scenes/objects/plants/WaterSphereShader.gdshader" id="14_qqpvx"]
+[ext_resource type="PackedScene" uid="uid://cnj3v48jns0ku" path="res://scenes/ui/HealthBar.tscn" id="14_y26r2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uyutu"]
 size = Vector2(16, 16)
@@ -174,3 +175,17 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PuzzleComponent"]
 shape = SubResource("CircleShape2D_uyutu")
 debug_color = Color(0.941176, 0.92549, 0, 0.67451)
+
+[node name="HealthBar" parent="." instance=ExtResource("14_y26r2")]
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = -23.0
+
+[node name="StatusIconContainer" type="HBoxContainer" parent="HealthBar"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HealthBar/StatusIconContainer"]
+layout_mode = 2

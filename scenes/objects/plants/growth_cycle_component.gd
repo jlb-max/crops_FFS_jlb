@@ -37,6 +37,9 @@ func set_watered_state(is_watered: bool) -> void:
 func on_day_passed(day: int = -1) -> void:
     # --- TEST DE DÉBOGAGE ---
     # Si la fonction est appelée sans numéro de jour, c'est notre coupable !
+    if planted_crop.is_dead:
+        return
+    
     if day == -1:
         push_error("ERREUR DE CONNEXION : on_day_passed a été appelé par un signal incorrect qui n'a pas fourni de numéro de jour !")
         return # On arrête tout pour ne pas créer plus de bugs.

@@ -4,6 +4,10 @@ extends Node2D
 @export var plant_data : PlantData
 var wetness_overlay    : TileMapLayer        # assignée par le cursor
 
+@export_group("Santé et Stress")
+@export var max_health: float = 100.0
+var health: float
+var is_dead: bool = false # Pour savoir si la plante est morte
 
 
 # --- Références internes (onready) ----------------------------------
@@ -18,6 +22,8 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 @onready var gravity_warp : Sprite2D = $GravityWarp
 @onready var aura_component: AuraComponent = $AuraComponent
 
+@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var status_icons_container: HBoxContainer = $StatusIconsContainer
 
 @onready var heat_warp: ColorRect = $HeatWarp
 @onready var flame_particles: GPUParticles2D = $FlameParticles
@@ -26,6 +32,16 @@ var wetness_overlay    : TileMapLayer        # assignée par le cursor
 
 
 func _ready() -> void:
+    # --- Initialisation de la santé ---
+    health = max_health
+    if health_bar:
+        health_bar.max_value = max_health
+        health_bar.value = health
+        health_bar.visible = false # On cache la barre par défaut
+    
+    if status_icons_container:
+        status_icons_container.visible = false # On cache aussi les icônes
+        
     if plant_data == null:
         queue_free(); return
     
@@ -294,3 +310,97 @@ func _notification(what: int) -> void:
                 wetness_overlay.to_local(global_position)
             )
             CropManager.unregister_crop(tile)
+
+
+func _process(delta: float) -> void:
+    # Si la plante est morte, on ne fait plus aucun calcul
+    if is_dead:
+        return
+
+    # 1. Obtenir les valeurs actuelles de l'environnement
+    var eff = EnvironmentManager.get_local_effects(global_position)
+    
+    # 2. On initialise nos totaux pour ce 'tick'
+    var total_stress_damage: float = 0.0
+    var total_growth_bonus: float = 0.0 # On va calculer un bonus, pas un modificateur
+    
+    # --- NOUVELLE LOGIQUE UNIFIÉE ---
+
+    # Chaleur
+    var heat_sensitivity = plant_data.heat_effect.heat_sensitivity
+    var heat_impact = eff.heat * heat_sensitivity
+    total_stress_damage += max(0, -heat_impact) # Le stress est l'opposé de l'impact négatif
+    total_growth_bonus += max(0, heat_impact) # Le bonus est l'impact positif
+
+    # Oxygène
+    var oxygen_sensitivity = plant_data.oxygen_effect.oxygen_sensitivity
+    var oxygen_impact = eff.oxygen * oxygen_sensitivity
+    total_stress_damage += max(0, -oxygen_impact)
+    total_growth_bonus += max(0, oxygen_impact)
+
+    # Gravité
+    var gravity_sensitivity = plant_data.gravity_effect.gravity_sensitivity
+    var gravity_impact = eff.gravity * gravity_sensitivity
+    total_stress_damage += max(0, -gravity_impact)
+    total_growth_bonus += max(0, gravity_impact)
+
+    # 3. Appliquer le stress et le bonus
+    if total_stress_damage > 0:
+        health -= total_stress_damage * delta
+        print("Santé actuelle de la plante : ", health)
+    
+    # On met le modificateur de croissance à 1.0 (normal) + le bonus total
+    # Le 0.1 est un facteur d'équilibrage que vous pouvez ajuster
+    growth_cycle_component.growth_modifier = 1.0 + (total_growth_bonus * 0.1)
+
+    # 4. Mettre à jour l'UI
+    update_ui()
+    
+    # 5. Vérifier la mort
+    if health <= 0:
+        die()
+        
+        
+func die() -> void:
+    print("%s est morte." % plant_data.item_name)
+    is_dead = true
+    health = 0
+    
+    # Joue l'animation de la plante morte
+    if animated_sprite.sprite_frames.has_animation("stage_dead"):
+        animated_sprite.play("stage_dead")
+    
+    # Désactive la possibilité de la récolter
+    collectable_component.monitoring = false
+    
+    # On cache l'UI
+    if health_bar:
+        health_bar.visible = false
+    if status_icons_container:
+        status_icons_container.visible = false
+
+func update_ui() -> void:
+    if not health_bar: return
+
+    # Mettre à jour la valeur de la barre
+    health_bar.value = health
+    
+    # Afficher la barre uniquement si la plante a perdu de la vie ET n'est pas morte
+    health_bar.visible = (health < max_health and not is_dead)
+
+    # --- Logique pour les icônes de statut (simplifiée) ---
+    # Vous aurez besoin d'un ou plusieurs TextureRect dans le HBoxContainer
+    # var buff_icon = $StatusIconsContainer/BuffIcon
+    # var debuff_icon = $StatusIconsContainer/DebuffIcon
+    #
+    # if growth_cycle_component.growth_modifier > 1.1: # Si on a un bon bonus
+    #     status_icons_container.visible = true
+    #     buff_icon.visible = true
+    # else:
+    #     buff_icon.visible = false
+    #
+    # if health < max_health: # Si on subit des dégâts
+    #     status_icons_container.visible = true
+    #     debuff_icon.visible = true
+    # else:
+    #     debuff_icon.visible = false
