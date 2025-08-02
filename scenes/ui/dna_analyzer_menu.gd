@@ -28,8 +28,6 @@ func close_menu():
 
 # La nouvelle fonction clé qui scanne l'inventaire
 func populate_analyzable_items():
-	print("\n--- Début du scan de l'inventaire pour le Séquenceur ---")
-	
 	# On réinitialise tout
 	item_list.clear()
 	displayed_items.clear()
@@ -37,30 +35,24 @@ func populate_analyzable_items():
 	analyze_button.disabled = true
 
 	var inventory_contents = InventoryManager.get_all_items()
-	print("Items trouvés dans l'inventaire au total : ", inventory_contents.size())
 
 	for item_stack in inventory_contents:
 		var item = item_stack.item
-		print("  - Analyse de : '", item.item_name, "'")
-
-		# Test 1 : L'item a-t-il un lien vers sa plante d'origine ?
-		var plant_data = item.get_source_plant_data()
 		
-		if not plant_data:
-			print("    -> REJETÉ : Pas de 'Source Plant Data' configuré pour cet item.")
-			continue # On passe à l'item suivant
+		# 1. On vérifie si l'item est bien un produit de plante avec du lore
+		var plant_data = item.get_source_plant_data()
+		if not plant_data or not plant_data.lore_data:
+			continue # Si non, on ignore cet item et on passe au suivant
 
-		# Test 2 : La plante d'origine a-t-elle des données d'histoire ?
-		if not plant_data.lore_data:
-			print("    -> REJETÉ : Le PlantData ('%s') n'a pas de 'Lore Data' configuré." % plant_data.resource_path)
-			continue # On passe à l'item suivant
+		# 2. On vérifie si la progression de cette plante n'est pas déjà complète
+		var progress = LoreManager.get_sequencing_progress(plant_data)
+		var required = plant_data.lore_data.sequencing_points_required
+		if progress >= required:
+			continue # Si oui, on ignore cet item et on passe au suivant
 
-		# Si on arrive ici, l'item est valide !
-		print("    -> ACCEPTÉ : Cet item est valide pour le séquençage.")
+		# 3. Si l'item a passé tous les tests, on l'ajoute à la liste
 		displayed_items.append(item)
 		item_list.add_item(item.item_name, item.icon)
-	
-	print("--- Fin du scan. Items valides affichés dans le menu : ", displayed_items.size(), " ---")
 
 # Appelée quand le joueur clique sur un item dans la liste
 func _on_item_selected(index: int):

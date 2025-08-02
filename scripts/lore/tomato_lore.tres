@@ -26,5 +26,5 @@ full_text = "
 		# S'il n'y a plus rien dans la liste, on vide le panneau de droite.
 		plant_name_label.text = \"Aucune plante séquencée\"
 		progress_bar.value = 0"
-sequencing_points_required = 2
+sequencing_points_required = 1
 metadata/_custom_type_script = "uid://bkumg6gvortv4"
