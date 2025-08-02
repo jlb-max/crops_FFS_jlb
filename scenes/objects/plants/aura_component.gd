@@ -47,3 +47,6 @@ func init(
 func _exit_tree() -> void:
 	if _registered:
 		EnvironmentManager.unregister(self)
+
+func _draw():
+	draw_circle(Vector2.ZERO, effect_radius, Color(1,0,0,0.25))

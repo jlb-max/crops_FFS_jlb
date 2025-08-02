@@ -35,64 +35,63 @@ func unregister(s: EffectSource2D) -> void:
 # API publique : somme des effets au point donné
 # ------------------------------------------------------------------
 func get_local_effects(pos: Vector2) -> Dictionary:
-	var heat    : float = BASE_HEAT_LOSS
-	var oxygen  : float = BASE_OXY_LOSS
-	var gravity : float = BASE_GRAV_IMBALANCE
+	var heat: float = BASE_HEAT_LOSS
+	var oxygen: float = BASE_OXY_LOSS
+	var gravity: float = BASE_GRAV_IMBALANCE
 
-	var dH : float = 0.0
-	var dO : float = 0.0
-	var dG : float = 0.0
-
-	if DEBUG_ENV and _debug_accum.is_empty():
-		_debug_accum.append("\n%-16s|%7s|%4s|%7s|%7s|%7s"
-			% ["Source", "dist", "f", "ΔH", "ΔO₂", "ΔG"])
-		_debug_accum.append("-".repeat(54))
+	# --- DÉBUT DE LA SECTION DE DÉBOGAGE ---
+	# Pour voir le résultat final dans le log
+	var total_dh: float = 0.0
+	var total_dox: float = 0.0
+	var total_dg: float = 0.0
+	print("--- NOUVEAU CALCUL D'ENVIRONNEMENT À LA POSITION : ", pos, " ---")
+	# --- FIN DE LA SECTION DE DÉBOGAGE ---
 
 	for s in _sources:
 		if not s.is_inside_tree():
 			continue
 
-		var d       := pos.distance_to(s.global_position)
+		var d := pos.distance_to(s.global_position)
+		
+		# --- CORRECTION : SÉCURITÉ CONTRE LA DIVISION PAR ZÉRO ---
+		# Si le rayon est invalide, on ignore cette aura et on passe à la suivante.
+		if s.effect_radius <= 0.0:
+			print("AVERTISSEMENT (EnvMgr): L'aura '", s.name, "' a un rayon de 0 ou moins et a été ignorée.")
+			continue
+
+		# Si on est hors de portée, on ignore.
 		if d > s.effect_radius:
-			continue                    # hors de portée
+			continue
 
-		var f       : float = 1.0 - pow(d / s.effect_radius, 2)
-		var dh      :=  s.heat_power    * f
-		var dox     :=  s.oxygen_power  * f
-		var dg      :=  s.gravity_power * f
+		# --- DÉBOGAGE LISIBLE POUR CHAQUE AURA ---
+		print("  Aura détectée : '", s.name, "'")
+		print("    - Distance: %.2f / Rayon: %.2f" % [d, s.effect_radius])
+		
+		var f : float = 1.0 - pow(d / s.effect_radius, 2)
+		print("    - Facteur de puissance (f) : %.2f" % f)
+		
+		var dh := s.heat_power * f
+		var dox := s.oxygen_power * f
+		var dg := s.gravity_power * f
+		print("    - Effets (Chaleur, Oxy, Grav): (%.2f, %.2f, %.2f)" % [dh, dox, dg])
 
-		heat       += dh
-		oxygen     += dox
-		gravity    += dg
+		heat += dh
+		oxygen += dox
+		gravity += dg
+		
+		# On accumule les totaux pour le log final
+		total_dh += dh
+		total_dox += dox
+		total_dg += dg
 
-		dH += dh;   dO += dox;   dG += dg
-
-		if DEBUG_ENV:
-			_debug_accum.append(
-				"%-16s  %6.1f  %4.2f  %7.2f  %7.2f  %7.2f"
-				% [s.name, d, f, dh, dox, dg])
-
-	# ─────────────  dump périodique (toutes les DEBUG_INTERVAL ms) ─────────────
-	if DEBUG_ENV:
-		var now := Time.get_ticks_msec()
-		if now - _last_dump_ms >= DEBUG_INTERVAL:
-			if DEBUG_DETAILS and DEBUG_TOP_N > 0:
-				# on trie les sources par distance croissante (les plus « influentes »)
-				_debug_accum.sort_custom(func(a,b):
-					return float(a.split()[1]) < float(b.split()[1]))   # tri sur la 2ᵉ colonne « dist »
-				_debug_accum = _debug_accum.slice(0, DEBUG_TOP_N)
-				for line in _debug_accum:
-					print(line)
-
-			print("Σ ΔH=%6.2f  Σ ΔO₂=%6.2f  Σ ΔG=%6.2f    (sources actives : %d)"
-				% [dH, dO, dG, _sources.size()])
-			print("-".repeat(54))
-			_debug_accum.clear()
-			_last_dump_ms = now
-	# --------------------------------------------------------------------------
+	# Affiche un résumé clair du calcul
+	print("--- RÉSULTAT FINAL ---")
+	print("  Total des deltas (ΔH, ΔO₂, ΔG) : (%.2f, %.2f, %.2f)" % [total_dh, total_dox, total_dg])
+	print("  Valeurs finales (avec pertes de base) : { heat:%.2f, oxygen:%.2f, gravity:%.2f }" % [heat, oxygen, gravity])
+	print("----------------------------------------------------------")
 
 	return {
-		heat    = heat,
-		oxygen  = oxygen,
+		heat = heat,
+		oxygen = oxygen,
 		gravity = gravity
 	}

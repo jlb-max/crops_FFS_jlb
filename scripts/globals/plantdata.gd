@@ -16,6 +16,10 @@ extends CollectibleData
 @export var water_pulse_effect: WaterPulseEffectData
 @export var oxygen_effect : OxygenEffectData
 
-@export var min_heat : float = 0.0
-@export var min_oxy  : float = 0.0
-@export var min_grav : float = -10.0
+
+
+## NOUVEAU : Seuils minimaux pour la germination
+@export_group("Conditions de Germination")
+@export var min_heat: float = 0.0
+@export var min_oxygen: float = 0.0
+@export var min_gravity: float = 0.0

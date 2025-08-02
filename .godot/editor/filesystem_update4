@@ -15,11 +15,9 @@ res://scenes/objects/plants/corn_fruit.tres
 res://machines/recipes/corn_fuel.tres
 res://scenes/objects/plants/tomato_fruit.tres
 res://machines/recipes/tomato_fuel.tres
-res://scenes/objects/plants/gravitron_fruit.tres
-res://machines/recipes/gravitron_fuel.tres
-res://machines/recipes/corn_and_tomato_fuel.tres
 res://scenes/objects/craftables/planche.tres
 res://machines/recipes/planche_recipe.tres
+res://machines/recipes/corn_and_tomato_fuel.tres
 res://machines/ordinateur/recompense_palier_2.tres
 res://Tilesets/game_tile_set.tres
 res://scenes/ui/RainShaderMaterial.tres
@@ -46,6 +44,7 @@ res://scenes/objects/plants/carot_data.tres
 res://scenes/objects/plants/carot_seed.tres
 res://scenes/objects/plants/star_data.tres
 res://scenes/objects/plants/star_seed.tres
+res://scenes/objects/plants/gravitron_fruit.tres
 res://scenes/objects/plants/gravitron_data.tres
 res://scenes/objects/plants/gravitron_seed.tres
 res://scenes/objects/plants/grape_fruit.tres
@@ -57,23 +56,20 @@ res://scenes/objects/gravityeffect.gdshader
 res://scenes/objects/gravity_shader.gdshader
 res://scenes/objects/plants/gravity_ripple.gdshader
 res://scenes/objects/rocks/grav_stone.gdshader
-res://scripts/globals/game_manager.gd
-res://scenes/ui/game_screen.gd
-res://scenes/ui/gauge.gd
-res://machines/aura production/GenericAuraMachine.gd
-res://scenes/objects/plants/growth_cycle_component.gd
 res://scenes/objects/plants/plantedcrop.gd
+res://scenes/characters/player/player_status_component.gd
 res://scenes/characters/player/player.tscn
 res://scenes/objects/plants/plantedcrop.tscn
 res://scenes/levels/level_1_1.tscn
 res://scenes/ui/game_screen.tscn
-res://machines/aura production/machine_heater.tscn
-res://scenes/test/test_scene_cropfields_FFS_effect_machines.tscn
 res://machines/aura production/HeaterMachine.tscn
-res://machines/aura production/heater_menu.tscn
 res://scenes/space/biofuelconverter.tscn
-res://scenes/space/biofuelconverter.gd
-res://scenes/objects/craftables/atelier2.tscn
-res://scenes/space/biofuelconverter_OLD.tscn
 res://scenes/test/test_scene_cropfields_FFS_effect_machines_bis.tscn
-res://scenes/characters/player/player_status_component.gd
+res://machines/ordinateur/monolithe_ancien.gd
+res://machines/ordinateur/monolithe_ancien.tscn
+res://scripts/globals/plantdata.gd
+res://scenes/objects/plants/growth_cycle_component.gd
+res://scenes/test/test_scene_cropfields_FFS_germination.tscn
+res://scenes/objects/plants/aura_component.gd
+res://scripts/globals/EnvironmentManager.gd
+res://machines/aura production/MachineAura.tscn
