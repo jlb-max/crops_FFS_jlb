@@ -48,6 +48,7 @@ text = "Codex Genetique"
 [node name="PlantList" type="ItemList" parent="VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(50, 100)

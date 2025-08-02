@@ -80,3 +80,4 @@ res://scripts/lore/LoreDatabaseComponent.gd
 res://scenes/objects/craftables/atelier2.tscn
 res://scenes/space/dna_analyzer.gd
 res://scripts/lore/corn_lore.tres
+res://scripts/lore/tomato_lore.tres

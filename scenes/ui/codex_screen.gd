@@ -46,6 +46,9 @@ func _on_plant_selected(index: int):
 	var progress = LoreManager.get_sequencing_progress(selected_plant)
 	var required = selected_plant.lore_data.sequencing_points_required
 	
+	# --- LIGNE DE DÉBOGAGE À AJOUTER ---
+	print("CODEX DEBUG: Plante sélectionnée: '%s', Progression récupérée: %d / %d" % [selected_plant.item_name, progress, required])
+	
 	progress_bar.max_value = required
 	progress_bar.value = progress
 	
@@ -60,34 +63,40 @@ func get_revealed_text(plant_data: PlantData) -> String:
 	var required = float(plant_data.lore_data.sequencing_points_required)
 	var progress = float(LoreManager.get_sequencing_progress(plant_data))
 
-	# Sécurité pour éviter la division par zéro
 	if required == 0:
 		return full_text
-
-	# On calcule le pourcentage de progression (entre 0.0 and 1.0)
-	var progress_percent = clamp(progress / required, 0.0, 1.0)
 	
-	# Si la progression est de 100%, on retourne le texte complet directement.
+	var progress_percent = clamp(progress / required, 0.0, 1.0)
 	if progress_percent >= 1.0:
 		return full_text
 
-	# --- NOUVELLE LOGIQUE LINÉAIRE ---
-	# 1. On calcule combien de caractères doivent être visibles
-	var chars_to_reveal = int(full_text.length() * progress_percent)
+	# --- LOGIQUE DE MOTS ALÉATOIRES CORRIGÉE ---
+	var words = full_text.split(" ", false)
+	var word_count = words.size()
+	var word_indices = range(word_count)
+	
+	# --- CORRECTION CI-DESSOUS ---
+	# 1. On utilise le chemin de la ressource comme "graine" pour le mélange.
+	seed(hash(plant_data.resource_path))
+	# 2. On mélange les indexes en utilisant la graine globale qu'on vient de définir.
+	word_indices.shuffle()
+	# 3. TRÈS IMPORTANT: On réinitialise le générateur aléatoire pour le reste du jeu.
+	randomize()
+	# --- FIN DE LA CORRECTION ---
 
-	# 2. On prend la partie révélée du texte
-	var revealed_part = full_text.substr(0, chars_to_reveal)
-	
-	# 3. On génère la partie brouillée pour le reste
-	var garbled_part = ""
-	for i in range(chars_to_reveal, full_text.length()):
-		# On garde les espaces et les sauts de ligne pour préserver la mise en page
-		if full_text[i] in " \n\t":
-			garbled_part += full_text[i]
+	var words_to_reveal_count = int(word_count * progress_percent)
+	var revealed_indices = {}
+	for i in range(words_to_reveal_count):
+		revealed_indices[word_indices[i]] = true
+
+	var final_text = ""
+	for i in range(word_count):
+		if revealed_indices.has(i):
+			final_text += words[i] + " "
 		else:
-			garbled_part += "▒"
-	
-	return revealed_part + garbled_part
+			final_text += "▒".repeat(words[i].length()) + " "
+			
+	return final_text
 
 # Fonction d'exemple pour charger les plantes - À ADAPTER
 func get_all_plant_data_from_game() -> Array[PlantData]:
@@ -107,3 +116,33 @@ func get_all_plant_data_from_game() -> Array[PlantData]:
 			discovered_lore_plants.append(plant)
 			
 	return discovered_lore_plants
+
+func refresh_display():
+	# 1. On mémorise l'item qui est actuellement sélectionné, s'il y en a un.
+	var previously_selected_plant: PlantData = null
+	var selected_indices = plant_list.get_selected_items()
+	if not selected_indices.is_empty():
+		previously_selected_plant = plant_data_array[selected_indices[0]]
+
+	# 2. On repeuple la liste de gauche (ce qui efface la sélection actuelle).
+	populate_plant_list()
+
+	# 3. On essaie de retrouver et de re-sélectionner l'item précédent.
+	if previously_selected_plant:
+		var new_index = plant_data_array.find(previously_selected_plant)
+		if new_index != -1:
+			# On sélectionne l'item dans la liste visuelle
+			plant_list.select(new_index)
+			# On appelle manuellement la fonction de mise à jour des détails
+			_on_plant_selected(new_index)
+			return # On a fini, pas besoin d'aller plus loin
+
+	# 4. Si rien n'était sélectionné ou si l'item a disparu, on sélectionne le premier de la liste.
+	if not plant_data_array.is_empty():
+		plant_list.select(0)
+		_on_plant_selected(0)
+	else:
+		# S'il n'y a plus rien dans la liste, on vide le panneau de droite.
+		plant_name_label.text = "Aucune plante séquencée"
+		progress_bar.value = 0
+		lore_text_label.text = ""

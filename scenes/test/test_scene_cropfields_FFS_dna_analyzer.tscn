@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://1g0o8xvxncfh"]
+[gd_scene load_steps=34 format=4 uid="uid://1g0o8xvxncfh"]
 
 [ext_resource type="PackedScene" uid="uid://bnicfp0u74mi1" path="res://scenes/components/test_scene_save_data_manager_component.tscn" id="1_mu3kp"]
 [ext_resource type="PackedScene" uid="uid://dyetv1frmqe4q" path="res://scenes/components/save_level_data_component.tscn" id="2_gc6cs"]
@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://d251lw71cjjxi" path="res://scenes/objects/plants/grape_seed.tres" id="27_ngg06"]
 [ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="28_7u4ou"]
 [ext_resource type="Resource" uid="uid://dce87yl2m3jlr" path="res://scenes/objects/plants/corn_fruit.tres" id="29_mw4a5"]
+[ext_resource type="Resource" uid="uid://dbjvv5124nvmi" path="res://scenes/objects/plants/tomato_fruit.tres" id="30_gc6cs"]
 [ext_resource type="Resource" uid="uid://cuufl813yry45" path="res://scenes/objects/plants/tournesol_seed.tres" id="30_tqfld"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iw503"]
@@ -150,6 +151,14 @@ item_data = ExtResource("28_7u4ou")
 [node name="GroundLoot11" parent="." instance=ExtResource("20_qov06")]
 position = Vector2(270, 324)
 item_data = ExtResource("29_mw4a5")
+
+[node name="GroundLoot16" parent="." instance=ExtResource("20_qov06")]
+position = Vector2(270, 279)
+item_data = ExtResource("30_gc6cs")
+
+[node name="GroundLoot17" parent="." instance=ExtResource("20_qov06")]
+position = Vector2(249, 279)
+item_data = ExtResource("30_gc6cs")
 
 [node name="GroundLoot12" parent="." instance=ExtResource("20_qov06")]
 position = Vector2(252, 324)

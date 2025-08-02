@@ -1,3 +1,4 @@
+res://assets/game/objects/Items
 res://scripts/lore
 res://assets/game/objects/new planet
 res://assets/game/ui
@@ -5,7 +6,6 @@ res://assets/game/ui/UI Sprites/Icons
 res://assets/game/ui/UI Sprites
 res://crafting/recipes
 res://machines/biofuel
-res://assets/game/objects/Items
 res://scenes/objects/craftables
 res://assets/game/objects/crops_2
 res://assets/game/objects

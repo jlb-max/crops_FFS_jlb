@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=25 format=3 uid="uid://bsea61ia2yqe6"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=28 format=3 uid="uid://bsea61ia2yqe6"]
 
 [ext_resource type="Script" uid="uid://b6isf51xji5ud" path="res://scripts/globals/plantdata.gd" id="1_rj4jm"]
 [ext_resource type="Resource" uid="uid://dbjvv5124nvmi" path="res://scenes/objects/plants/tomato_fruit.tres" id="1_s3elc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_bpp4m"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_2lrcw"]
 [ext_resource type="Script" uid="uid://1o5didd3c6kg" path="res://scripts/globals/OxygenEffectData.gd" id="9_2lrcw"]
+[ext_resource type="Resource" uid="uid://cubngjtnr43p0" path="res://scripts/lore/tomato_lore.tres" id="9_mksdd"]
 [ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="11_mksdd"]
 
 [sub_resource type="Resource" id="Resource_mksdd"]
@@ -108,6 +109,13 @@ burn_power = 0.0
 heat_sensitivity = 0.0
 metadata/_custom_type_script = "uid://bt6illphij7k6"
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2lrcw"]
+load_path = "res://.godot/imported/farming_plants_items.png-f2537ff9fd91f24d499afe20f89ea626.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvic3"]
+atlas = SubResource("CompressedTexture2D_2lrcw")
+region = Rect2(16, 64, 16, 16)
+
 [sub_resource type="Resource" id="Resource_6rl6s"]
 script = ExtResource("6_2lrcw")
 has_light_effect = false
@@ -148,7 +156,9 @@ oxygen_effect = SubResource("Resource_o68gv")
 min_heat = -50.0
 min_oxygen = -50.0
 min_gravity = -50.0
-item_name = "Nouvel Objet"
+lore_data = ExtResource("9_mksdd")
+item_name = "Tomate"
 description = ""
+icon = SubResource("AtlasTexture_mvic3")
 stackable = true
 metadata/_custom_type_script = "uid://b6isf51xji5ud"
