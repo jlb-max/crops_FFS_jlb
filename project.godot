@@ -32,6 +32,7 @@ CraftingManager="*res://crafting/crafting_manager.gd"
 MachineRecipeManager="*res://scripts/globals/machine_recipe_manager.gd"
 EnvironmentManager="*res://scripts/globals/EnvironmentManager.gd"
 GameConfig="*res://scripts/globals/game_config.gd"
+LoreManager="*res://scripts/lore/lore_manager.gd"
 
 [display]
 
@@ -124,6 +125,11 @@ game_menu={
 toggle_inventory={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"location":0,"echo":false,"script":null)
+]
+}
+toggle_codex={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":67,"key_label":0,"unicode":99,"location":0,"echo":false,"script":null)
 ]
 }
 

@@ -7,10 +7,27 @@ extends CanvasLayer
 @onready var gauge_o2: HBoxContainer = $HUDContainer/HBox/GaugeOxygen
 @onready var gauge_tmp: HBoxContainer = $HUDContainer/HBox/GaugeHeat
 @onready var gauge_grv: HBoxContainer = $HUDContainer/HBox/GaugeGravity
+@onready var codex_screen: HSplitContainer = $CodexScreen
+
+
 
 
 var player_status : PlayerStatusComponent
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	# --- CORRECTION ---
+	# On utilise le manager global 'Input' au lieu de la variable 'event'
+	if Input.is_action_just_pressed("toggle_codex"):
+		
+		# On s'assure que le jeu ne traite pas cet input ailleurs
+		get_viewport().set_input_as_handled()
+		
+		# Le reste de votre logique est parfait
+		codex_screen.visible = not codex_screen.visible
+		
+		if codex_screen.visible:
+			codex_screen.populate_plant_list()
 
 func _ready() -> void:
 	# 1. récupère le composant dans le groupe

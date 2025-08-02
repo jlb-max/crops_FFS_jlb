@@ -1,6 +1,9 @@
 # InventorySlot.gd (Version corrigée et complète)
 extends Panel
 
+enum SlotType { INVENTORY, MACHINE_INPUT }
+@export var slot_type: SlotType = SlotType.INVENTORY
+
 # --- VARIABLES ---
 # Ce sont les références aux noeuds de votre scène de slot
 @onready var texture_rect: TextureRect = $TextureRect
@@ -88,7 +91,17 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	return data is Dictionary and data.has("item")
 
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-	InventoryManager.merge_or_swap_slots(data.source, data.from_slot, "inventory", self.slot_index)
+	if slot_type == SlotType.INVENTORY:
+		# Logique existante pour l'inventaire, on n'y touche pas.
+		InventoryManager.merge_or_swap_slots(data.source, data.from_slot, "inventory", self.slot_index)
+	
+	elif slot_type == SlotType.MACHINE_INPUT:
+		# NOUVELLE logique, plus simple, pour les machines.
+		var item_to_drop = data.get("item")
+		if item_to_drop:
+			# On affiche simplement l'item dans le slot.
+			# La quantité est 1 car on analyse un item à la fois.
+			display_item(item_to_drop, 1)
 
 
 func display_ingredient_info(p_item_data: ItemData, p_quantity_required: int):

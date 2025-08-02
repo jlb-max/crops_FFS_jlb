@@ -11,6 +11,7 @@ region = Rect2(80, 0, 16, 16)
 script = ExtResource("1_bjd7b")
 damage = 1
 action_type = 0
+source_plant_data_path = "uid://bgc3ymb4tf8v8"
 item_name = "Maïs"
 description = ""
 icon = SubResource("AtlasTexture_y2jcg")

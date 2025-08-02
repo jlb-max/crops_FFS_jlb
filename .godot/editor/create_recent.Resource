@@ -1,3 +1,4 @@
+LoreData
 CraftingRecipe
 MachineRecipe
 ItemData

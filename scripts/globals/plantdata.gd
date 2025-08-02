@@ -23,3 +23,6 @@ extends CollectibleData
 @export var min_heat: float = 0.0
 @export var min_oxygen: float = 0.0
 @export var min_gravity: float = 0.0
+
+@export_group("Histoire")
+@export var lore_data: LoreData

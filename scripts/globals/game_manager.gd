@@ -6,6 +6,7 @@ var game_menu_screen = preload("res://scenes/ui/game_menu_screen.tscn")
 var biofuel_menu
 var reward_machine_menu
 var heater_fuel_menu
+var dna_analyzer_menu
 
 const FADE_OUT  : float = 0.2      # noir rapide
 const FADE_IN   : float = 2.0      # retour en douceur
@@ -61,7 +62,12 @@ func _do_fade(target_alpha: float) -> void:
 	tw.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tw.tween_property(_screen_fade, "modulate:a", target_alpha, dur)
 
-
+func register_dna_analyzer_menu(menu_node):
+	dna_analyzer_menu = menu_node
+	
+func open_dna_analyzer_menu(machine_node):
+	if dna_analyzer_menu:
+		dna_analyzer_menu.open_menu(machine_node)
 
 func register_biofuel_menu(menu_node):
 	biofuel_menu = menu_node

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cqg3k2c6eqa6m"]
+[gd_scene load_steps=30 format=3 uid="uid://cqg3k2c6eqa6m"]
 
 [ext_resource type="Script" uid="uid://rd2bq3o18fef" path="res://scenes/ui/game_screen.gd" id="1_c0p0g"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_e2vrk"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bmwckryxuprqe" path="res://machines/ordinateur/RewardMachineMenu.tscn" id="8_ce4rh"]
 [ext_resource type="PackedScene" uid="uid://c03jyijxggjcm" path="res://machines/aura production/heater_menu.tscn" id="10_dscta"]
 [ext_resource type="PackedScene" uid="uid://goc2r5pjajyj" path="res://scenes/ui/Gauge.tscn" id="10_nktmq"]
+[ext_resource type="PackedScene" uid="uid://bdlv1o20vbhrw" path="res://scenes/ui/DNAAnalyzerMenu.tscn" id="10_wwq64"]
+[ext_resource type="PackedScene" uid="uid://d0w5etu1ahnrg" path="res://scenes/ui/CodexScreen.tscn" id="11_wwq64"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nktmq"]
 load_path = "res://.godot/imported/all_ui_sprites.png-8f790274e39e8a769e78cacf4edd15e5.ctex"
@@ -113,6 +115,7 @@ offset_right = 11.0
 offset_bottom = 11.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 recipe_detail_window = NodePath("../RecipeDetailWindow")
 
 [node name="RecipeDetailWindow" parent="." node_paths=PackedStringArray("inventory_panel") instance=ExtResource("6_nwa5a")]
@@ -122,6 +125,12 @@ inventory_panel = NodePath("../InventoryPanel")
 visible = false
 
 [node name="RewardMachineMenu" parent="." instance=ExtResource("8_ce4rh")]
+visible = false
+
+[node name="DnaAnalyzerMenu" parent="." instance=ExtResource("10_wwq64")]
+visible = false
+
+[node name="CodexScreen" parent="." instance=ExtResource("11_wwq64")]
 visible = false
 
 [node name="HeaterMenu" parent="." instance=ExtResource("10_dscta")]
