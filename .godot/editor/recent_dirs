@@ -1,3 +1,6 @@
+res://assets/game/ui
+res://assets/game/ui/UI Sprites/Icons
+res://assets/game/ui/UI Sprites
 res://crafting/recipes
 res://assets/game/objects/new planet
 res://machines/biofuel
@@ -11,12 +14,9 @@ res://machines
 res://scenes/objects/plants
 res://scripts/globals
 res://scenes/components
-res://assets/game/ui/UI Sprites
 res://scenes/characters/player
 res://scenes/test
 res://scenes/environement
 res://assets/game/characters
 res://machines/ordinateur
 res://machines/atelier
-res://assets/game/ui/UI Sprites/Other UI sprites
-res://machines/logic

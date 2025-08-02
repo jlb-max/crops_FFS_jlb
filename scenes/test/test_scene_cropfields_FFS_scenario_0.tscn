@@ -109,7 +109,7 @@ objects_container = NodePath("../GameTileMap/Grass")
 [node name="TestSceneEnableToolButtonsComponent" parent="." instance=ExtResource("23_5txhg")]
 
 [node name="ShipAnchor" type="Node2D" parent="." groups=["ship_anchor"]]
-position = Vector2(295, 175)
+position = Vector2(219, 206)
 
 [node name="GroundLoot" parent="." instance=ExtResource("24_ee7eg")]
 position = Vector2(598, 284)

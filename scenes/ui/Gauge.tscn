@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://goc2r5pjajyj"]
+[gd_scene load_steps=7 format=3 uid="uid://goc2r5pjajyj"]
 
 [ext_resource type="Script" uid="uid://b5ky6aw1pd04g" path="res://scenes/ui/gauge.gd" id="1_5eyhb"]
 [ext_resource type="Texture2D" uid="uid://ditrah2qynd8a" path="res://assets/game/ui/texture_progress_bar_white_16x16.png" id="2_gvkvf"]
 
+[sub_resource type="Gradient" id="Gradient_i76ir"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.244776, 0.244776, 0.244776, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eqokn"]
+gradient = SubResource("Gradient_i76ir")
+
 [sub_resource type="Gradient" id="Gradient_gvkvf"]
-offsets = PackedFloat32Array(0, 0.121212, 0.246212, 0.435606, 0.556818, 0.723485, 0.878788, 1)
-colors = PackedColorArray(0.956863, 0, 0, 1, 0.749566, 0.217738, 0.0599803, 1, 0.542107, 0.36994, 0.0794954, 1, 0.792157, 0.894118, 0.0431373, 1, 0.631373, 0.776471, 0.333333, 1, 0.592157, 0.945098, 0.298039, 1, 0.450783, 0.822747, 0.188494, 1, 0.478431, 1, 0.137255, 1)
+offsets = PackedFloat32Array(0, 0.503205, 1)
+colors = PackedColorArray(0.956863, 0, 0, 1, 0.630866, 6.23775e-05, 0.52107, 1, 0.380392, 0, 0.545098, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i76ir"]
 gradient = SubResource("Gradient_gvkvf")
@@ -26,4 +33,5 @@ texture = ExtResource("2_gvkvf")
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_eqokn")
 texture_progress = SubResource("GradientTexture2D_i76ir")

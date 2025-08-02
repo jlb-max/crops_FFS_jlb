@@ -94,3 +94,6 @@ res://machines/ordinateur/reward_machine_menu.gd
 res://machines/ordinateur/RewardMachineMenu.tscn
 res://scenes/ui/inventoryslot.tscn
 res://scenes/ui/inventoryslot.gd
+res://scenes/ui/emotes_panel.tscn
+res://scenes/objects/shake.gdshader
+res://scenes/objects/rocks/rock.tscn
