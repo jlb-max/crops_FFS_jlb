@@ -93,7 +93,7 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 func display_ingredient_info(p_item_data: ItemData, p_quantity_required: int):
 	display_empty() # On réinitialise le slot
-	
+	self.item_data = p_item_data
 	texture_rect.texture = p_item_data.icon
 	texture_rect.visible = true
 	

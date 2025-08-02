@@ -1,6 +1,9 @@
+res://crafting/recipes
 res://assets/game/objects/new planet
-res://assets/game/objects/crops_2
+res://machines/biofuel
 res://assets/game/objects/Items
+res://scenes/objects/craftables
+res://assets/game/objects/crops_2
 res://assets/game/objects
 res://scenes/space
 res://machines/recipes
@@ -13,10 +16,7 @@ res://scenes/characters/player
 res://scenes/test
 res://scenes/environement
 res://assets/game/characters
-res://scenes/objects/craftables
-res://machines/biofuel
 res://machines/ordinateur
 res://machines/atelier
 res://assets/game/ui/UI Sprites/Other UI sprites
 res://machines/logic
-res://Tilesets

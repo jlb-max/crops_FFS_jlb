@@ -75,3 +75,22 @@ res://scripts/globals/EnvironmentManager.gd
 res://machines/aura production/MachineAura.tscn
 res://scenes/ui/HealthBar.tscn
 res://scenes/ui/Gauge.tscn
+res://scenes/objects/craftables/hoe.tres
+res://scenes/objects/craftables/watering_can.tres
+res://crafting/recipes/hoe_recipe.tres
+res://crafting/recipes/watering_can_recipe.tres
+res://scenes/objects/craftables/foyer_exterieur.tres
+res://crafting/recipes/foyer_exterieur_recipe.tres
+res://machines/ordinateur/cumulative_reward.gd
+res://scenes/objects/craftables/atelier2.tscn
+res://scenes/test/test_scene_cropfields_FFS_scenario_0.tscn
+res://scenes/objects/craftables/atelier.tres
+res://machines/biofuel/biofuel_converter.tres
+res://scenes/objects/craftables/atelier.tscn
+res://crafting/recipes/biofuel_converter_recipe.tres
+res://machines/recipes/biofuelconverter_recipe.tres
+res://machines/ordinateur/reward_machine_component.gd
+res://machines/ordinateur/reward_machine_menu.gd
+res://machines/ordinateur/RewardMachineMenu.tscn
+res://scenes/ui/inventoryslot.tscn
+res://scenes/ui/inventoryslot.gd

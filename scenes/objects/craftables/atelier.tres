@@ -2,15 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://b5ofwn7oewi58" path="res://assets/game/objects/work_station.png" id="1_6l5su"]
 [ext_resource type="Script" uid="uid://bpxw848fbm6jv" path="res://scripts/globals/itemdata.gd" id="1_h2f0e"]
-[ext_resource type="PackedScene" uid="uid://dqqcyt4dcq0i0" path="res://scenes/objects/craftables/atelier.tscn" id="2_5wbv7"]
+[ext_resource type="PackedScene" uid="uid://dyp00nuhmonwt" path="res://scenes/objects/craftables/atelier2.tscn" id="2_5wbv7"]
 
 [resource]
 script = ExtResource("1_h2f0e")
 scene_to_place = ExtResource("2_5wbv7")
+damage = 1
+action_type = 5
 item_name = "Atelier"
 description = ""
 icon = ExtResource("1_6l5su")
 stackable = true
-damage = 1
-action_type = 5
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"

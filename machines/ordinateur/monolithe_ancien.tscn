@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ca7ilrmahamlq"]
+[gd_scene load_steps=38 format=3 uid="uid://ca7ilrmahamlq"]
 
 [ext_resource type="PackedScene" uid="uid://beaog5n0dxa5y" path="res://scenes/components/interactable_component.tscn" id="1_cw1j0"]
 [ext_resource type="Script" uid="uid://c2ecl70hlcsv4" path="res://machines/ordinateur/monolithe_ancien.gd" id="1_uspbo"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cd0n4jrm0co4x" path="res://scenes/components/interactable_label_component.tscn" id="2_lhmv5"]
 [ext_resource type="Texture2D" uid="uid://c4g67rns61opr" path="res://assets/game/objects/new planet/accumulator-discharge.png" id="3_rbylr"]
 [ext_resource type="PackedScene" uid="uid://c7twf2kcdb7ly" path="res://machines/ordinateur/reward_machine_component.tscn" id="3_xlq0o"]
-[ext_resource type="Resource" uid="uid://1sb6bql4p1as" path="res://machines/biofuel/biofuel.tres" id="6_bo022"]
 [ext_resource type="Script" uid="uid://cl4puo50cqmuf" path="res://machines/ordinateur/cumulative_reward.gd" id="7_y6wup"]
 [ext_resource type="Resource" uid="uid://kdnwclrt1285" path="res://machines/ordinateur/recompense_palier_1.tres" id="8_68vuk"]
 [ext_resource type="Resource" uid="uid://ckv4s3isxs1xv" path="res://machines/ordinateur/recompense_palier_2.tres" id="9_bo022"]
@@ -228,7 +227,6 @@ offset_right = -32.0
 offset_bottom = -42.0
 
 [node name="RewardMachineComponent" parent="." instance=ExtResource("3_xlq0o")]
-fuel_item = ExtResource("6_bo022")
 reward_tiers = Array[ExtResource("7_y6wup")]([ExtResource("8_68vuk"), ExtResource("9_bo022")])
 
 [node name="Aura" parent="." instance=ExtResource("10_y6wup")]

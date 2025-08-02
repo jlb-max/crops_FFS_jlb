@@ -1,7 +1,7 @@
-MachineRecipe
-NoiseTexture2D
-ItemData
 CraftingRecipe
+MachineRecipe
+ItemData
+NoiseTexture2D
 CumulativeReward
 Shader
 TileSet

@@ -6,7 +6,7 @@ extends Resource
 const Ingredient = preload("res://crafting/ingredient.gd")
 
 # La quantité de carburant nécessaire pour atteindre ce palier
-@export var fuel_required: int = 100
+@export var fuel_required: Array[Ingredient]
 
 @export_group("Récompenses")
 # Une liste d'items à donner directement
