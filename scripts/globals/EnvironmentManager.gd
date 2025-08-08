@@ -106,3 +106,7 @@ func get_local_effects(pos: Vector2) -> Dictionary:
 		oxygen = oxygen,
 		gravity = gravity
 	}
+
+func get_sources_snapshot() -> Array[EffectSource2D]:
+	# filtre basique: dans l'arbre uniquement
+	return _sources.filter(func(s): return s.is_inside_tree()).duplicate()

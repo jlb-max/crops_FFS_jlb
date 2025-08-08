@@ -2,13 +2,18 @@
 class_name AuraComponent
 extends EffectSource2D
 
+
+
+
 var heat_data   : HeatEffectData
 var grav_data   : GravityEffectData
 var oxygen_data : OxygenEffectData      # (tu l’ajouteras juste après)
 var _registered := false
 
 func _ready() -> void:
-	EnvironmentManager.register(self)
+	if not _registered:
+		EnvironmentManager.register(self)
+		_registered = true
 
 func init(
 		heat : HeatEffectData     = null,
@@ -47,6 +52,7 @@ func init(
 func _exit_tree() -> void:
 	if _registered:
 		EnvironmentManager.unregister(self)
+		_registered = false
 
 func _draw():
 	draw_circle(Vector2.ZERO, effect_radius, Color(1,0,0,0.25))

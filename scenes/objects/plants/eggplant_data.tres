@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlantData" load_steps=21 format=3 uid="uid://c2jrt2vbc7xig"]
+[gd_resource type="Resource" script_class="PlantData" load_steps=25 format=3 uid="uid://c2jrt2vbc7xig"]
 
 [ext_resource type="Resource" uid="uid://dtxfa7nc0aj2g" path="res://scenes/objects/plants/eggplant_fruit.tres" id="1_i8crl"]
 [ext_resource type="Script" uid="uid://caa2jifiaeqh0" path="res://scripts/globals/GravityEffectData.gd" id="1_p58p6"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://c2xngbojvrgo7" path="res://assets/game/objects/Items/farming_plants_items.png" id="4_p58p6"]
 [ext_resource type="Script" uid="uid://bt6illphij7k6" path="res://scripts/globals/HeatEffectData.gd" id="5_dbtks"]
 [ext_resource type="Script" uid="uid://dgtqgj606gj6g" path="res://scripts/globals/LightEffectData.gd" id="6_lw3nf"]
+[ext_resource type="Script" uid="uid://1o5didd3c6kg" path="res://scripts/globals/OxygenEffectData.gd" id="9_lw3nf"]
+[ext_resource type="Script" uid="uid://dxc8a5txh3fxm" path="res://scripts/globals/WaterPulseEffectData.gd" id="11_knfr2"]
 
 [sub_resource type="Resource" id="Resource_knfr2"]
 script = ExtResource("1_p58p6")
@@ -117,6 +119,21 @@ shimmer_min_factor = 0.8
 shimmer_max_factor = 1.2
 metadata/_custom_type_script = "uid://dgtqgj606gj6g"
 
+[sub_resource type="Resource" id="Resource_x0m63"]
+script = ExtResource("9_lw3nf")
+emits_oxygen = false
+oxygen_power = 1.0
+oxygen_radius = 64.0
+oxygen_sensitivity = 0.0
+metadata/_custom_type_script = "uid://1o5didd3c6kg"
+
+[sub_resource type="Resource" id="Resource_i010r"]
+script = ExtResource("11_knfr2")
+has_water_pulse_effect = false
+pulse_radius = 1
+pulse_duration = 3.0
+metadata/_custom_type_script = "uid://dxc8a5txh3fxm"
+
 [resource]
 script = ExtResource("2_l22ae")
 harvest_item = ExtResource("1_i8crl")
@@ -126,6 +143,8 @@ harvest_data = SubResource("Resource_7cwxw")
 light_effect = SubResource("Resource_gg6gw")
 gravity_effect = SubResource("Resource_knfr2")
 heat_effect = SubResource("Resource_dywq2")
+water_pulse_effect = SubResource("Resource_i010r")
+oxygen_effect = SubResource("Resource_x0m63")
 min_heat = 0.0
 min_oxygen = 0.0
 min_gravity = 0.0

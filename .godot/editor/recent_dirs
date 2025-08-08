@@ -1,3 +1,6 @@
+res://scenes/components
+res://scripts/globals
+res://scenes/ui
 res://assets/game/objects/Items
 res://scripts/lore
 res://assets/game/objects/new planet
@@ -13,10 +16,7 @@ res://scenes/space
 res://machines/recipes
 res://machines
 res://scenes/objects/plants
-res://scripts/globals
-res://scenes/components
 res://scenes/characters/player
 res://scenes/test
 res://scenes/environement
 res://assets/game/characters
-res://machines/ordinateur

@@ -1,3 +1,4 @@
+Node2D
 Timer
 Node
 ItemList
@@ -12,4 +13,3 @@ ProgressBar
 TextureRect
 HBoxContainer
 Sprite2D
-AnimatedSprite2D
