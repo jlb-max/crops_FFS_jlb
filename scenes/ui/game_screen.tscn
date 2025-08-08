@@ -120,6 +120,7 @@ mouse_filter = 1
 recipe_detail_window = NodePath("../RecipeDetailWindow")
 
 [node name="RecipeDetailWindow" parent="." node_paths=PackedStringArray("inventory_panel") instance=ExtResource("6_nwa5a")]
+visible = false
 inventory_panel = NodePath("../InventoryPanel")
 
 [node name="BioFuelConverterMenu" parent="." instance=ExtResource("7_ooiym")]

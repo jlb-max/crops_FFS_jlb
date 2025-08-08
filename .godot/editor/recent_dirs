@@ -1,5 +1,6 @@
-res://assets/game/objects/Items
 res://assets/game/objects/new planet
+res://machines/aura production
+res://assets/game/objects/Items
 res://scenes/components
 res://scripts/globals
 res://scenes/ui
@@ -19,4 +20,3 @@ res://scenes/objects/plants
 res://scenes/characters/player
 res://scenes/test
 res://scenes/environement
-res://assets/game/characters

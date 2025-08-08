@@ -28,7 +28,7 @@ layout_mode = 2
 
 [node name="ConvertButton" type="Button" parent="."]
 layout_mode = 2
-text = "convertir"
+text = "créer"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 custom_minimum_size = Vector2(30, 0)

@@ -1,7 +1,7 @@
+ItemData
 LoreData
 CraftingRecipe
 MachineRecipe
-ItemData
 NoiseTexture2D
 CumulativeReward
 Shader
