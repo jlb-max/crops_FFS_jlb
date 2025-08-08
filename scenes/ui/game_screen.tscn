@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cqg3k2c6eqa6m"]
+[gd_scene load_steps=31 format=3 uid="uid://cqg3k2c6eqa6m"]
 
 [ext_resource type="Script" uid="uid://rd2bq3o18fef" path="res://scenes/ui/game_screen.gd" id="1_c0p0g"]
 [ext_resource type="Theme" uid="uid://b3n8unqbh0or1" path="res://scenes/ui/game_ui_theme.tres" id="1_e2vrk"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://goc2r5pjajyj" path="res://scenes/ui/Gauge.tscn" id="10_nktmq"]
 [ext_resource type="PackedScene" uid="uid://bdlv1o20vbhrw" path="res://scenes/ui/DNAAnalyzerMenu.tscn" id="10_wwq64"]
 [ext_resource type="PackedScene" uid="uid://d0w5etu1ahnrg" path="res://scenes/ui/CodexScreen.tscn" id="11_wwq64"]
+[ext_resource type="Script" uid="uid://d3qf0vicr2aga" path="res://scenes/ui/effects_toolbar.gd" id="14_ywp2c"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nktmq"]
 load_path = "res://.godot/imported/all_ui_sprites.png-8f790274e39e8a769e78cacf4edd15e5.ctex"
@@ -141,8 +142,8 @@ offset_right = 200.0
 offset_bottom = 150.0
 
 [node name="HUDContainer" type="MarginContainer" parent="."]
-offset_right = 396.0
-offset_bottom = 64.0
+offset_right = 459.0
+offset_bottom = 58.0
 
 [node name="HBox" type="HBoxContainer" parent="HUDContainer"]
 custom_minimum_size = Vector2(120, 15)
@@ -192,6 +193,97 @@ expand_mode = 2
 
 [node name="Bar" parent="HUDContainer/HBox/GaugeGravity" index="1"]
 texture_progress = SubResource("GradientTexture2D_v3mdj")
+
+[node name="EffectsToolbar" type="PanelContainer" parent="HUDContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+script = ExtResource("14_ywp2c")
+
+[node name="Root" type="VBoxContainer" parent="HUDContainer/EffectsToolbar"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Buttons" type="HBoxContainer" parent="HUDContainer/EffectsToolbar/Root"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="CarteOnOff" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "carte ON/OFF"
+
+[node name="Tout" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "Tout
+"
+
+[node name="Oxygène" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "Oxygène"
+
+[node name="Lumière" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "Lumière"
+
+[node name="Chaleur" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "Chaleur"
+
+[node name="Gravité" type="Button" parent="HUDContainer/EffectsToolbar/Root/Buttons"]
+layout_mode = 2
+text = "Gravité"
+
+[node name="Legend" type="HBoxContainer" parent="HUDContainer/EffectsToolbar/Root"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(0.0862745, 0.505882, 1, 1)
+
+[node name="Label" type="Label" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+layout_mode = 2
+text = "oxygène"
+
+[node name="ColorRect2" type="ColorRect" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(1, 1, 0.494118, 1)
+
+[node name="Label2" type="Label" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+layout_mode = 2
+text = "lumière"
+
+[node name="ColorRect3" type="ColorRect" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(1, 0.411765, 0.294118, 1)
+
+[node name="Label3" type="Label" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+layout_mode = 2
+text = "chaleur"
+
+[node name="ColorRect4" type="ColorRect" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(1, 0.286275, 1, 1)
+
+[node name="Label4" type="Label" parent="HUDContainer/EffectsToolbar/Root/Legend"]
+layout_mode = 2
+text = "gravité"
 
 [node name="ScreenFade" type="ColorRect" parent="." groups=["screen_fade"]]
 modulate = Color(1, 1, 1, 0)

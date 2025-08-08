@@ -77,3 +77,8 @@ res://scenes/ui/CodexScreen.tscn
 res://scenes/test/test_scene_cropfields_FFS_dna_analyzer.tscn
 res://scenes/ui/DNAAnalyzerMenu.tscn
 res://scenes/components/game_tile_map.gd
+res://scenes/ui/effects_toolbar.gd
+res://scripts/game_input_events.gd
+res://scenes/ui/inventory_panel.tscn
+res://scenes/ui/game_screen.gd
+res://scenes/objects/plants/tomato.tscn

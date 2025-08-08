@@ -28,3 +28,12 @@ static func use_tool() -> bool:
 	var use_tool_value: bool = Input.is_action_just_pressed("hit")
 	
 	return use_tool_value
+
+static func toggle_effect_map_just_pressed() -> bool:
+	return Input.is_action_just_pressed("toggle_overlay_map")
+
+static func overlay_next_effect_just_pressed() -> bool:
+	return Input.is_action_just_pressed("overlay_next_effect")
+
+static func overlay_prev_effect_just_pressed() -> bool:
+	return Input.is_action_just_pressed("overlay_prev_effect")
