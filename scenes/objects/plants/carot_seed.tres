@@ -15,6 +15,7 @@ script = ExtResource("3_6yb7q")
 damage = 1
 action_type = 3
 plant_to_grow = ExtResource("1_pntpp")
+source_plant_data_path = ""
 item_name = "Graine de Tomate"
 description = ""
 icon = SubResource("AtlasTexture_7kbjp")

@@ -15,6 +15,7 @@ script = ExtResource("1_li37i")
 scene_to_place = ExtResource("1_svwaj")
 damage = 1
 action_type = 5
+source_plant_data_path = ""
 item_name = "BioFuelConverter"
 description = ""
 icon = SubResource("AtlasTexture_om8tv")

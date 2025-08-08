@@ -13,6 +13,7 @@ region = Rect2(112, 80, 16, 16)
 script = ExtResource("2_jlvxp")
 damage = 1
 action_type = 0
+source_plant_data_path = ""
 item_name = "Raisin"
 description = ""
 icon = SubResource("AtlasTexture_uv6vv")

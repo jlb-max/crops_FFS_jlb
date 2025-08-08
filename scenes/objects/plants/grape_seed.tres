@@ -15,6 +15,7 @@ script = ExtResource("3_2x466")
 damage = 1
 action_type = 3
 plant_to_grow = ExtResource("1_xpy3v")
+source_plant_data_path = ""
 item_name = "Graine de Raisin"
 description = ""
 icon = SubResource("AtlasTexture_0duj0")

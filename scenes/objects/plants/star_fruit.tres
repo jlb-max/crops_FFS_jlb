@@ -13,6 +13,7 @@ region = Rect2(16, 208, 16, 16)
 script = ExtResource("1_36bfa")
 damage = 1
 action_type = 0
+source_plant_data_path = ""
 item_name = "Lumina"
 description = ""
 icon = SubResource("AtlasTexture_ut1l6")

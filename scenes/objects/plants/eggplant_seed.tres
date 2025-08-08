@@ -13,6 +13,7 @@ script = ExtResource("3_gtvkr")
 damage = 1
 action_type = 3
 plant_to_grow = ExtResource("2_rl6by")
+source_plant_data_path = ""
 item_name = "Graine de Maïs"
 description = ""
 icon = SubResource("AtlasTexture_gtvkr")

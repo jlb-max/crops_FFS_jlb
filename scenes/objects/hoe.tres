@@ -13,6 +13,7 @@ region = Rect2(32, 0, 16, 16)
 script = ExtResource("1_6t7li")
 damage = 1
 action_type = 1
+source_plant_data_path = ""
 item_name = "Houe"
 description = ""
 icon = SubResource("AtlasTexture_k3lbc")

@@ -13,6 +13,7 @@ region = Rect2(16, 144, 16, 16)
 script = ExtResource("1_2816w")
 damage = 1
 action_type = 0
+source_plant_data_path = ""
 item_name = "Gravitron"
 description = ""
 icon = SubResource("AtlasTexture_8ogw1")

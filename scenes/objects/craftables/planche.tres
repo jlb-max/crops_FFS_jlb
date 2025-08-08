@@ -13,6 +13,7 @@ region = Rect2(32, 64, 16, 16)
 script = ExtResource("1_0l0kr")
 damage = 1
 action_type = 0
+source_plant_data_path = ""
 item_name = "Planche"
 description = ""
 icon = SubResource("AtlasTexture_wdlxi")

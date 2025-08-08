@@ -11,6 +11,7 @@ region = Rect2(16, 80, 16, 16)
 script = ExtResource("2_8ogw1")
 damage = 1
 action_type = 0
+source_plant_data_path = ""
 item_name = "Aubergine"
 description = ""
 icon = SubResource("AtlasTexture_8ogw1")

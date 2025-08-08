@@ -13,6 +13,7 @@ region = Rect2(0, 0, 16, 16)
 script = ExtResource("1_xg5tq")
 damage = 1
 action_type = 2
+source_plant_data_path = ""
 item_name = "Arrosoir"
 description = ""
 icon = SubResource("AtlasTexture_3xl7a")

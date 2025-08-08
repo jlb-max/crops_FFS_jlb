@@ -15,6 +15,7 @@ script = ExtResource("2_kefo1")
 damage = 1
 action_type = 3
 plant_to_grow = ExtResource("1_xvm45")
+source_plant_data_path = ""
 item_name = "Graine de Lumina"
 description = ""
 icon = SubResource("AtlasTexture_7kbjp")

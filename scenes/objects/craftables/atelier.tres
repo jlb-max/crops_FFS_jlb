@@ -9,6 +9,7 @@ script = ExtResource("1_h2f0e")
 scene_to_place = ExtResource("2_5wbv7")
 damage = 1
 action_type = 5
+source_plant_data_path = ""
 item_name = "Atelier"
 description = ""
 icon = ExtResource("1_6l5su")
