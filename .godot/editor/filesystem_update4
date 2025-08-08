@@ -82,3 +82,10 @@ res://scripts/game_input_events.gd
 res://scenes/ui/inventory_panel.tscn
 res://scenes/ui/game_screen.gd
 res://scenes/objects/plants/tomato.tscn
+res://scenes/objects/craftables/atelier2.tscn
+res://scenes/ui/recipe_detail_window.tscn
+res://scenes/ui/inventoryslot.gd
+res://scenes/ui/inventory_panel.gd
+res://scenes/ui/inventoryslot.tscn
+res://scenes/ui/tools_panel.tscn
+res://scenes/components/ship_aura_component.gd

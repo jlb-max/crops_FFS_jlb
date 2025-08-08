@@ -1,3 +1,4 @@
+#effects_overlay.gd
 extends Node2D
 class_name EffectsOverlay
 
@@ -10,6 +11,17 @@ class_name EffectsOverlay
 # Fond sombre
 @export var darken_background := true
 @export var background_color := Color(0, 0, 0, 0.35)
+
+
+enum Norm { RELATIVE, ABSOLUTE }
+
+@export var normalize_mode: int = Norm.RELATIVE    # RELATIVE = auto par effet, ABSOLUTE = échelle fixe
+@export var absolute_scale: Array[float] = [       # utilisé si ABSOLUTE
+    20.0,  # OXYGEN  (ex: valeurs typiques max)
+    1.0,   # LIGHT
+    10.0,  # HEAT
+    5.0    # GRAVITY
+]
 
 
 const COLORS: Array[Color] = [
@@ -33,6 +45,20 @@ func _ready() -> void:
     visible = overlay_visible
     EffectMaps.maps_rebuilt.connect(_on_maps_rebuilt)
 
+
+func _alpha_for(et: int, v: float) -> float:
+    var a: float = 0.0
+    if normalize_mode == Norm.RELATIVE:
+        var m: float = EffectMaps.get_max_value(et)
+        if m <= 0.0001:
+            return 0.0
+        a = v / m
+    else:
+        var s: float = (absolute_scale[et] if et < absolute_scale.size() else 1.0)
+        if s <= 0.0001:
+            return 0.0
+        a = v / s
+    return clampf(a, 0.0, 1.0)
 
   
 func is_showing_all() -> bool:
@@ -109,7 +135,9 @@ func _fill_cache_for_effect(et: int, out_rects: Array, out_cols: Array) -> void:
         for x in range(used.position.x, used.end.x):
             var cell: Vector2i = Vector2i(x, y)
             var v: float = EffectMaps.get_value(et, cell)
-            if v <= threshold:
+
+            var a_norm := _alpha_for(et, v)            # <-- normalisé 0..1
+            if a_norm <= threshold:
                 continue
 
             var p_layer: Vector2 = EffectMaps.terrain_layer.map_to_local(cell)
@@ -117,7 +145,7 @@ func _fill_cache_for_effect(et: int, out_rects: Array, out_cols: Array) -> void:
             out_rects.append(Rect2(pos, ts))
 
             var col: Color = COLORS[et]
-            col.a = clampf(v, 0.0, 1.0) * alpha_max
+            col.a = a_norm * alpha_max                # <-- plus de saturation
             out_cols.append(col)
 
 func _draw() -> void:

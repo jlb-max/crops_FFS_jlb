@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://cm5hylc4h4yu1" path="res://scenes/ui/RecipeDetailWindow.gd" id="1_rr0bq"]
 
 [node name="RecipeDetailWindow" type="PanelContainer"]
-visible = false
 theme = ExtResource("1_7a2fq")
 theme_type_variation = &"DarkWoodPanel"
 script = ExtResource("1_rr0bq")
@@ -14,14 +13,14 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "produit:"
+text = "construction:"
 
 [node name="OutputItemsList" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="IngredientsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "ingrédients:"
+text = "ingredients:"
 
 [node name="IngredientsList" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

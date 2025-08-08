@@ -16,6 +16,8 @@ var _emitters: Array = []
 # Champs: effect_type (int) -> PackedFloat32Array (taille = w*h)
 var fields: Dictionary = {}
 
+var max_values: Array[float] = []
+
 func register_terrain_layer(layer: TileMapLayer) -> void:
 	if not layer:
 		return
@@ -47,24 +49,28 @@ func rebuild() -> void:
 	var used: Rect2i = map_used_rect
 	var w: int = used.size.x
 	var h: int = used.size.y
-	fields.clear()
-	for t in EFFECT_TYPES:
-		var arr := PackedFloat32Array()
-		arr.resize(w * h)
-		fields[t] = arr
 
-	# Conversion px -> tuiles (ton radius est en pixels)
+	# On travaille sur des buffers locaux (évite les copies silencieuses)
+	var arr_o := PackedFloat32Array(); arr_o.resize(w * h)
+	var arr_l := PackedFloat32Array(); arr_l.resize(w * h)
+	var arr_h := PackedFloat32Array(); arr_h.resize(w * h)
+	var arr_g := PackedFloat32Array(); arr_g.resize(w * h)
+
+	var max_o: float = 0.0
+	var max_l: float = 0.0
+	var max_h: float = 0.0
+	var max_g: float = 0.0
+
 	var ts: Vector2 = Vector2(tile_size)
 	var tile_len: float = maxf(ts.x, ts.y)
 
-	# Sources depuis l'EnvironmentManager (pas de double registre)
 	var sources: Array = EnvironmentManager.get_sources_snapshot()
-	print("[EffectMaps] sources:", sources.size(), " used:", map_used_rect)  # DEBUG
+	# Debug utile:
+	# print("[EffectMaps] sources:", sources.size(), " used:", used)
+
 	for _s in sources:
 		var s := _s as EffectSource2D
-		if s == null:
-			continue
-		if s.effect_radius <= 0.0:
+		if s == null or s.effect_radius <= 0.0:
 			continue
 
 		var center_cell: Vector2i = world_to_cell(s.global_position)
@@ -82,24 +88,51 @@ func rebuild() -> void:
 				var d_tiles: float = Vector2i(x, y).distance_to(center_cell)
 				if d_tiles > float(r_tiles):
 					continue
-
-				# même falloff que ton EnvironmentManager: f = 1 - (d/r)^2
 				var f: float = 1.0 - pow(d_tiles / float(r_tiles), 2.0)
 				if f <= 0.0:
 					continue
 
 				var idx: int = (y - used.position.y) * w + (x - used.position.x)
 
-				# somme par effet (tu peux passer à max() si tu préfères)
 				if s.oxygen_power != 0.0:
-					fields[EffectMaps.EffectType.OXYGEN][idx] = fields[EffectMaps.EffectType.OXYGEN][idx] + float(s.oxygen_power) * f
+					var v := arr_o[idx] + float(s.oxygen_power) * f
+					arr_o[idx] = v
+					if v > max_o: max_o = v
+
 				if s.heat_power != 0.0:
-					fields[EffectMaps.EffectType.HEAT][idx]   = fields[EffectMaps.EffectType.HEAT][idx]   + float(s.heat_power)   * f
+					var v2 := arr_h[idx] + float(s.heat_power) * f
+					arr_h[idx] = v2
+					if v2 > max_h: max_h = v2
+
 				if s.gravity_power != 0.0:
-					fields[EffectMaps.EffectType.GRAVITY][idx]= fields[EffectMaps.EffectType.GRAVITY][idx]+ float(s.gravity_power)* f
+					var v3 := arr_g[idx] + float(s.gravity_power) * f
+					arr_g[idx] = v3
+					if v3 > max_g: max_g = v3
+
+	# Réinjecte les buffers dans le dictionnaire (une seule fois)
+	fields.clear()
+	fields[EffectType.OXYGEN] = arr_o
+	fields[EffectType.LIGHT]  = arr_l
+	fields[EffectType.HEAT]   = arr_h
+	fields[EffectType.GRAVITY]= arr_g
+
+	# Mets à jour les maxima (alignés sur l'index de l'enum)
+	max_values.clear()
+	max_values.resize(4)
+	max_values[EffectType.OXYGEN] = max_o
+	max_values[EffectType.LIGHT]  = max_l
+	max_values[EffectType.HEAT]   = max_h
+	max_values[EffectType.GRAVITY]= max_g
 
 	maps_rebuilt.emit(EFFECT_TYPES)
+	# Debug bonus :
+	# print("[EffectMaps] max O2=%.3f  HEAT=%.3f  GRAV=%.3f" % [max_o, max_h, max_g])
 
+
+func get_max_value(effect_type: int) -> float:
+	if max_values.is_empty():
+		return 0.0
+	return float(max_values[effect_type])
 
 
 func get_value(effect_type: int, cell: Vector2i) -> float:

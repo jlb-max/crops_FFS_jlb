@@ -12,5 +12,5 @@ func _notification(what):
 		EnvironmentManager.unregister(self)
 
 
-func _draw():
-	draw_circle(Vector2.ZERO, effect_radius, Color(1,0,0,0.25))
+#func _draw():
+	#draw_circle(Vector2.ZERO, effect_radius, Color(1,0,0,0.25))

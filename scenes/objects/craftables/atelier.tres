@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dy00jkvirx4ps"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://dy00jkvirx4ps"]
 
-[ext_resource type="Texture2D" uid="uid://b5ofwn7oewi58" path="res://assets/game/objects/work_station.png" id="1_6l5su"]
 [ext_resource type="Script" uid="uid://bpxw848fbm6jv" path="res://scripts/globals/itemdata.gd" id="1_h2f0e"]
 [ext_resource type="PackedScene" uid="uid://dyp00nuhmonwt" path="res://scenes/objects/craftables/atelier2.tscn" id="2_5wbv7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6l5su"]
+load_path = "res://.godot/imported/Basic Crafting Table.png-96219706d994af199f7cf169a61f23d9.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wbv7"]
+atlas = SubResource("CompressedTexture2D_6l5su")
+region = Rect2(144, 8, 16, 24)
 
 [resource]
 script = ExtResource("1_h2f0e")
@@ -12,6 +18,6 @@ action_type = 5
 source_plant_data_path = ""
 item_name = "Atelier"
 description = ""
-icon = ExtResource("1_6l5su")
+icon = SubResource("AtlasTexture_5wbv7")
 stackable = true
 metadata/_custom_type_script = "uid://bpxw848fbm6jv"
